@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <style type="text/css">
+        .wrap {
+            width: 960px;
+        }
+        .products {
+            display: flex;
+            text-decoration: none;
+        }
+
+        .list-item {
+            padding: 10px;
+
+        }
+
+        .item-text {
+            width: 100%;
+            justify-items: auto;
+        }
+
+        .msg {
+            color: #E41B43;
+            font-size: 13px;
+            padding-left: 8px;
+        }
+
+        h2 {
+            color: #636363;
+            font-family: sans-serif;
+            font-weight: 100px;
+            font-size: small;
+            letter-spacing: 1px;
+            line-height: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .price :first-child {
+            font-size: 12px;
+            margin-right: -5px;
+            font-weight: bold;
+            color: #E63995;
+        }
+
+        .price {
+            font-family: sans-serif;
+            font-weight: lighter;
+            font-size: 22px;
+            color: #E63995;
+        }
+
+        .price :last-child {
+            font-size: 12px;
+            font-weight: 400;
+            margin-left: 5px;
+            color: #808080;
+        }
+
+        img[src^="星星"] {
+            width: 75px;
+            margin-right: -8px;
+        }
+
+        .item-text span:nth-child(5) {
+            position: relative;
+            top: -3px;
+            font-size: 12px;
+            font-weight: 400;
+            margin-left: 8px;
+            color: #808080;
+        }
+
+        .item-text :nth-child(6) {
+            display: block;
+            margin: 3px 0 0 5px;
+            font-size: 12.2px;
+            color: #636363;
+        }
+
+        .item-info {
+            display: flex;
+            margin: 10px 0px;
+            padding: 6px;
+            background-color: #EDEDED;
+            justify-content: flex-end;
+        }
+
+        .item-info span:nth-last-child(-n+2):not(.sold-out):not(.fast) {
+            background-color: #FF4778;
+        }
+
+        .item-info .fast {
+            background-color: #CC0000;
+            padding: 4px 6px;
+        }
+
+        .item-info span:not(.sold-out) {
+            margin: 0 1px;
+            color: #F5F5F5;
+            padding: 3px 3px;
+            border-radius: 20%;
+            font-size: 12.3px;
+            font-weight: bold;
+        }
+
+        .sold-out {
+            padding: 1px 6px;
+            font-size: 13px;
+            color: #808080;
+            margin: auto;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a[href="#"] .list-item:hover {
+            background-color: #fefacd;
+        }
+
+        .list-item {
+            position: relative;
+        }
+
+        img.pic1,
+        img.pic2 {
+            position: absolute;
+            display: none;
+        }
+
+        .list-item:hover img.pic1 {
+            display: block;
+            top: 116px;
+            left: 11px;
+        }
+
+        .list-item:hover img.pic2 {
+            display: block;
+            top: 70px;
+            left: 190px;
+            width: 21px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="products">
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg"></strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            17,580<span>(售價已折)</span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(111)</span>
+                        <div>總銷量 > 100</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">滿1件折100</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            22,500<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(266)</span>
+                        <div>總銷量 > 500</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">雙手把充電座組</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            12,580<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(850)</span>
+                        <div>總銷量 > 5,000</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg"></strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            17,080<span>(售價已折)</span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(431)</span>
+                        <div>總銷量 > 800</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">光碟主機 現貨快搶★</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            30,460<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(568)</span>
+                        <div>總銷量 > 500</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg"></strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            29,080<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(191)</span>
+                        <div>總銷量 > 1,000</div>
+                        <div class="item-info">
+                            <span class="sold-out">可訂購時通知我</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </ul>
+        <ul class="products">
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">PS5主機+充電座 超優惠</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            22,280<span>(售價已折)</span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(314)</span>
+                        <div>總銷量 > 400</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">發光快速充電座 讓遊玩不中斷</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            33,200<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(259)</span>
+                        <div>總銷量 > 600</div>
+                        <div class="item-info">
+                            <span class="sold-out">可訂購時通知我</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg"></strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            19,900<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(147)</span>
+                        <div>總銷量 > 500</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">防疫在家一起打電動</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            21,680<span>(售價已折)</span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(643)</span>
+                        <div>總銷量 > 100</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">滿1件折100</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            17,580<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(341)</span>
+                        <div>總銷量 > 200</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="list-item">
+                    <div class="item-pic">
+                        <img src="PS5.jpg">
+                        <img src="選取.jpg" class="pic1">
+                        <img src="右側.jpg" class="pic2">
+                    </div>
+                    <div class="item-text">
+                        <strong class="msg">限時限量★手刀快搶</strong>
+                        <h2 class="title">【SONY 索尼】 PS5 光碟版主機+PS5充電座(送魔物手機支架)</h2>
+                        <p class="price"><span>$</span>
+                            23,680<span></span>
+                        </p>
+                        <img src="星星.jpg">
+                        <span>(126)</span>
+                        <div>總銷量 > 800</div>
+                        <div class="item-info">
+                            <span class="fast">速</span>
+                            <span>登記</span>
+                            <span>贈品</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </ul>
+
+
+
+</body>
+
+</html>
