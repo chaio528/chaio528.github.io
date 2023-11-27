@@ -8,11 +8,11 @@
     <link rel="stylesheet" type="text/css" href="reset.css">
     <style type="text/css">
         .wrap {
-            width: 1400px;
+            width: 1590px;
             margin: auto;
             font-family: 'Notosans2', "-apple-system, BlinkMacSystemFont", "Segoe UI", " Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             font-weight: 500px;
-            font-size: 14.5px;
+            font-size: 18px;
             color: #052855;
         }
 
@@ -25,48 +25,50 @@
         }
 
         .sl-banner h2 {
-            font-size: 30px;
+            font-size: 35px;
             font-weight: 700;
         }
 
-        .sl-banner p {
+        .sl-banner p{
             margin: 15px 0px;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 500;
         }
         .sl-item {
-            width: 960PX;
+            width: 1150PX;
             margin: auto;
             display: flex;
             line-height: 1.8;
-            margin-TOP: 50px;
-        }
+            margin-TOP: 100px;
 
-        .item-pic img {
-            width: 105%;
+        }
+        .item-pic>img {
+            width: 500px;
             vertical-align: bottom;
         }
-
+        .sl-item:nth-of-type(odd) img{
+            margin-left:92px;
+        }
+        
         .item-info {
-            width: 75%;
+            width: 50%;
+            flex-direction:row;
+            margin: auto;
         }
 
         .sl-item:nth-child(even) .item-info {
             margin-left: 120px;
             margin-right: 10px;
         }
-        .sl-item:nth-child(odd) .item-info {
-            margin-right: 130px;
-        }
 
         .item-info h3,
         .item-info p,
-        .item-info ul {
+        .introduce {
             margin-bottom: 20px;
         }
 
         .item-info h3 {
-            font-size: 23px;
+            font-size: 28px;
             font-weight: 700;
 
         }
@@ -78,7 +80,7 @@
         }
 
         .introduce li:nth-child(n+4) {
-            margin-left: -10px;
+            margin-left: 20px;
         }
 
         .introduce li::before {
@@ -89,7 +91,7 @@
             border-radius: 50%;
             background-color: #0061FF;
             left: -15px;
-            top: 19px;
+            top: 22px;
             position: relative;
         }
 
@@ -129,27 +131,33 @@
             bottom: 1px;
             left: 0;
         }
-
-        .sl-service {
+        .sl-service{
+            margin-top: 80px;
+            padding-top: 20px;
+            width: 1590px;
             background-color: #f7f8f9;
-            display: flex;
-            flex-wrap: wrap;
             text-align: center;
             font-size: 14PX;
-            justify-content: center;
+            
+        }
+        .service-wrap {
+            width: 960px;
+            display: flex;
+            flex-wrap: wrap;
             margin-top: 70PX;
+            margin: auto;
         }
 
         .sl-service h3 {
-            font-size: 23px;
+            font-size: 28px;
             font-weight: bold;
             margin: 50px 0px;
             width: 100%;
         }
 
         .service-item {
-            margin: 0PX 30PX;
-            width: 300px;
+            margin: 0PX 20PX;
+            width: 280px;
             flex-direction: column;
             margin-top: auto;
             margin-bottom: 50px;
@@ -163,7 +171,7 @@
         }
 
         .service-item h4 {
-            font-size: 18px;
+            font-size: 21px;
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -297,7 +305,7 @@
                         OMO 全通路無縫整併
                         <br>輕鬆管理網店、門市以及其他通路
                     </h3>
-                    <p>不論是網店拓展門市，還是門市想發展網路生意，從商品、庫存、訂單到會員等各項虛實店舖的資料都能完善整併，輕鬆實現全通路會員經營到多店營運。</p>
+                    <p>不論是網店拓展門市，還是門市想發展網路生意，從商品、庫存、訂單到會員等各項虛實店ic舖的資料都能完善整併，輕鬆實現全通路會員經營到多店營運。</p>
                     <ul class="introduce">
                         <li>門市 POS 系統</li>
                         <li>線上線下會員／商品／庫存整合</li>
@@ -321,6 +329,7 @@
         <!-- service區塊 -->
         <section class="sl-service">
             <h3>更多功能與服務</h3>
+           <div class="service-wrap">
             <div class="service-item">
                 <img src="s1.png">
                 <h4>強大庫存與訂單系統</h4>
@@ -356,6 +365,7 @@
                 <h4>品牌專屬成長社群</h4>
                 <p>致力為品牌店家打造能深度交流且互助的生態體系，是拓展人脈、商機的絕佳場域。</p>
             </div>
+           </div>
         </section>
     </div>
 </body>
