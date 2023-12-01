@@ -84,12 +84,13 @@ img {
 
 .small-list .item {
     width: 280px;
+    padding-bottom: 130px;
 }
 .small-list .item-text{
     margin-bottom: 50px;
     flex-direction: column;
 }
-.date,.main-date{
+.date{
     position: absolute;
     bottom: 0;
 }
