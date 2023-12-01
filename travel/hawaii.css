@@ -1,0 +1,123 @@
+.container {
+    width: 1200px;
+    margin: 30px auto;
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.5;
+    font-family: YakuHanJP, "游ゴシック Medium", YuGothic, YuGothicM, "Noto Sans Japanese", sans-serif;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+img {
+    border-radius: 3%;
+}
+
+.title-gp .title {
+    display: flex;
+    margin-left: 10px;
+}
+
+.title-gp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sub-title {
+    margin-left: 17px;
+    margin-top: 12px;
+    display: block;
+    color: rgb(87, 83, 83);
+    font-weight: 500;
+}
+
+.title-gp .link a {
+    text-decoration: none;
+    color: #f65936;
+    font-weight: bolder;
+}
+
+.list-box .item-pic img {
+    width: 100%;
+}
+
+.list-box {
+    display: flex;
+}
+
+.item-text {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.big-list .item-text p {
+    flex-direction: column;
+}
+
+.big-list .item-text h3 {
+    font-size: 22px;
+}
+
+.big-list .item-text h3,
+.big-list .item-text p {
+    width: 50%;
+    display: flex;
+}
+
+.big-list .item {
+    position: relative;
+}
+
+.item {
+    margin: 10px;
+}
+
+.item a {
+    text-decoration: none;
+    color: black;
+}
+
+.small-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+}
+
+.small-list .item {
+    width: 280px;
+    position: relative;
+}
+
+.date {
+    position: absolute;
+    bottom: 0px;
+}
+
+.icon {
+    display: inline-block;
+    height: 20px;
+}
+
+img[src^="arrow"] {
+    vertical-align: bottom;
+}
+
+section:nth-of-type(even) .list-box {
+    flex-direction: row-reverse;
+}
+
+hr {
+    border: 1px solid rgb(237, 234, 234);
+}
