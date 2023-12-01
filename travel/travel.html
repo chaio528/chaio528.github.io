@@ -1,11 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Malama Hawaii【マラマハワイ】 ハワイ州レスポンシブル ...</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        .container {
+            width: 1200px;
+            margin: 30px auto;
+            font-size: 12px;
+            text-align: left;
+            line-height: 1.5;
+            font-family: YakuHanJP, "游ゴシック Medium", YuGothic, YuGothicM, "Noto Sans Japanese", sans-serif;
+            letter-spacing: 1px;
+        }
+        h2,
+        h3 {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        img {
+            border-radius: 3%;
+        }
+
+        .link a {
+            text-decoration: none;
+            color: #f65936;
+            font-weight: bolder;
+        }
+
+        .big-list h3 {
+            font-size: 23px;
+        }
+
+        .small-list h3 {
+            font-size: 18px;
+            margin: 20px 0px;
+        }
+
+        .title-gp .title {
+            display: flex;
+            align-items: center;
+        }
+
+        .small-text {
+            margin-left: 17px;
+            margin-top: 8px;
+            color: rgb(87, 83, 83);
+            font-weight:500;
+        }
+
+        .link {
+            position: relative;
+            left: 1090px;
+            margin-top: auto;
+        }
+
+        .list-box .item-pic img {
+            width: 100%;
+        }
+
+        .list-box {
+            display: flex;
+            flex-wrap: nowrap;
+            margin-right: auto;
+        }
+
+        .item-text {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .big-list .item-text p {
+            flex-direction: column;
+        }
+
+        .big-list .item-text h3,
+        .big-list .item-text p {
+            width: 50%;
+            display: flex;
+        }
+        .big-list .item{
+          position: relative;
+        }
+
+        .item {
+            margin: 10px;
+        }
+        .item a{
+          text-decoration: none;
+          color:black;
+        }
+
+        .small-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 50%;
+        }
+
+        .small-list .item {
+            width: 280px;
+            position: relative;
+        }
+        .date {
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .icon {
+          display: inline-block;
+          height: 20px;
+        }
+        img[src^="arrow"] {
+            vertical-align: bottom;
+        }
+
+        .section-company .list-box {
+            flex-direction: row-reverse;
+        }
+        hr{
+            border: 1px solid rgb(237, 234, 234);
+        }
+    </style>
 </head>
+
 <body>
-    
+    <hr>
+    <section class="section-travel">
+        <div class="container">
+            <div class="title-gp">
+                <div class="title">
+                    <h2>旅行者にできること</h2>
+                    <spn class="small-text">What Travelers Can Do</spn>
+                </div>
+                <div class="link">
+                    <a href="#">
+                        <span>すべて見る</span>
+                        <img src="arrow.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="list-box">
+                <div class="big-list">
+                    <div class="item">
+                        <a href="">
+                          <div class="icon">
+                            <img src="sea2.png">
+                            <span>海</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="travel1.png">
+                        </div>
+                        <div class="item-text">
+                            <h3>11月はサンゴ白化啓発月間　〜日常でできること〜</h3>
+                            <p>世界のサンゴ礁を救うことを使命としている環境NGO団体コーラル・リーフ・アライアンス（The Coral Reef Alliance）は、2023年11月を「サ
+                                <span class="date">2023.11.09</span>
+                            </p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="small-list">
+                    <div class="item">
+                        <a href="">
+                          <div class="icon">
+                            <img src="sea1.png">
+                            <span>その他</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=75">
+                        </div>
+                        <div class="item-text">
+                            <h3>マウイ島の山火事救援金、日本円で受付開始</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                       <a href="">
+                        <div class="icon"></div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=56">
+                        </div>
+                        <div class="item-text">
+                            <h3>2023年7月後半～9月にハワイで開催されるカルチャー9月にハワイでれるカルチャーイベント</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                       </a>
+                    </div>
+                    <div class="item">
+                       <a href="">
+                        <div class="icon"></div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=50">
+                        </div>
+                        <div class="item-text">
+                            <h3>第46回プリンスロット•フラフェスティバル、7月</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                       </a>
+                    </div>
+                    <div class="item">
+                       <a href="">
+                        <div class="icon"></div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=32">
+                        </div>
+                        <div class="item-text">
+                            <h3>マウイ援金、日本円で受付開始</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="section-company">
+        <div class="container">
+            <div class="title-gp">
+                <div class="title">
+                    <h2>企業の取組み</h2>
+                    <spn class="small-text">Corporate Initiatives</spn>
+                </div>
+                <div class="link">
+                    <a href="#">
+                        <span>すべて見る</span>
+                        <img src="arrow.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="list-box">
+                <div class="big-list">
+                    <div class="item">
+                      <a href="">
+                        <div class="icon">
+                          <span>ジャルパック</span>
+                        </div>
+                          <div class="item-pic">
+                              <img src="travel1.png">
+                          </div>
+                          <div class="item-text">
+                              <h3>【チームJALハワイ】ビーチクリーンアップ活動で地元コミュニティに貢献</h3>
+                              <p>JALハワイ支店とJALPAK International Hawaiiで構成された“チームJALハワイ”は、ハワイ州観光局が提唱する「マラマハワイ～ハワイを思
+                                  <span class="date">2022.11.02</span>
+                              </p>
+                          </div>
+                      </a>
+                    </div>
+                </div>
+                <div class="small-list">
+                    <div class="item">
+                        <a href="">
+                          <div class="icon"></div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=75">
+                        </div>
+                        <div class="item-text">
+                            <h3>廃棄された漁網を服に生まれ変わらせる！海を守ろうと作るプロポートしませんか？</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                          <div class="icon"></div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=56">
+                        </div>
+                        <div class="item-text">
+                            <h3>第33回タートル・インディペンデンス・デイ開催</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                      <a href="">
+                        <div class="icon">
+                          <span>オラカイ株式会社</span>
+                        </div>
+                          <div class="item-pic">
+                              <img src="https://picsum.photos/300/200/?random=50">
+                          </div>
+                          <div class="item-text">
+                              <h3>「シーアスパラガス」を生産している「オラカイ」のサステナブルな取り組み</h3>
+                              <span class="date">2023.08.18</span>
+                          </div>
+                      </a>
+                    </div>
+                    <div class="item">
+                      <a href="">
+                        <div class="icon">
+                          <span>ザ・リッツカールトン・レジデンス・ワイキキ</span>
+                        </div>
+                          <div class="item-pic">
+                              <img src="https://picsum.photos/300/200/?random=32">
+                          </div>
+                          <div class="item-text">
+                              <h3>マウイ援金、日本円で受付開始</h3>
+                              <span class="date">2023.08.18</span>
+                          </div>
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="section-hawaii">
+        <div class="container">
+            <div class="title-gp">
+                <div class="title">
+                    <h2>ハワイ州観光局の取組み</h2>
+                    <spn class="small-text">Hawai‘i Tourism Japan Initiatives</spn>
+                </div>
+                <div class="link">
+                    <a href="#">
+                        <span>すべて見る</span>
+                        <img src="arrow.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="list-box">
+                <div class="big-list">
+                    <div class="item">
+                        <a href="">
+                          <div class="icon">
+                            <span>ハワイ州観光局</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="travel1.png">
+                        </div>
+                        <div class="item-text">
+                            <h3>マウイ郡、ハワイ島、海洋生物に影響与える日焼け止めの流通禁止を発表</h3>
+                            <p>2022年10月1日からマウイ郡ノンミネラルの日焼け止めの流通・販売禁止条例を施行 マウイ郡の条例5306号により、2022年10月1日からマウイ島、ラナイ島、
+                                <span class="date">2022.12.02</span>
+                            </p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="small-list">
+                    <div class="item">
+                        <a href="">
+                          <div class="icon">
+                            <span>ハワイ州観光局</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=75">
+                        </div>
+                        <div class="item-text">
+                            <h3>TBSミニ番組　マラマ〜新しいハワイ旅〜</h3>
+                            <span class="date">2022.10.01</span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="item">
+                       <a href="">
+                        <div class="icon">
+                          <span>ハワイ州観光局</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=56">
+                        </div>
+                        <div class="item-text">
+                            <h3>ハワイ州観光局、マラマハワイリツイートキャンペーン第2弾を実施！～動画の楽曲を作詞された倉木麻衣さんのbillboard classics主催シンフォニックコンサート3公演を合計30組60名様にご招待！～</h3>
+                            <span class="date">2023.08.18</span>
+                        </div>
+                       </a>
+                    </div>
+                    <div class="item">
+                       <a href="">
+                        <div class="icon">
+                          <span>ハワイ州観光局</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=50">
+                        </div>
+                        <div class="item-text">
+                            <h3>ハワイ州観光局、モデルのローラさんをマラマハワイ・アンバサダーに任命</h3>
+                            <span class="date">2022.04.22</span>
+                        </div>
+                       </a>
+                    </div>
+                    <div class="item">
+                       <a href="">
+                        <div class="icon">
+                          <span>ハワイ州観光局</span>
+                        </div>
+                        <div class="item-pic">
+                            <img src="https://picsum.photos/300/200/?random=32">
+                        </div>
+                        <div class="item-text">
+                            <h3>ハワイ州観光局、マラマハワイ動画のリツイートキャンペーンを実施～動画のために書き下ろした『Sea wind』が収録された倉木麻衣さんサイン入りCDを10名様に贈呈！～</h3>
+                            <span class="date">2021.12.14</span>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
