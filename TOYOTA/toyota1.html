@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        * {
+            font-family: system-ui, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+            letter-spacing: 1px;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 960px;
+            margin: auto;
+        }
+
+        .container-safe {
+            flex-wrap: wrap-reverse;
+            background-color: pink;
+        }
+
+        .title-num {
+            display: flex;
+            position: relative;
+            z-index: 1;
+            width: 350px;
+            background-color: #bb0404;
+            color: #fff;
+        }
+
+        .container-safe h2{
+            flex-direction: row-reverse;
+        }
+
+        .title-num div:nth-child(1) {
+            font-size: 130px;
+            transform: rotate(90deg);
+            display: inline-block;
+            margin-left: -21px;
+        }
+
+        .title-num div:nth-child(2) {
+            font-size: 52px;
+            margin: auto;
+        }
+
+        .title-text {
+            position: absolute;
+            z-index: 1;
+            width: 310px;
+            padding: 20px;
+            background-color: black;
+            color: #fff;
+        }
+
+        .title-text strong {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .title-text p {
+            font-size: 17px;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .pic {
+            position: relative;
+            top: 0;
+            left: 190px;
+        }
+
+        .icon {
+            display: inline-block;
+            padding: 4px 10px 4px 18px;
+            font-size: 26px;
+            background-color: #bb0404;
+            position: relative;
+            bottom: 225px;
+            left: 845px;
+            color: #fff;
+        }
+
+        .info-gp {
+            padding: 10px 20px;
+            position: relative;
+            left: 45px;
+            bottom: 70px;
+            z-index: 1;
+            width: 680px;
+            background-color: #EEEEEE;
+            box-sizing: border-box;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+
+        .info-gp h3 {
+            color: #bb0404;
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .info-gp h3::after {
+            content: '';
+            display: inline-block;
+            border-top: 1px solid #bb0404;
+            width: 70%;
+            vertical-align: middle;
+        }
+
+        .info-gp dt {
+            display: inline-block;
+            background-color: black;
+            color: #fff;
+            padding: 3px 5px;
+            border-radius: 5px;
+        }
+
+        .info-gp dd {
+            margin: 5px auto;
+            color: gray;
+        }
+
+        .info-gp dd::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            display: inline-block;
+            background-color: #bb0404;
+            margin: 0px 5px 4px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="item-fun">
+            <h2 class="title-num item">
+                <div>01</div>
+                <div>操控樂趣</div>
+            </h2>
+            <div class="title-text">
+                <strong>人人滿意的駕駛體驗</strong>
+                <p>透過最佳重量分配，實現平順起步，直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋，享受隨心馳騁的行駛快感。</p>
+            </div>
+            <div class="pic">
+                <img src="https://picsum.photos/695/430/?random=88">
+            </div>
+            <div class="icon">
+                ▶
+            </div>
+            <div class="info-gp">
+                <h3>因為我們做了這些革新</h3>
+                <dl>
+                    <dt>低重心設計</dt>
+                    <dd>透過低重心設計，不僅呈現低伏的外觀，更能減少身側傾，保持高速行穩定性。</dd>
+                    <dt>車體剛性強化</dt>
+                    <dd>車身結構採用超高強度鋼材.提高車輛穩定性,同時藉由雷射強化焊接技術,大幅增加焊點數量提升車身抗扭剛性,強化駕馭穩定性及安全性。</dd>
+                    <dt>四輪獨立懸吊</dt>
+                    <dd>搭載全新四輪獨立懸吊設定,透過懸吊的高承載強度,保輪胎抓地力,同時兼顧轉向靈敏度與清晰路感回饋,提升駕馭樂趣。</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="container container-safe">
+        <div class="item-safe item">
+            <h2 class="title-num">
+                <div>02</div>
+                <div>安全守護</div>
+            </h2>
+            <div class="title-text">
+                <strong>行車更安心的高剛性車體</strong>
+                <p>
+                    您的愛車會妥善保護您強悍穩固的車身可使您安全無虞。世界級的安全功能讓您輕鬆自如享受旅程毫無後顧之憂。
+                </p>
+            </div>
+            <div class="pic">
+                <img src="https://picsum.photos/695/430/?random=88">
+            </div>
+            <div class="icon">▶</div>
+            <div class="info-gp">
+                <h3>因為我們做了這些革新</h3>
+                <dl>
+                    <dt>主動安全</dt>
+                    <dd>以先進的TSS系統，動偵測路況，輔助駕駛判斷路況並維持行車安全。</dd>
+                    <dt>被動安全</dt>
+                    <dd>堅固的高剛性車體，使用熱沖壓材料的高強度抗扭鋼板，強化座對意外事故的保力。</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item-comfortable item">
+            <h2 class="title-num">
+                <div>03</div>
+                <div>乘坐舒適</div>
+            </h2>
+            <div class="title-text">
+                <strong>令人放鬆舒適的車室空間</strong>
+                <p>
+                    車室空間設計著重人體工學,透過方向盤、踏板等位置優化，追求更舒適的駕駛位置，並以新型座椅設計·提高座椅包覆性，致力實現長途駕駛不疲勞的舒適駕馭體驗。
+                </p>
+            </div>
+            <div class="pic">
+                <img src="https://picsum.photos/695/430/?random=90">
+            </div>
+            <div class="icon">▶</div>
+            <div class="info-gp">
+                <h3>因為我們做了這些革新</h3>
+                <dl>
+                    <dt>駕駛位置最佳化</dt>
+                    <dd>針對駕駛位置進行徹底的修改，讓駕馭者可如同握手般自然舒適地操控方向盤。</dd>
+                    <dt>駕馭視野佳</dt>
+                    <dd>考量駕駛坐進車內的高度，透過前擋風玻璃位置的調整.達到盲區極小化，使駕駛視野
+                        更開闊，同步提升駕馭安全。</dd>
+                    <dt>更寧靜的車室</dt>
+                    <dd>採用最新三層結構的隔音材料，與引擎、變速箱的零件改革，將座的震動抑制在最小
+                        限度，提供乘客舒適安靜的感受。</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
