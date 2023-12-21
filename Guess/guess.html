@@ -15,10 +15,6 @@
             background-size: cover;
         }
 
-        .gameStart {
-            text-align: center;
-        }
-
         .game-container {
             width: 960px;
             margin: auto;
@@ -114,12 +110,29 @@
             height: 40px;
             margin: -2px 5px;
             box-shadow: 0px 5px 0px #a60;
-            transition:.2s;
+            transition: .2s;
         }
-        .btn:active{
+
+        .btn:active {
             box-shadow: 0px 2px 0px #a60;
         }
-        
+
+        .start-btn {
+            background-image: linear-gradient(to right, rgb(247, 135, 154), yellow 50%, rgb(223, 132, 223));
+            width: 130px;
+            height: 40px;
+            margin: -2px 5px;
+            box-shadow: 5px 5px 5px rgba(125, 26, 122, 0.91);
+            transition: .2s;
+            position: relative;
+            bottom: 180px;
+            left: 370px;
+        }
+
+        .start-btn:active {
+            box-shadow: 2px 2px 3px rgba(125, 26, 122, 0.91);
+        }
+
         .gameStart {
             color: #04ecd9;
             opacity: .7;
@@ -147,6 +160,19 @@
             background-clip: text;
         }
 
+        .wait {
+            position: relative;
+            font-size: 6em;
+            Letter-spacing: 15px;
+            color: #dfb930;
+            text-shadow: 4px 6px 3px #a60;
+            width: 100%;
+            text-align: center;
+            -webkit-box-reflect: below 1px linear-gradient(to top right, transparent, #edba04);
+            line-height: 0.7em;
+            animation: animate 5s linear infinite;
+        }
+
         @keyframes spotlight {
             0% {
                 -webkit-clip-path: ellipse(100px 100px at 0% 50%);
@@ -163,12 +189,30 @@
                 clip-path: ellipse(100px 100px at 0% 50%);
             }
         }
+
+        @keyframes animate {
+            0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92% 
+            {
+            color: #d1b13cf4;
+            text-shadow: none;
+            }
+            18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100% 
+            {
+            coLor:#ebe4d3;
+            text-shadow: 0 0 10px #03bcf4,
+            0 0 20px #03bcf4,
+            0 0 40pX #03bcf4,
+            0 0 80px #03bcf4,
+            0 0 160px #03bcf4;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="initial-screen">
         <h1 class="gameStart" data-spotlight="♥ 終極密碼遊戲即將開始! ♥">♥ 終極密碼遊戲即將開始! ♥</h1>
+        <h2 class="wait">請靜待8秒</h2>
     </div>
     <div class="game-screen" style="display: none">
         <div class="game-container">
@@ -201,9 +245,11 @@
                 <input type="button" id="confirmBtn" class="btn" value="確認">
                 <input type="button" id="clearBtn" class="btn" value="清除">
             </div>
+            <input type="button" class="start-btn" value="開始遊戲">
         </div>
     </div>
     <script>
+        const startButton = document.querySelector('.start-btn');
         const btnGroup = document.querySelectorAll('.btnGroup');
         const guessInput = document.getElementById('guess-input');
         const confirmButton = document.getElementById('confirmBtn');
@@ -211,11 +257,29 @@
         const resultMessage = document.getElementById('result');
         const highLight = document.querySelector('.highlight');
 
+        confirmButton.disabled = true;
+        clearButton.disabled = true;
+
+        // start-btn 的事件監聽器 // 在按下 start-btn 之後啟用按鈕
+        startButton.addEventListener('click', function () {
+            confirmButton.disabled = false;
+            clearButton.disabled = false;
+
+            // 重設 face 和 guess-input 的內容
+            resultMessage.innerText = 'Fighting';
+            highLight.innerText = '請輸入1~100之間的數字';
+            guessInput.value = '';
+            min = 1;
+            max = 100;
+        });
+
         btnGroup.forEach(function (item) {
+            guessInput.value = '';
             item.addEventListener('click', function () {
                 guessInput.value += item.value;
             });
         });
+
         confirmButton.addEventListener('click', function () {
             const guessValue = parseInt(guessInput.value, 10);
 
@@ -253,7 +317,6 @@
 
             guessInput.value = ""; // 清空輸入框
         });
-
 
         const initialScreen = document.querySelector('.initial-screen');
         const gameScreen = document.querySelector('.game-screen');
