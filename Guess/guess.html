@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: linear-gradient(rgb(86, 238, 252), rgba(41, 60, 184, 0.918));
+            background-size: cover;
+        }
+
+        .gameStart {
+            text-align: center;
+        }
+
+        .game-container {
+            width: 960px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .item-ear {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ear {
+            clip-path: ellipse(40% 200% at 50% 200%);
+            margin: 0px 20px;
+            width: 200px;
+            height: 40px;
+            background-color: #00bffe;
+        }
+
+        .inner-ear {
+            clip-path: ellipse(40% 200% at 50% 200%);
+            margin: 0px 20px;
+            width: 150px;
+            height: 30px;
+            background-color: antiquewhite;
+            margin-inline: auto;
+            margin-top: 10px;
+            opacity: .8;
+        }
+
+        .item-head {
+            width: 500px;
+            height: 350px;
+            background-color: #02befd;
+            border-radius: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 15px 25px #252323;
+        }
+
+        .face {
+            padding: 0px 20px;
+            border: 5px solid #4c55d9;
+            border-radius: 10%;
+            opacity: .7;
+            width: 400px;
+            height: 300px;
+            background-color: #04ecd9;
+        }
+
+        #result {
+            font-size: 40px;
+        }
+
+        .highlight {
+            font-size: 37px;
+        }
+
+        .item-body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 450px;
+            height: 250px;
+            background-color: #02abe4;
+            box-shadow: 30px 30px 30px #252323;
+            margin-bottom: auto;
+        }
+
+        .item-body::before {
+            display: block;
+            margin-top: -2px;
+            content: '';
+            width: 100%;
+            border-top: 10px solid #252323;
+            opacity: .3;
+        }
+
+        .item-body input {
+            display: inline-block;
+        }
+
+        #guess-input {
+            width: 350px;
+            height: 20px;
+        }
+
+        .btn {
+            background-color: #fa0;
+            width: 130px;
+            height: 40px;
+            margin: -2px 5px;
+            box-shadow: 0px 5px 0px #a60;
+            transition:.2s;
+        }
+        .btn:active{
+            box-shadow: 0px 2px 0px #a60;
+        }
+        
+        .gameStart {
+            color: #04ecd9;
+            opacity: .7;
+            text-shadow: 6px 6px 0 #252323;
+            font-family: Helvetica;
+            margin: 0;
+            padding: 0;
+            font-size: 100px;
+            position: relative;
+        }
+
+        .gameStart::after {
+            content: attr(data-spotlight);
+            color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+            clip-path: ellipse(100px 100px at 0% 50%);
+            animation: spotlight 3s infinite;
+            background-image: url(https://images.unsplash.com/photo-1519580930435-fbfc9e7ecf26?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: 150%;
+            background-position: center center;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        @keyframes spotlight {
+            0% {
+                -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+                clip-path: ellipse(100px 100px at 0% 50%);
+            }
+
+            50% {
+                -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+                clip-path: ellipse(100px 100px at 100% 50%);
+            }
+
+            100% {
+                -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+                clip-path: ellipse(100px 100px at 0% 50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="initial-screen">
+        <h1 class="gameStart" data-spotlight="♥ 終極密碼遊戲即將開始! ♥">♥ 終極密碼遊戲即將開始! ♥</h1>
+    </div>
+    <div class="game-screen" style="display: none">
+        <div class="game-container">
+            <div class="item-ear">
+                <div class="ear1 ear">
+                    <div class="inner-ear"></div>
+                </div>
+                <div class="ear2 ear">
+                    <div class="inner-ear"></div>
+                </div>
+            </div>
+            <div class="item-head">
+                <div class="face">
+                    <p id="result">Fighting</p>
+                    <p class="highlight">請輸入1~100之間的數字</p>
+                </div>
+            </div>
+            <div class="item-body">
+                <input type="text" id="guess-input" readonly>
+                <input type="button" class="btnGroup btn" value="1">
+                <input type="button" class="btnGroup btn" value="2">
+                <input type="button" class="btnGroup btn" value="3">
+                <input type="button" class="btnGroup btn" value="4">
+                <input type="button" class="btnGroup btn" value="5">
+                <input type="button" class="btnGroup btn" value="6">
+                <input type="button" class="btnGroup btn" value="7">
+                <input type="button" class="btnGroup btn" value="8">
+                <input type="button" class="btnGroup btn" value="9">
+                <input type="button" class="btnGroup btn" value="0">
+                <input type="button" id="confirmBtn" class="btn" value="確認">
+                <input type="button" id="clearBtn" class="btn" value="清除">
+            </div>
+        </div>
+    </div>
+    <script>
+        const btnGroup = document.querySelectorAll('.btnGroup');
+        const guessInput = document.getElementById('guess-input');
+        const confirmButton = document.getElementById('confirmBtn');
+        const clearButton = document.getElementById('clearBtn');
+        const resultMessage = document.getElementById('result');
+        const highLight = document.querySelector('.highlight');
+
+        btnGroup.forEach(function (item) {
+            item.addEventListener('click', function () {
+                guessInput.value += item.value;
+            });
+        });
+        confirmButton.addEventListener('click', function () {
+            const guessValue = parseInt(guessInput.value, 10);
+
+            if (!isNaN(guessValue) && guessValue >= 1 && guessValue <= 100) {
+                resultMessage.innerText = `您猜的數字是：${guessValue}`;
+            } else {
+                resultMessage.innerText = '輸入無效內容\n請重新輸入 !!';
+            }
+        });
+
+        clearButton.addEventListener('click', function () {
+            guessInput.value = '';
+            resultMessage.innerText = 'Fighting';
+        });
+        ////////////////////////////////////////////////////////////
+        let min = 1;
+        let max = 100;
+        let answer = Math.floor(Math.random() * (max - min + 1) + min);
+        let guessNum;
+
+        confirmButton.addEventListener('click', function () {
+            guessNum = parseInt(guessInput.value, 10);
+
+            if (guessNum > answer && guessNum < max) {
+                max = guessNum;
+            } else if (guessNum < answer && guessNum > min) {
+                min = guessNum;
+            }
+
+            if (guessNum !== answer) {
+                highLight.innerText = `請輸入${min} - ${max}之間的整數`;
+            } else {
+                highLight.innerText = `猜中了！！！\n答案是 【${answer}】 ！！！`;
+            }
+
+            guessInput.value = ""; // 清空輸入框
+        });
+
+
+        const initialScreen = document.querySelector('.initial-screen');
+        const gameScreen = document.querySelector('.game-screen');
+
+        setTimeout(function () {
+            initialScreen.style.display = 'none';
+            gameScreen.style.display = 'block';
+        }, 8000);
+
+    </script>
+</body>
+
+</html>
