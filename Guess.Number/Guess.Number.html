@@ -152,11 +152,11 @@
         let item;
 
         function newItem() {
-            const hint = document.createElement('span');  
+            const hint = document.createElement('span');
             hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-danger text-white position-absolute start-0');
             hint.textContent = `${aCount}A${bCount}B`;
 
-            item = document.createElement('li'); 
+            item = document.createElement('li');
             item.setAttribute('class', 'item list-group-item list-group-item-warning text-center position-relative');
             if (guessInput.value.length !== 4) {
                 item.innerText = `您輸入的內容不正確`;
@@ -166,7 +166,7 @@
             }
 
             item.appendChild(hint);
-            list.appendChild(item); 
+            list.appendChild(item);
             guessInput.value = '';
 
             if (aCount === 4) {
@@ -175,6 +175,8 @@
                 item.innerText = `恭喜過關~ 答案是: ${answer}！`;
                 item.appendChild(hint);
                 list.appendChild(item);
+                guessInput.disabled = true;
+                checkButton.disabled = true;
             }
         }
 
