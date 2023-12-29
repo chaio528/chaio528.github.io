@@ -11,14 +11,17 @@
         <h1>用Object資料結合DOM API動態產生Table</h1>
     </div>
     <div id="container">
-
     </div>
+    <canvas id="mkShare"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+        integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const marketingShare = { // 物件 裡面 包2個陣列
             publish: "2019/05/30",
             version: "1.0",
             Titles: ["排名", "公司", "國別", "市占率%"],
-            Country: [
+            Country: [  // Country 的值是一個陣列 ,該陣列包含多個物件 ,每個物件都有不同的 kay( 也是屬性 ) 和 value
                 { Ranking: 1, Name: "台積電", Country: "台灣", Ratio: 53.1 },
                 { Ranking: 2, Name: "三星電子", Country: "韓國", Ratio: 17.3 },
                 { Ranking: 3, Name: "聯電", Country: "台灣", Ratio: 7.2 },
@@ -33,18 +36,26 @@
         };
         let container;
         let table, thead, tbody;
+        let companies = [], ratios = [];
+        // 因為他們是最後出來 呈現在畫面上的物件,所以要宣告在全域
 
         window.onload = function () {
             container = document.getElementById('container');
-
             table = document.createElement('table');
             table.setAttribute("class", "table table-bordered table-striped table-dark");
             thead = document.createElement('thead');
             tbody = document.createElement('tbody');
 
             CreateThead(marketingShare.Titles);
-
             CreateTbody(marketingShare.Country);
+            // drawPieChart(companies, ratios);
+
+            // 圓餅圖
+            for (const { Name, Ratio } of marketingShare.Country) {
+                companies.push(Name);
+                ratios.push(Ratio);
+            }
+            drawPieChart(companies, ratios);
         }
 
         function CreateThead(titleArray) {
@@ -78,6 +89,51 @@
                 tbody.append(tr);
             });
             table.append(tbody);
+        }
+
+        //第一個參數為公司陣列, 第二個參數為資料陣列
+        function drawPieChart(companyArray, ratioArray) {
+            //Pie Chart圓餅圖
+            let ctxPie = document.getElementById("mkShare");
+            var pieChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: companyArray,
+                    datasets: [{
+                        data: ratioArray,
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(255,75,50)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(54, 162, 235)',
+                            'rgb(153, 102, 255)',
+                            'rgb(201, 203, 207)',
+                            'rgb(255, 138, 64)',
+                            'rgb(142, 65, 64)',
+                            'rgb(59, 72, 64)'
+                        ]
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        fontSize: 26,
+                        text: '2021年全球晶圓代工市佔率%'
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: true,
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'black',
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>
