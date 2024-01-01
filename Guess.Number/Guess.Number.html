@@ -11,21 +11,16 @@
         * {
             font-weight: bold;
         }
-
         .container {
             width: 100%;
-            height: 800px;
             text-align: center;
         }
-
         .btn-outline-primary {
             padding: 12px 130px;
         }
-
         .input-group {
             width: 940px;
         }
-
         .list {
             width: 950px;
         }
@@ -38,15 +33,11 @@
 
 <body>
     <div class="container p-3 mb-2 bg-info-subtle text-emphasis-info mx-auto">
-        <h1 class="h1 text-primary">1A2B猜數字遊戲</h1>
-
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <!-- 開始 -->
             <button type="button" class="startButton btn btn-outline-primary">開始</button>
             <button type="button" class="giveUpButton btn btn-outline-primary">放棄重來</button>
             <button type="button" class="answerButton btn btn-outline-primary" id="liveToastBtn">看答案</button>
         </div>
-
         <div class="toast-container position-fixed top-0 end-0 p-3">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
@@ -56,17 +47,13 @@
                 </div>
             </div>
         </div>
-
         <div class="input-group mt-4 mb-4 mx-auto">
-
             <input type="text" class="guessInput form-control border border-info-subtle" placeholder="GuessNumber"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
-
             <button class="checkButton btn btn-primary border border-info-subtle" type="button" id="button-addon2">
                 猜 !
             </button>
         </div>
-
         <ul class="list list-group mx-auto text-start">
         </ul>
 
@@ -77,15 +64,14 @@
 
         </script>
     <script>
-        const startButton = document.querySelector('.startButton');     /*開始按鈕*/
-        const giveUpButton = document.querySelector('.giveUpButton');   /*放棄按鈕*/
-        const toastTrigger = document.getElementById('liveToastBtn')    /*答案按鈕*/
-        const toastLiveExample = document.getElementById('liveToast')   /*跳出答案框框*/
-        const answerText = document.querySelector('.toast-body');       /*答案文字*/
-        const guessInput = document.querySelector('.guessInput');       /*輸入*/
-        const checkButton = document.querySelector('.checkButton');     /*猜*/
-        const list = document.querySelector('.list');                   /*大內文*/
-
+        const startButton = document.querySelector('.startButton');     
+        const giveUpButton = document.querySelector('.giveUpButton');
+        const toastTrigger = document.getElementById('liveToastBtn') 
+        const toastLiveExample = document.getElementById('liveToast')
+        const answerText = document.querySelector('.toast-body');    
+        const guessInput = document.querySelector('.guessInput');    
+        const checkButton = document.querySelector('.checkButton');  
+        const list = document.querySelector('.list');                
         function random(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
@@ -94,7 +80,6 @@
         let answer;
         let numArray;
         let tempArray;
-
         function generateRandom() {
             tempArray = [-1, -1, -1, -1];
             for (let i = 0; i < tempArray.length; i++) {
@@ -108,12 +93,10 @@
             answer = numArray;
             return answer;
         }
-
         guessInput.disabled = true;
         checkButton.disabled = true;
         giveUpButton.disabled = true;
         toastTrigger.disabled = true;
-
         startButton.addEventListener('click', () => {
             generateRandom();
             guessInput.disabled = false;
@@ -121,7 +104,6 @@
             giveUpButton.disabled = false;
             toastTrigger.disabled = false;
         });
-
         if (toastTrigger) {
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
             toastTrigger.addEventListener('click', () => {
@@ -129,11 +111,9 @@
                 answerText.innerText = answer;
             })
         }
-
         let aCount = 0;
         let bCount = 0;
         let input = guessInput;
-
         checkButton.addEventListener('click', () => {
             aCount = 0;
             bCount = 0;
@@ -148,15 +128,12 @@
             }
             document.querySelector('.checkButton').addEventListener('click', newItem);
         });
-
         let item;
-
         function newItem() {
             const hint = document.createElement('span');
             hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-danger text-white position-absolute start-0');
             hint.textContent = `${aCount}A${bCount}B`;
-
-            item = document.createElement('li');
+            item = document.createElement('li'); 
             item.setAttribute('class', 'item list-group-item list-group-item-warning text-center position-relative');
             if (guessInput.value.length !== 4) {
                 item.innerText = `您輸入的內容不正確`;
@@ -164,22 +141,19 @@
             if (guessInput.value.length == 4) {
                 item.innerText = `您輸入了: ${guessInput.value}`;
             }
-
             item.appendChild(hint);
-            list.appendChild(item);
+            list.prepend(item); 
             guessInput.value = '';
-
             if (aCount === 4) {
                 hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-success text-white position-absolute start-0');
                 hint.textContent = `${aCount}A${bCount}B`;
                 item.innerText = `恭喜過關~ 答案是: ${answer}！`;
                 item.appendChild(hint);
-                list.appendChild(item);
+                list.prepend(item);
                 guessInput.disabled = true;
                 checkButton.disabled = true;
             }
         }
-
         giveUpButton.addEventListener('click', () => {
             alert(`答案是: ${answer}`);
             generateRandom();
