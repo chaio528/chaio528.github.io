@@ -28,10 +28,6 @@
         .list {
             width: 950px;
         }
-
-        .item {
-            position: relative;
-        }
     </style>
 </head>
 
@@ -102,6 +98,7 @@
             // 開始按鈕掛上事件
             startButton.addEventListener('click', () => {
                 resetGame();
+                list.innerHTML = '';
                 guessInput.disabled = false;
                 checkButton.disabled = false;
                 giveUpButton.disabled = false;
@@ -122,60 +119,62 @@
                 })
             }
 
-            let aCount = 0;
-            let bCount = 0;
+            let aCount;
+            let bCount;
 
             // 輸入數字 按'猜'後 跳出item
             checkButton.addEventListener('click', () => {
                 aCount = 0;
                 bCount = 0;
 
-                if (guessInput.value.length !== 4) {
+                if (guessInput.value.length == 4) {
                     for (let i = 0; i < answer.length; i++) {
                         if (answer[i] === guessInput.value[i]) { aCount++; }
                         else if (answer[i] !== guessInput.value[i] && answer.includes(guessInput.value[i])) { bCount++; }
                     }
                 }
-                document.querySelector('.checkButton').addEventListener('click', newItem);
+                newItem();
             });
 
             let item;
             // 出現新item
             function newItem() {
-                const hint = document.createElement('span');  /*提示圖案*/
-                hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-danger text-white position-absolute start-0');
+                const hint = document.createElement('span');
+                hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-danger text-white position-absolute start-0 top-50 translate-middle-y');
                 hint.textContent = `${aCount}A${bCount}B`;
 
-                item = document.createElement('li'); // 創建新的li元素
+                item = document.createElement('li');
                 item.setAttribute('class', 'item list-group-item list-group-item-warning text-center position-relative');
-                if (guessInput.value.length !== 4) {
-                    item.innerText = `您輸入的內容不正確`;
-                }
-                const guessArray = guessInput.value.split('');
+
+                const guessValue = guessInput.value;
+                const guessArray = guessValue.split('');
                 const guessSet = new Set(guessArray);
-                if (guessSet.size != 4) {
-                    alert(`請輸入4個不重複的數字`);
+
+                if (isNaN(parseInt(guessValue)) || guessValue.length !== 4 || guessSet.size !== 4) {
                     item.innerText = `您輸入的內容不正確`;
-                }
-                else {
-                    item.innerText = `您輸入了: ${guessInput.value}`;
+                    hint.textContent = ` Error `;
+                    alert(`請輸入4個不重複的數字`);
+                } else {
+                    item.innerText = `您輸入了: ${guessValue}`;
                 }
 
                 item.appendChild(hint);
-                list.prepend(item); // 將新的li元素添加到list中
+                list.prepend(item);
                 guessInput.value = '';
 
-                // 如果過關，修改 hint 和 item 的樣式
                 if (aCount === 4) {
-                    hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-success text-white position-absolute start-0');
+                    hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-warning text-white position-absolute start-0 top-50 translate-middle-y');
                     hint.textContent = `${aCount}A${bCount}B`;
                     item.innerText = `恭喜過關~ 答案是: ${answer.join('')}！`;
                     item.appendChild(hint);
                     list.prepend(item);
+                    item.style.backgroundColor = '#FFFF66';
+                    item.style.border = '#FFFF66';
                     guessInput.disabled = true;
                     checkButton.disabled = true;
                 }
             }
+
 
             // 放棄按鈕
             giveUpButton.addEventListener('click', () => {
