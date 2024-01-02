@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>猜數字：幾A幾B</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .wrap {
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="btn-group d-flex p-2" role="group" aria-label="Basic outlined example">
+        <button type="button" id="btn-start" class="btn btn-outline-primary">開始</button>
+        <button type="button" id="btn-retry" class="btn btn-outline-primary">放棄重來</button>
+        <button type="button" id="btn-showAnswer" class="btn btn-outline-primary">看答案</button>
+    </div>
+
+    <ul id="ul-result" class="list-group p-2">
+    </ul>
+
+    <div class="input-group mb-3 p-2">
+        <label class="input-group-text" for="inputGroupSelect01">猜答案</label>
+        <input type="text" class="form-control" placeholder="請輸入 4 個數字" aria-label="" aria-describedby="button-addon2"
+            id="input-guess">
+        <button class="btn btn-outline-secondary" type="button" id="btn-guess">猜！</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        // variables
+        let answer;
+
+        // Elements
+        const $btnStart = document.getElementById('btn-start');
+        const $btnRetry = document.getElementById('btn-retry');
+        const $btnGuess = document.getElementById('btn-guess');
+        const $btnShowAnswer = document.getElementById('btn-showAnswer');
+        const $inputGuess = document.getElementById('input-guess');
+        const $ulResult = document.getElementById('ul-result');
+
+        // Event registration
+        $btnStart.addEventListener('click', onBtnStartClick);
+        $btnRetry.addEventListener('click', onBtnRetryClick);
+        $btnGuess.addEventListener('click', onBtnGuessClick);
+        $btnShowAnswer.addEventListener('click', onBtnShowAnswerClick);
+
+        // Element event
+        window.onload = function () {
+            resetGame();
+        }
+
+        function onBtnStartClick() {
+            resetGame();
+        }
+
+        function onBtnRetryClick() {
+            resetGame();
+        }
+
+        function onBtnGuessClick(event) {
+            const guess = $inputGuess.value;
+
+            const validateionResult = validateGuess(guess);
+            if (validateionResult) {
+                alert(validateionResult);
+
+                $inputGuess.value = null;
+                return;
+            }
+
+            const result = checkAnswer(guess, answer);
+
+            const $li = createResultElement(result, guess);
+            $ulResult.append($li);
+
+            $inputGuess.value = null;
+        }
+
+        function onBtnShowAnswerClick() {
+            alert(`Answer is ${answer.join('')}`);
+        }
+
+        // Functions
+        function resetGame() {
+            answer = generateFourDigitNumbers();
+
+            $ulResult.innerHTML = null;
+        }
+
+        function generateFourDigitNumbers() {
+            const numbers = [];
+
+            while (numbers.length < 4) {
+                // Generate a new number
+                var newNum = (Math.floor(Math.random() * 10)).toString();
+
+                // Check if the newNum is existed
+                if (numbers.includes(newNum)) {
+                    continue;
+                } else {
+                    numbers.push(newNum);
+                }
+            }
+
+            return numbers;
+        }
+
+        function checkAnswer(guess, answer) {
+            let a = 0;
+            let b = 0;
+
+            for (let i = 0; i < answer.length; i++) {
+                if (guess[i] === answer[i]) {
+                    a++;
+                } else if (answer.includes(guess[i])) {
+                    b++;
+                }
+            }
+
+            return `${a}A${b}B`;
+        }
+
+        function validateGuess(guess) {
+            if (isNaN(parseInt(guess))) {
+                return 'Answer must be a number';
+            }
+
+            if (guess.length != 4) {
+                return 'You must enter a 4 digit number';
+            }
+
+            const guessArray = guess.split('');
+            const guessSet = new Set(guessArray);
+            if (guessSet.size != 4) {
+                return 'You must enter a 4 digit number without duplicate number';
+            }
+        }
+
+        // <li class="list-group-item d-flex align-items-center">
+        //     <span class="badge bg-success  mx-1">4A0B</span>
+        //     5690
+        // </li>
+        function createResultElement(result, guess) {
+            const $li = document.createElement('li');
+            $li.setAttribute('class', 'list-group-item d-flex align-items-center');
+
+            const $span = document.createElement('span');
+            let spanClass = 'badge mx-1 ';
+            if (result === '4A0B') {
+                spanClass += "bg-success";
+            } else {
+                spanClass += "bg-danger";
+            }
+
+            $span.setAttribute('class', spanClass);
+            $span.innerText = result;
+
+            $li.appendChild($span);
+            $li.append(guess);
+
+            return $li;
+        }
+    </script>
+</body>
+
+</html>
