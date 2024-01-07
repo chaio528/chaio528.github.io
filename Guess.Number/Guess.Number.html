@@ -11,7 +11,9 @@
         * {
             font-weight: bold;
         }
-
+        .text-primary{
+            text-shadow: 3px 2px #55dce9;
+        }
         .container {
             width: 100%;
             text-align: center;
@@ -19,6 +21,12 @@
 
         .btn-outline-primary {
             padding: 12px 130px;
+        }
+        .btn{
+            box-shadow: 0px 10px 1px #8e959c;
+        }
+        .btn:active{
+            box-shadow: 0px 5px 1px #8e959c;
         }
 
         .input-group {
@@ -48,11 +56,11 @@
                 </div>
             </div>
         </div>
-        <div class="input-group mt-4 mb-4 mx-auto">
+        <div class="input-group mt-4 mb-4 mx-auto shadow mb-5">
             <label class="input-group-text border-info-subtle" for="inputGroupSelect01">答案區</label>
             <input type="text" class="guessInput form-control" placeholder="GuessNumber"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="checkButton btn btn-primary" type="button" id="button-addon2">
+            <button class="checkButton btn btn-primary rounded-end" type="button" id="button-addon2">
                 猜 !
             </button>
             <ul class="list list-group mx-auto text-start">

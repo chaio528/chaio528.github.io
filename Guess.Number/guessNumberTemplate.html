@@ -36,10 +36,10 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script>
-        // variables
+        // variables變數 ( 答案 )
         let answer;
 
-        // Elements
+        // Elements 用選擇器取得所有元素
         const $btnStart = document.getElementById('btn-start');
         const $btnRetry = document.getElementById('btn-retry');
         const $btnGuess = document.getElementById('btn-guess');
@@ -47,63 +47,65 @@
         const $inputGuess = document.getElementById('input-guess');
         const $ulResult = document.getElementById('ul-result');
 
-        // Event registration
+        // Event registration 註冊事件
         $btnStart.addEventListener('click', onBtnStartClick);
         $btnRetry.addEventListener('click', onBtnRetryClick);
         $btnGuess.addEventListener('click', onBtnGuessClick);
         $btnShowAnswer.addEventListener('click', onBtnShowAnswerClick);
 
-        // Element event
+        // Element event  網頁渲染完成後 ,要產生的 ,元素事件
         window.onload = function () {
             resetGame();
         }
-
+        // 開始按鈕
         function onBtnStartClick() {
             resetGame();
         }
-
+        // 放棄重來按鈕
         function onBtnRetryClick() {
             resetGame();
         }
-
+        // 猜按鈕
         function onBtnGuessClick(event) {
             const guess = $inputGuess.value;
-
             const validateionResult = validateGuess(guess);
+
             if (validateionResult) {
                 alert(validateionResult);
+            // 當使用者輸入的内容不符合要求时，validateGuess 函数會根據不同情况返回不同的字符串。
+            // 在 if (validateionResult) 中，如果 validateionResult 變量中包含了任何字符串
+            // (也就是 validateGuess 函数返回了任何錯誤信息），那麼 if 語句的條件就會被視為真，
+            // 會執行其中的代碼，包括彈出警告提示框。
 
                 $inputGuess.value = null;
-                return;
+                return; // 退出當前的函數或區塊
             }
-
-            const result = checkAnswer(guess, answer);
+            const result = checkAnswer(guess, answer);   // result 在這
 
             const $li = createResultElement(result, guess);
             $ulResult.append($li);
 
             $inputGuess.value = null;
         }
-
+        // 看答案 按鈕
         function onBtnShowAnswerClick() {
             alert(`Answer is ${answer.join('')}`);
         }
 
-        // Functions
+        // Functions 重製遊戲  1.重新產生亂數  2.把<ul>的內容清空
         function resetGame() {
             answer = generateFourDigitNumbers();
-
             $ulResult.innerHTML = null;
         }
-
+        // 產生亂數陣列
         function generateFourDigitNumbers() {
             const numbers = [];
 
             while (numbers.length < 4) {
-                // Generate a new number
+                // Generate a new number    ,產生亂數
                 var newNum = (Math.floor(Math.random() * 10)).toString();
 
-                // Check if the newNum is existed
+                // Check if the newNum is existed   ,檢查數字存在
                 if (numbers.includes(newNum)) {
                     continue;
                 } else {
@@ -113,7 +115,7 @@
 
             return numbers;
         }
-
+        // 對照 1A2B
         function checkAnswer(guess, answer) {
             let a = 0;
             let b = 0;
@@ -126,10 +128,11 @@
                 }
             }
 
-            return `${a}A${b}B`;
+            return `${a}A${b}B`; // 他會回傳到 result 變數裡
         }
-
+        // 防呆
         function validateGuess(guess) {
+            // 檢查用戶輸入的值 是不是 不合法的數字( 包含空值 未定義undefined )
             if (isNaN(parseInt(guess))) {
                 return 'Answer must be a number';
             }
@@ -149,6 +152,8 @@
         //     <span class="badge bg-success  mx-1">4A0B</span>
         //     5690
         // </li>
+
+        //  創造 <ul> 裡面的內容
         function createResultElement(result, guess) {
             const $li = document.createElement('li');
             $li.setAttribute('class', 'list-group-item d-flex align-items-center');
