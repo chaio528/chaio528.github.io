@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>1A2B猜數字遊戲</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">1A2B猜數字遊戲</h1>
+        <div class="btn-group w-100 my-3" role="group" aria-label="Basic example">
+            <button type="button" id="start_btn" class="btn btn-outline-secondary">
+                開始
+            </button>
+            <button type="button" id="restart_btn" class="btn btn-outline-secondary">
+                放棄重來
+            </button>
+            <button type="button" id="show_answer_btn" class="btn btn-outline-secondary">
+                看答案
+            </button>
+        </div>
+        <div class="input-group my-3">
+            <span class="input-group-text">猜數字</span>
+            <input type="text" id="guess_input" class="form-control" placeholder="GuessNumber" aria-label="GuessNumber"
+                aria-describedby="GuessNumber" />
+            <button type="button" id="guess_btn" class="btn btn-outline-secondary">
+                猜！
+            </button>
+        </div>
+        <ul id="guess_history_list" class="list-group">
+            <li class="list-group-item">
+                <span class="badge bg-danger">0A0B</span> 1234
+            </li>
+            <li class="list-group-item">
+                <span class="badge bg-danger">0A0B</span> 1234
+            </li>
+            <li class="list-group-item">
+                <span class="badge bg-danger">0A0B</span> 1234
+            </li>
+            <li class="list-group-item">
+                <span class="badge bg-danger">0A0B</span> 1234
+            </li>
+            <li class="list-group-item">
+                <span class="badge bg-success">4A0B</span> 5678
+            </li>
+        </ul>
+    </div>
+
+    <div class="toast-container top-0 end-0">
+        <div id="game_msg_toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">提示</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="end_game_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">過關</h1>
+                </div>
+                <div class="modal-body">恭喜過關！</div>
+                <div class="modal-footer">
+                    <button type="button" id="end_game_btn" class="btn btn-primary">
+                        重新開始
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        /* 
+        document.addEventListener('load',()=>{
+
+        })
+        ♥產生答案: 產生4個不重複0-9數字(文字) )
+        ♥產生亂數: 1. Math.Random()  重複出現過的  2. [0~9]抽號碼牌
+        ♥答案做成文字
+        ♥初始化畫面:  輸入框、內容____清空    ,   按鈕狀態要處理
+        ♥按鈕狀態:    還沒開始,遊戲中,遊戲結束
+        ♥輸入的檢查審核: 
+        1.有沒有輸入
+        2.輸入是否為數字(isNaN,parseInt,Regex)  如果 isNaN 回傳true就是:不是數字
+        3.輸入的字數
+        4.有沒有重複( Set物件 ,切物件Array )
+        5.比對答案
+
+        sort的compare函式 有 >0  <0  =0 要確保 >0  <0 有出現
+        */
+        let answer;
+        const $startBtn = document.querySelector('#start_btn');
+        const $showAnsBtn = document.querySelector('#show_answer_btn');
+        const $gameMsgToast = document.querySelector('#game_msg_toast');
+        const $guessInput = document.querySelector('#guess_input');
+        const $guessBtn = document.querySelector('#guess_btn');
+
+        $startBtn.addEventListener('click', initGame);
+        $showAnsBtn.addEventListener('click', showAnswer);
+        $guessBtn.addEventListener('click', myGuessBtn);
+
+        // 初始化
+        function initGame() {
+            answer = generateAns();
+        }
+
+        // 組成的亂數   可以是字串 或 陣列
+        function generateAns() {
+            const numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            numArr.sort(() => getRandomArbitrary(-1, 1))
+            return numArr.slice(0, 4).join("");  //寫法一 String
+            // slice 本身返回一個新的陣列   ,但 join 讓他連接成字串
+            // return numArr.slice(0,4);                 //寫法二 Array 每個數字中間出現,
+        }
+
+        // 產生亂數
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // 傳統  看答案
+        function showAnswer() {
+            // alert(`答案是:${answer}`);   // 寫法一
+            showHint(`答案是: ${answer}`);   // 寫法二
+        }
+
+        //  Bootstrap 顯示吐司 ( 看答案  ,顯示文字   ,跳出來 )
+        function showHint(msg = "") {
+            const toastBootstrap = new bootstrap.Toast($gameMsgToast, { delay: 500 }); //跳出吐司2   用執行個體方法
+            // const toastBootstrap = bootstrap.Toast.getOrCreateInstance($gameMsgToast); //跳出吐司1 用靜態方法取得
+            toastBootstrap.show();
+        }
+
+        // 按下猜按鈕時 ,要做的檢核 guessBtn
+        function myGuessBtn() {
+            console.log('aaa');
+            const val = $guessInput.value.trim();  // 去空白後的輸入的值
+            if (val === "" || isNaN(val)) {
+                showHint("請輸入合法的數字!");
+                $guessInput.value = "";
+                return;
+            }
+            if (val.length > 4 || new Set(val).size !== 4) {
+                showHint("請確認輸入數字數量");
+                $guessInput.value = "";
+                return;
+            }
+            let a = 0, b = 0;
+            for (let i = 0; i < answer.length; i++) {
+                if (val === answer[i]) { a++; }
+                else if (answer.includes(val[i])) { b++; }
+            }
+            showHint(`${a}A  ${b}B`);
+        }
+    </script>
+    <!-- <script src="./main.js"></script> -->
+</body>
+
+</html>

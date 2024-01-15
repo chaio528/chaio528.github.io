@@ -1,0 +1,7 @@
+C:\Study1\chaio528.github.io\C\C\bin\Debug\C.exe.config
+C:\Study1\chaio528.github.io\C\C\bin\Debug\C.exe
+C:\Study1\chaio528.github.io\C\C\bin\Debug\C.pdb
+C:\Study1\chaio528.github.io\C\C\obj\Debug\C.csproj.AssemblyReference.cache
+C:\Study1\chaio528.github.io\C\C\obj\Debug\C.csproj.CoreCompileInputs.cache
+C:\Study1\chaio528.github.io\C\C\obj\Debug\C.exe
+C:\Study1\chaio528.github.io\C\C\obj\Debug\C.pdb

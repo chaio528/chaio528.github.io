@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;600&family=Noto+Serif+TC:wght@900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* Q1: What is the difference between the following three font-family settings?
+      1. font-family: 'Noto Sans TC', 'Noto Serif TC',sans-serif;
+      2. font-family: 'Noto Serif TC', 'Noto Sans TC', sans-serif;
+      3. font-family: 'Noto Sans TC', sans-serif;
+         font-family: 'Noto Serif TC', serif;
+
+         回答Q1:
+         這是我套用 google 的字體
+
+         sans-serif     無襯線字
+         serif:         有襯線字
+         Noto Sans TC:  針對繁體中文的無襯線字
+         Noto Serif TC  針對繁體中文的有襯線字
+    */
+        * {
+            font-family: 'Noto Serif TC', serif;
+            letter-spacing: 2px;
+        }
+
+        .container,
+        .wrap,
+        .divItem {
+            width: 960px;
+        }
+
+        .input {
+            box-shadow: 1px 5px 5px #bddce2;
+        }
+
+        .divItem {
+            box-shadow: 1px 5px 5px #e2e1bd;
+        }
+
+        .inputTodo {
+            width: 720px;
+            height: 30px;
+            text-overflow: ellipsis;
+        }
+
+        .btn {
+            box-shadow: 1px 5px 5px #a4835a;
+        }
+
+        .btn:active {
+            box-shadow: 1px 2px 2px #a4835a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mx-auto">
+        <h1 class="text-center">待辦清單</h1>
+        <!--
+  Q2: Why is the script tag of bootstrap is not placed at the bottom of the body tag? (It works fine though, but it is not recommended.) 
+  為什麼 Bootstrap 的 script 標籤沒有被放在 body 標籤底部？（雖然它仍然運作正常，但這並不被建議。）
+  https://getbootstrap.com/docs/5.3/getting-started/introduction/#quick-start
+
+  Q3: Why the html tags is wrapped in the script tag? HTML 標籤被包裹在 script 標籤內的原因是什麼呢？-->
+<!-- 回答Q2 Q3: 我寫著寫著沒發現.... -->
+
+
+
+        <!-- 上面輸入區 -->
+        <div class="input-group mb-3">
+            <!-- 新增輸入欄 -->
+            <!--  Q4: Why the value of the attribute aria-label is "Recipient's username"? -->
+            <!--  Q5: What is the purpose of using aria-label in HTML?-->
+            <!--    https://developer.mozilla.org/zh-CN/docs/Web/Accessibility/ARIA/Attributes/aria-label -->
+
+            <!-- 回答Q4 Q5:
+                已更正為 aria-label="Input field for adding to-do items"
+                ♥ aria-label 主要用於提供對於不具有視覺感知的使用者（如使用螢幕助讀器的人士）的文字描述。當一個元素沒有可見的標籤或標題時，使用 aria-label 可以提供對該元素的描述，從而讓螢幕助讀器能夠準確地傳遞信息給使用者。
+             -->
+            <input type="text" class="input form-control" placeholder="Enter your to-do item"
+                aria-label="Input field for adding to-do items">
+            <button class="addBtn btn btn-primary" type="button">新增</button>
+        </div>
+        <script>
+            // Q6: Why the naming of variables start with $ sign?(camelCase is recommended)
+            // https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Writing_style_guide/Code_style_guide/JavaScript#variables
+
+            // 回答Q6: 模仿JQuery的命名方式,這樣容易有錯誤嗎?
+            const $input = document.querySelector(".input");
+            const $addBtn = document.querySelector(".addBtn");
+            let $wrap, $divItem, $divTodo, $check, $inputTodo, $divBtn, $editBtn, $delBtn;
+
+            $addBtn.addEventListener("click", () => {
+                createTodo($input);
+                updateTodo();
+                $input.value = "";
+            });
+            window.addEventListener("load", readAllTodos);
+
+            // 從 localStorage 中載入現有的待辦事項
+
+            function readAllTodos() {
+                // 解析 localStorage 中的待辦事項，若無則為空陣列
+                const items = JSON.parse(localStorage.getItem("items")) || [];
+                items.forEach(item => {
+                    createTodo(item);
+                });
+            }
+
+            // Q7: What if user input is empty while creating the new todo? 如果使用者在創建新的待辦事項時輸入為空，該怎麼處理？
+            // 回答Q7: 已改成 $inputTodo.value = item.value.trim();
+            function createTodo(item) {
+                // wrap
+                $wrap = document.createElement("div");
+                $wrap.setAttribute("class", "wrap m-auto");
+                // divItem
+                $divItem = document.createElement("div");
+                $divItem.setAttribute("class", "divItem d-flex p-lg-3 mb-2 mt-2 border border-secondary-subtle align-items-center");
+                // divTodo
+                $divTodo = document.createElement("div");
+                $divTodo.setAttribute("class", "divTodo bg-primary-subtle d-flex align-items-center p-2");
+                // check input
+                $check = document.createElement("input");
+                $check.setAttribute("class", "check form-check-input me-1 border border-secondary-subtle m-3");
+                $check.type = "checkbox";
+                $check.checked = item.completed;
+                $check.addEventListener("click", (event) => {
+                    // Q8: the function parameter "event" is recommended to set in the arrow function 建議在箭頭函數中設置參數 "event"。
+                    // 回答Q8: 已更正
+                    const toCheckedDivItem = event.target.closest(".divItem");
+                    toCheckedDivItem.checked = !toCheckedDivItem.checked;
+                    updateTodo();
+                });
+
+                // inputTodo
+                $inputTodo = document.createElement("input");
+                $inputTodo.setAttribute("class", "inputTodo myInput form-control bg-primary-subtle ms-2 flex-wrap");
+                $inputTodo.type = "text";
+                $inputTodo.value = item.value.trim();
+                $inputTodo.disabled = true;
+
+                // divBtn
+                $divBtn = document.createElement("div");
+                $divBtn.setAttribute("class", "divBtn mx-auto");
+                // editBtn
+                $editBtn = document.createElement("button");
+                $editBtn.setAttribute("class", "editBtn btn btn-warning mx-1");
+                $editBtn.type = "button";
+                $editBtn.innerText = "編輯";
+                $editBtn.addEventListener("click", editTodo);
+                // delBtn
+                $delBtn = document.createElement("button");
+                $delBtn.setAttribute("class", "delBtn btn btn-danger");
+                $delBtn.type = "button";
+                $delBtn.innerText = "刪除";
+                $delBtn.addEventListener("click", deleteTodo);
+
+                // 附加
+                $divTodo.appendChild($check);
+                $divTodo.appendChild($inputTodo);
+
+                $divItem.prepend($divTodo);
+
+                $divBtn.appendChild($editBtn);
+                $divBtn.appendChild($delBtn);
+                $divItem.appendChild($divBtn);
+
+                $wrap.appendChild($divItem);
+                document.body.appendChild($wrap);
+
+            }
+
+            // 刪除按鈕 事件
+            function deleteTodo(event) {
+                if (event.target.classList.contains("delBtn")) {
+                    const delDivItem = event.target.closest(".divItem");
+                    if (delDivItem) {
+                        delDivItem.remove();
+                        // 從 localStorage 中移除該待辦事項
+                        updateTodo();
+                    }
+                }
+            }
+
+            // 編輯按鈕事件
+            function editTodo(event) {
+                const editBtn = event.target;
+                const inputTodo = editBtn.closest(".divItem").querySelector(".inputTodo");
+                if (editBtn.innerText === "編輯") {
+                    // 切換為保存
+                    editBtn.innerText = "保存";
+                    editBtn.setAttribute("class", "editBtn btn bg-info text-white mx-1");
+                    inputTodo.disabled = false;
+                } else {
+                    // 切換為編輯
+                    editBtn.innerText = "編輯";
+                    editBtn.setAttribute("class", "editBtn btn btn-warning mx-1");
+                    inputTodo.disabled = true;
+                }
+                // 編輯完成後將待辦事項存入 localStorage
+                updateTodo();
+            }
+
+            // 將待辦事項存入 localStorage
+            function updateTodo() {
+                const items = Array.from(document.querySelectorAll(".divItem")).map(divItem => {
+                    $inputTodo = divItem.querySelector(".inputTodo");
+                    $check = divItem.querySelector(".check");
+                    return {
+                        value: $inputTodo.value,
+                        completed: $check.checked,
+                    };
+                });
+
+                localStorage.setItem("items", JSON.stringify(items));
+            }
+
+            //Q9 function naming style 建議要一致
+            // loadItemsFromLocalStorage, createListElement, delList, onBtnEditClick, saveItemToStorage
+            // ex. readAllTodos, createTodo, deleteTodo, editTodo, updateTodo
+
+            // 回答Q9: 已更正
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
