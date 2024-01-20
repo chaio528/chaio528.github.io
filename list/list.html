@@ -103,7 +103,7 @@
                 $check.checked = item.completed;
                 $check.addEventListener('click', (event) => {
                     const toCheckedDivItem = event.target.closest('.divItem');
-                    toCheckedDivItem.classList.toggle('completed');  // 切換 completed 類別.
+                    toCheckedDivItem.classList.toggle('completed');  // 切換 completed 類別
                     saveItemToStorage();
                 });
 
