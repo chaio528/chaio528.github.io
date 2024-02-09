@@ -1,99 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="grid.css">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .room-row {
-            margin: auto;
+        * {
+            color: #000;
+        }
+
+        img {
+            vertical-align: bottom;
+        }
+
+        .wish-listings-container {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .room-icon {
+            position: sticky;
+            z-index: 3;
+            top: 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            height: 50px;
+        }
+
+        .room-icon-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .up-load,
+        .point {
+            padding: 15px 10px;
+            border-radius: 50%;
+            background-color: transparent;
+        }
+
+        .up-page {
+            padding: 15px 12px;
+            border-radius: 50%;
+            background-color: transparent;
+        }
+
+        .up-load:active,
+        .point:active,
+        .up-page:active {
+            background-color: #eae6e6;
+        }
+
+        .date-peoples {
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: start;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .date-peoples button {
+            background-color: #fff;
+            border: 1px solid #bebdbd;
+            border-radius: 20px;
+            padding: 6px 12px;
+            width: fit-content;
+        }
+
+        .date-peoples button:active {
+            border: 1px solid #000;
         }
 
         .room-item {
-            margin-bottom: 15px;
+            margin-bottom: 45px;
+
         }
 
-
         .card-pic {
+            margin-bottom: 10px;
             position: relative;
-            margin-bottom: 20px;
+            height: 100%;
+            background: #fff;
+            font-family: Helvetica, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
         }
 
         .room-img {
             width: 100%;
             border-radius: 25px;
-            border: 5px solid #fbf9f9;
             vertical-align: bottom;
-            box-shadow: 0px 0px 5px 2px #d0d0d0;
+        }
+
+        .card-pic-love {
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            z-index: 2;
+        }
+
+        .room-introduce {
+            margin: 10px 0px;
+        }
+
+        .room-detail {
+            margin-top: -4px;
+        }
+
+        .room-item-bed,
+        .room-item-night,
+        .room-item-total {
+            color: #656565;
+        }
+
+        .room-item-price {
+            font-weight: bold;
+            margin: 2px 0px;
+        }
+
+        .room-item-total {
+            display: inline;
+            text-decoration: underline;
+            font-weight: 400;
         }
 
         .room-link {
+            position: relative;
             text-decoration: none;
         }
 
-        .room-link:hover .close-button {
-            display: block;
-            opacity: 0.6;
-        }
-
-        .close-button:hover {
-            opacity: 1;
-            background-color: #fff;
-            scale: 1.1;
-        }
-
-        .close-button {
-            display: none;
-            position: absolute;
-            top: 12px;
-            left: 15px;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            font-size: 10px;
-            border: 0 solid #fff;
+        .add-remark {
+            text-decoration: underline;
+            color: #656565;
+            font-weight: bold;
         }
 
         .add-edit-div {
-            width: 60px;
-            margin-left: auto;
-            margin-right: 10px;
+            background-color: #e1e1e1;
+            border-radius: 10px;
+            padding: 10px 8px;
         }
 
         .add-edit {
-            border: transparent;
-            background-color: transparent;
             text-decoration: underline;
+            color: #656565;
             font-weight: bold;
-
-            border-radius: 10px;
-            padding: 3px 0px;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .add-edit:active {
-            background-color: #e1e1e1;
+            border: none;
+            background-color: transparent;
         }
 
         .main-wish-title,
-        .subtitle,
-        .saved {
+        .subtitle {
             color: black;
         }
 
         .main-wish-title {
-            padding-left: 25px;
             font-weight: bold;
+            margin: 10px 0px;
         }
 
         .subtitle {
             font-weight: bold;
             font-size: 18px;
+            display: flex;
+            justify-content: space-between;
             display: -webkit-box;
             text-overflow: ellipsis;
             -webkit-line-clamp: 2;
@@ -101,136 +180,736 @@
             overflow: hidden;
         }
 
-        .saved {
-            margin-top: -8px;
-            font-size: 14px;
-            color: #777070;
+        /* 房源無法預定---------------- */
+        .no-room-title strong {
+            font-size: 24px;
+        }
+
+        .no-room-tag {
+            position: absolute;
+            display: inline-block;
+            width: fit-content;
+            white-space: nowrap;
+            top: 15px;
+            left: 20px;
+            z-index: 2;
+            border-radius: 30px;
+            color: #fff;
+            background-color: #514e4e71;
+            padding: 10px 10px;
+            font-weight: bold;
+        }
+
+        /* 
+        彈跳視窗-----------------------------
+
+        價格明細
+        設定重新命名
+        */
+        .price-detail-row {
+            /* display: none; */
+        }
+
+        .point-rename-row {
+            /* display: none; */
+        }
+
+        .detail-item {
+            position: relative;
+            border-top: 1px solid #7e7878;
+            border-radius: 20px;
+            padding-top: 10px;
+            padding-bottom: 50px;
+        }
+
+        .detail-content {
+            padding: 0 20px;
+        }
+
+        .cross {
+            position: absolute;
+            top: 23px;
+            left: 20px;
+        }
+
+        .detail-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .sub1-set,
+        .sub2-set {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            justify-content: space-between;
+        }
+
+        /* 
+        彈跳視窗-----------------------------
+
+        右上的分享
+        */
+        .share-detail-row {
+            /* display: none; */
+        }
+
+        .detail-content-mysub1,
+        .detail-content-mysub2 {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            align-items: center;
+            border: 1px solid #bcbaba;
+            border-radius: 20px;
+            padding: 15px 20px;
+        }
+
+        .detail-content-share {
+            display: grid;
+            gap: 15px;
+        }
+
+        b {
+            font-size: 18px;
+        }
+
+        /* 控制彈跳視窗的 input----------------- */
+        #my-up-load,
+        #my-point,
+        #my-room-item-total,
+        #my-add-remark,
+        #my-add-edit {
+            display: none;
+        }
+
+        /* 控制彈跳視窗------------------------- */
+        #my-up-load:checked .wish-listings-container .share-detail-row {
+            display: block;
+        }
+
+        /* Swiper 照片幻燈片--------------------- */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        :root {
+            --swiper-theme-color: #ededed;
+        }
+
+        /* ---- */
+
+        @media screen and (max-width:767px) {
+            .wish-map-container {
+                display: none;
+            }
         }
 
         @media screen and (min-width:768px) {
-            .add-edit:active {
-                background-color: transparent;
+            .my-wish-detail-container {
+                max-width: 1200px;
+                margin: auto;
+            }
+
+            .no-room-row {
+                border-top: 1px solid #e1e1e1;
+                padding-top: 40px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="add-edit-div row">
-            <button class="add-edit">編輯</button>
+    <div class="my-wish-detail-container container">
+        <input type="checkbox" id="my-up-load">
+        <input type="checkbox" id="my-point">
+        <input type="checkbox" id="my-room-item-total">
+        <input type="checkbox" id="my-add-remark">
+        <input type="checkbox" id="my-add-edit">
+
+        <div class="my-wish-detail-row row">
+            <!-- 房源區 -->
+            <div class="wish-listings-container col-12 col-sm-12 col-md-7">
+
+                <!-- 最上方小圖示 -->
+                <div class="room-icon">
+                    <div class="room-icon-left">
+                        <a href="#" class="up-page-link">
+                            <i class="up-page fa-solid fa-angle-left fa-sm"></i>
+                        </a>
+                    </div>
+                    <div class="room-icon-right">
+                        <label for="my-up-load">
+                            <i class="up-load fa-solid fa-arrow-up-from-bracket fa-sm"></i>
+                        </label>
+                        <label for="my-point">
+                            <i class="point fa-solid fa-ellipsis fa-sm"></i>
+                        </label>
+                    </div>
+                </div>
+
+                <h1 class="main-wish-title">用戶自訂名字</h1>
+                <!-- 新增日期 人數 -->
+                <div class="date-peoples">
+                    <button class="create-date">新增日期</button>
+                    <button class="peoples">1人</button>
+                </div>
+                <!-- 卡片 -->
+                <div class="my-wish-card-container container">
+                    <div class="have-room-row row">
+                        <!-- 卡片1 -->
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="card-pic">
+                                        <!-- 照片 -->
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <!-- 卡片文字 -->
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Hualien City的獨立房間
+                                                <span class="star">★ 4.84(323)</span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-bed">2張標準雙人床</div>
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <div class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$16,854 TWD
+                                                    稅前總價
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="add-edit-div">
+                                    <label for="my-add-edit" class="add-edit">編輯</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 卡片2 -->
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="card-pic">
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Hualien City的獨立房間
+                                                <span class="star">★ 4.84(323)</span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <span class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$20,854 TWD
+                                                    稅前總價
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                            </div>
+                        </div>
+                        <!-- 卡片3 -->
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="card-pic">
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Hualien City的獨立房間
+                                                <span class="star">★ 4.84(323)</span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <span class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$9,854 TWD
+                                                    稅前總價
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                            </div>
+                        </div>
+                        <!-- 卡片4 -->
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="card-pic">
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Hualien City的獨立房間
+                                                <span class="star">★ 4.84(323)</span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <span class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$9,854 TWD
+                                                    稅前總價
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                            </div>
+                        </div>
+                        <!-- 卡片5 -->
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="card-pic">
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Hualien City的獨立房間
+                                                <span class="star">★ 4.84(323)</span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <span class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$9,854 TWD
+                                                    稅前總價
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                            </div>
+                        </div>
+                        <!-- 卡片6 -->
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="card-pic">
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Hualien City的獨立房間
+                                                <span class="star">★ 4.84(323)</span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <span class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$9,854 TWD
+                                                    稅前總價
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 此房源無法預訂 -->
+                    <div class="no-room-row">
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="no-room-title">
+                                <strong>此房源無法預定</strong>
+                                <p>請嘗試變更心願單日期，以搜尋更多可預訂的選項。</p>
+                            </div>
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <div class="no-room-tag">無法預訂</div>
+                                    <div class="card-pic">
+                                        <i class="card-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                    <div class="room-introduce">
+                                        <div class="room-title">
+                                            <h2 class="subtitle">位於Township的房源
+                                                <span class="star"></span>
+                                            </h2>
+                                        </div>
+                                        <div class="room-detail">
+                                            <div class="room-item-night">5晚．2月18日至23日</div>
+                                            <span class="room-item-price">$854 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$854 TWD 稅前總價
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 價格明細 彈跳視窗 ------------------->
+                    <div class="price-detail-row row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="detail-item">
+                                <header class="detail-title">價格明細</header>
+                                <i class="cross fa-solid fa-xmark fa-sm"></i>
+                                <hr>
+                                <div class="detail-content">
+                                    <div class="detail-content-sub1">
+                                        <div class="sub1-set">
+                                            <span>$1,667 TWD x 5晚</span>
+                                            <span>$8,334 TWD</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="detail-content-sub2">
+                                        <div class="sub2-set">
+                                            <span>稅前總價</span>
+                                            <span>$1,667 TWD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右上設定 彈跳視窗 -->
+                    <div class="point-rename-row row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="detail-item">
+                                <header class="detail-title">設定</header>
+                                <i class="cross fa-solid fa-xmark fa-sm"></i>
+                                <hr>
+                                <div class="detail-content">
+                                    <div class="detail-content-sub1">
+                                        <div class="sub1-set">
+                                            <i class="sub-set-icon fa-solid fa-pen fa-sm"> 重新命名</i>
+                                            <i class="fa-solid fa-angle-right fa-sm"></i>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="detail-content-sub2">
+                                        <div class="sub2-set">
+                                            <i class="sub-set-icon fa-solid fa-trash-can fa-sm"> 刪除</i>
+                                            <i class="fa-solid fa-angle-right fa-sm"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分享 彈跳視窗 -->
+                    <div class="share-detail-row row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="detail-item">
+                                <header class="detail-title">你想要怎麼分享呢?</header>
+                                <i class="cross fa-solid fa-xmark fa-sm"></i>
+                                <hr>
+                                <div class="detail-content detail-content-share">
+                                    <div class="detail-content-mysub1">
+                                        <i class="fa-solid fa-link fa-xl"></i>
+                                        <div class="send-link">
+                                            <b>傳送連結</b>
+                                            <p>有此連結的任何人都可查看</p>
+                                        </div>
+                                    </div>
+                                    <div class="detail-content-mysub2">
+                                        <i class="fa-solid fa-user-plus fa-xl"></i>
+                                        <div class="cooperation">
+                                            <b>合作</b>
+                                            <p>邀請其他人使用此心願單</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <!-- 地圖 ------------------>
+            <div class="wish-map-container col-12 col-sm-12 col-md-5">
+                <div class="wish-map">
+                    <img src="taiwan-map.jpg" alt="" class="taiwan-map">
+                </div>
+            </div>
         </div>
-        <h1 class="main-wish-title">心願單</h1>
 
-        <div class="room-row row">
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字用戶自訂名字用戶自訂名字用戶自訂名字用戶自訂名字用戶自訂名字</h2>
-                        <div class="saved">已儲存1項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house4.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存2項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house1.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存3項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house2.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存4項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house3.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存5項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存6項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存7項</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-                <div class="room-item">
-                    <a href="#" class="room-link">
-                        <div class="card-pic">
-                            <img src="house2.jpg" class="room-img">
-                            <button type="button" class="close-button">X</button>
-                        </div>
-                        <h2 class="subtitle">用戶自訂名字</h2>
-                        <div class="saved">已儲存8項</div>
-                    </a>
-                </div>
-            </div>
-
-
-        </div>
     </div>
 
 
 
-
-
+    <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/bc13cdfd27.js" crossorigin="anonymous"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+    </script>
+
 </body>
 
 </html>
