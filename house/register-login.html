@@ -17,9 +17,11 @@
 		}
 
 		.signin-btn {
-			border: 1px solid #bcbaba;
+			border: 1px solid #aaaaaa;
 			display: flex;
 			align-items: center;
+			text-align: center;
+			border-radius: 10px;
 		}
 
 		.signin-btn .fa {
@@ -31,12 +33,17 @@
 			margin-top: 20px;
 		}
 
-		.btn-close:focus{
+		.btn-close:focus {
 			outline:none;
+			box-shadow: none;
 		}
 
-		.btn:active{
+		.signin-btn:active,.btn-danger:active{
 			transform: scale(0.9);
+		}
+		.btn-danger{
+			padding: 15px 0px;
+			border-radius: 10px;
 		}
 	</style>
 </head>
@@ -67,26 +74,26 @@
 							<p>我們會寄email，以確認你的電子信箱。</p>
 							<!-- <textarea class="form-control" id="message-text"></textarea> -->
 						</div>
-						<button type="button" class="btn btn-danger w-100 mb-4">繼續</button>
+						<button type="button" class="btn btn-danger w-100 mb-4 fs-5">繼續</button>
 						<div class="row d-flex align-items-center justify-content-center">
 							<div class="line col-5"></div>
 							<span class="col-1 text-center or">或</span>
 							<div class="line col-5"></div>
 						</div>
 					</form>
-					<div class="facebook-signin-btn signin-btn btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
+					<div class="facebook-signin-btn signin-btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
 						<i class="fa-brands fa-facebook fa-2xl"></i>
 						<p class="col-11 signin-p">使用Facebook登入</p>
 					</div>
-					<div class="google-signin-btn signin-btn btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
+					<div class="google-signin-btn signin-btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
 						<i class="fa-brands fa-google fa-2xl"></i>
 						<p class="col-11 signin-p">使用Google登入</p>
 					</div>
-					<div class="line-signin-btn signin-btn btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
+					<div class="line-signin-btn signin-btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
 						<i class="fa-brands fa-line fa-2xl"></i>
 						<p class="col-11 signin-p">使用Line登入</p>
 					</div>
-					<div class="mail-signin-btn signin-btn btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
+					<div class="mail-signin-btn signin-btn w-100 mt-3 px-5 lh-lg fw-bold d-flex">
 						<i class="fa-solid fa-envelope fa-2xl"></i>
 						<p class="col-11 signin-p">使用Mail登入</p>
 					</div>
