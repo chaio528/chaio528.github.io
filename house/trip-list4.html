@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><travel-list></travel-list></title>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .main-travel-title {
+            margin-top: 10px;
+        }
+
+        img {
+            vertical-align: bottom;
+        }
+
+        .room-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .room-item {
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0px 5px 15px 5px #cbcbcb;
+        }
+
+        .room-img {
+            object-fit: cover;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .trip-pic {
+            position: relative;
+        }
+
+        .trip-pic-tag {
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #fcfcfc;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        .room-introduce {
+            padding: 30px;
+        }
+
+        .room-item-main-title-p {
+            border-bottom: 1px solid #c5c1c1;
+            padding-bottom: 10px;
+        }
+
+        .room-item-footer {
+            display: grid;
+            grid-template-columns: 1fr auto 3fr;
+            gap: 0px;
+        }
+
+        .room-item-date+.subtitle {
+            justify-items: center;
+        }
+
+        .line {
+            color: #cbcbcb;
+            border-left: 1px solid #cbcbcb;
+            margin: 0 10px;
+        }
+
+        .help-center-p {
+            border-top: 1px solid #cbcbcb;
+            padding: 20px;
+        }
+
+        .help-center-span {
+            text-decoration: underline;
+        }
+        @media screen and (min-width:768px) {
+            .travel-list-container{
+                max-width: 1200px;
+            }
+            .room-link {
+                display: flex;
+                align-items: center;
+            }
+
+            .room-img {
+                border-radius: 0px 20px 20px 0px;
+            }
+
+            .trip-pic-tag {
+                display: inline;
+                /* right: 20px; */
+                width: fit-content;
+            }
+
+            .trip-pic-col {
+                order: 1;
+            }
+
+            .room-introduce {
+                padding: 0px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="travel-list-container container">
+        <h1 class="main-travel-title fw-bold">旅程</h1>
+        <!-- 卡片 -->
+        <div class="room-row row">
+            <!-- 卡片1 -->
+            <div class="col-12 col-sm-12 col-md-12">
+                <div class="room-item">
+                    <a href="#" class="room-link">
+
+                        <div class="trip-pic-col col-12 col-sm-12 col-md-6">
+                            <div class="trip-pic">
+                                <img src="travel-room-img.jpg" class="room-img">
+                                <span class="trip-pic-tag">待處理</span>
+                            </div>
+                        </div>
+
+                        <div class="room-introduce-col col-12 col-sm-12 col-md-6">
+                            <div class="room-introduce">
+                                <h2 class="room-item-main-title">
+                                    Toucheng Township
+                                </h2>
+                                <p class="room-item-main-title-p">
+                                    Chiaoling 出租的臺灣民宿中的獨棟房間
+                                </p>
+                                <div class="room-item-footer">
+                                    <span class="room-item-date">
+                                        5月27日-5月28日
+                                        <p class="room-item-year">2024年</p>
+                                    </span>
+                                    <div class="line col-5"></div>
+                                    <div class="subtitle">Toucheng Township
+                                        <p class="subtitle-chinese">臺灣</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 卡片2 -->
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="room-item">
+                <a href="#" class="room-link">
+
+                    <div class="trip-pic-col col-12 col-sm-12 col-md-6">
+                        <div class="trip-pic">
+                            <img src="travel-room-img.jpg" class="room-img">
+                            <span class="trip-pic-tag">待處理</span>
+                        </div>
+                    </div>
+
+                    <div class="room-introduce-col col-12 col-sm-12 col-md-6">
+                        <div class="room-introduce">
+                            <h2 class="room-item-main-title">
+                                Toucheng Township
+                            </h2>
+                            <p class="room-item-main-title-p">
+                                Chiaoling 出租的臺灣民宿中的獨棟房間
+                            </p>
+                            <div class="room-item-footer">
+                                <span class="room-item-date">
+                                    5月27日-5月28日
+                                    <p class="room-item-year">2024年</p>
+                                </span>
+                                <div class="line col-5"></div>
+                                <div class="subtitle">Toucheng Township
+                                    <p class="subtitle-chinese">臺灣</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+        <!-- 卡片3 -->
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="room-item">
+                <a href="#" class="room-link">
+
+                    <div class="trip-pic-col col-12 col-sm-12 col-md-6">
+                        <div class="trip-pic">
+                            <img src="travel-room-img.jpg" class="room-img">
+                            <span class="trip-pic-tag">待處理</span>
+                        </div>
+                    </div>
+
+                    <div class="room-introduce-col col-12 col-sm-12 col-md-6">
+                        <div class="room-introduce">
+                            <h2 class="room-item-main-title">
+                                Toucheng Township
+                            </h2>
+                            <p class="room-item-main-title-p">
+                                Chiaoling 出租的臺灣民宿中的獨棟房間
+                            </p>
+                            <div class="room-item-footer">
+                                <span class="room-item-date">
+                                    5月27日-5月28日
+                                    <p class="room-item-year">2024年</p>
+                                </span>
+                                <div class="line col-5"></div>
+                                <div class="subtitle">Toucheng Township
+                                    <p class="subtitle-chinese">臺灣</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+        <!-- 卡片4 -->
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="room-item">
+                <a href="#" class="room-link">
+
+                    <div class="trip-pic-col col-12 col-sm-12 col-md-6">
+                        <div class="trip-pic">
+                            <img src="travel-room-img.jpg" class="room-img">
+                            <span class="trip-pic-tag">待處理</span>
+                        </div>
+                    </div>
+
+                    <div class="room-introduce-col col-12 col-sm-12 col-md-6">
+                        <div class="room-introduce">
+                            <h2 class="room-item-main-title">
+                                Toucheng Township
+                            </h2>
+                            <p class="room-item-main-title-p">
+                                Chiaoling 出租的臺灣民宿中的獨棟房間
+                            </p>
+                            <div class="room-item-footer">
+                                <span class="room-item-date">
+                                    5月27日-5月28日
+                                    <p class="room-item-year">2024年</p>
+                                </span>
+                                <div class="line col-5"></div>
+                                <div class="subtitle">Toucheng Township
+                                    <p class="subtitle-chinese">臺灣</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+        <!-- 卡片5 -->
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="room-item">
+                <a href="#" class="room-link">
+
+                    <div class="trip-pic-col col-12 col-sm-12 col-md-6">
+                        <div class="trip-pic">
+                            <img src="travel-room-img.jpg" class="room-img">
+                            <span class="trip-pic-tag">待處理</span>
+                        </div>
+                    </div>
+
+                    <div class="room-introduce-col col-12 col-sm-12 col-md-6">
+                        <div class="room-introduce">
+                            <h2 class="room-item-main-title">
+                                Toucheng Township
+                            </h2>
+                            <p class="room-item-main-title-p">
+                                Chiaoling 出租的臺灣民宿中的獨棟房間
+                            </p>
+                            <div class="room-item-footer">
+                                <span class="room-item-date">
+                                    5月27日-5月28日
+                                    <p class="room-item-year">2024年</p>
+                                </span>
+                                <div class="line col-5"></div>
+                                <div class="subtitle">Toucheng Township
+                                    <p class="subtitle-chinese">臺灣</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        </div>
+        <p class="help-center-p">在這裡找不到預訂?
+            <span class="help-center-span fw-bold">前往說明中心</span>
+        </p>
+    </div>
+
+
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/bc13cdfd27.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
