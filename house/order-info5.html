@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        img {
+            vertical-align: bottom;
+        }
+
+        .wish-listings-container {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .room-icon {
+            position: sticky;
+            z-index: 3;
+            top: 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            height: 50px;
+        }
+
+        .up-page {
+            padding: 15px 12px;
+            border-radius: 50%;
+            background-color: transparent;
+        }
+
+        .up-page:active {
+            background-color: #eae6e6;
+        }
+
+        .room-pic {
+            margin-bottom: 10px;
+            position: relative;
+            height: 100%;
+            background: #fff;
+            font-family: Helvetica, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .room-img {
+            width: 100%;
+            border-radius: 25px;
+            vertical-align: bottom;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* 入住 退房------------------------------- */
+        .check-datetime {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0px;
+            border-bottom: 1px solid #a2a1a1;
+        }
+
+        .check-datetime p {
+            font-weight: bold;
+            font-size: larger;
+            margin: 0px;
+        }
+
+        .check-in-gp {
+            text-align: start;
+        }
+
+        .check-out-gp {
+            text-align: end;
+        }
+
+        .check-in-gp,
+        .check-out-gp {
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .line {
+            width: 1px;
+            border-left: 1px solid #a2a1a1;
+            align-self: center;
+            height: 90px;
+        }
+
+        /* 前往房源 按扭區---------------------- */
+        .trip-lodging .btn {
+            border-radius: 0px;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .trip-lodging .btn:hover {
+            background-color: #ebeaea;
+            width: 100%;
+            text-align: left;
+        }
+
+        /* 排版 ------------------------ */
+        .trip-lodging {
+            display: grid;
+            justify-items: start;
+        }
+
+        .trip-lodging i {
+            margin-left: -10px;
+            margin-right: 20px;
+        }
+
+        .trip-lodging .btn {
+            font-weight: bold;
+        }
+
+        /* -------- 背景變深色 ------- */
+        .modal-backdrop {
+            z-index: 1050;
+        }
+
+        /* 使用 JavaScript 來設置背景 */
+        body.darken-bg {
+            overflow: hidden;
+        }
+
+        .darken-bg::before {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 半透明黑色背景 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1040;
+            /* 確保背景在 Modal 之下 */
+        }
+
+        /* Swiper 照片幻燈片--------------------- */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        :root {
+            --swiper-theme-color: #ededed;
+        }
+
+        /* ---- */
+
+        @media screen and (max-width:767px) {
+            .wish-map-container {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width:768px) {
+            .my-wish-detail-container {
+                max-width: 1200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="my-wish-detail-container container">
+
+        <div class="my-wish-detail-row row">
+            <!-- 房源區 -->
+            <div class="wish-listings-container col-12 col-sm-12 col-md-7">
+
+                <!-- 最上方小圖示 -->
+                <div class="room-icon">
+                    <div class="room-icon-left">
+                        <a href="#" class="up-page-link">
+                            <i class="up-page fa-solid fa-angle-left fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <h1 class="main-wish-title fw-bold p-2">你的海邊走走之旅已經準備就緒</h1>
+                <!-- 卡片 -->
+                <div class="my-wish-card-container container">
+                    <div class="have-room-row row">
+                        <!-- 卡片1 -->
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <!-- 照片 -->
+                                    <div class="room-pic">
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="check-datetime">
+                                    <div class="check-in-gp">
+                                        <p class="check-in-p fs-4">入住</p>
+                                        <div class="check-in-date text-secondary fs-5">5月27日 週一</div>
+                                        <div class="check-in-time text-secondary fs-5">下午2:00</div>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="check-out-gp">
+                                        <p class="check-out-p fs-4">退房</p>
+                                        <div class="check-out-date text-secondary fs-5">5月28日 週二</div>
+                                        <div class="check-out-time text-secondary fs-5">上午11:00</div>
+                                    </div>
+                                </div>
+                                <!-- 前往房源 按鈕區 -->
+                                <section class="trip-lodging d-grid">
+                                    <button class="to-lodging-btn btn" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#to-lodging">
+                                        <i class="fa-solid fa-location-dot fa-lg"></i>前往房源</button>
+
+                                    <button class="notice-btn btn" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#to-lodging">
+                                        <i class="fa-solid fa-book-open fa-sm"></i>注意事項</button>
+
+                                    <button class="message-btn btn" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#to-lodging">
+                                        <i class="fa-regular fa-comment fa-sm"></i>傳送訊息給房東</button>
+
+                                    <a class="message-btn btn" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#to-lodging">
+                                        <i class="fa-solid fa-house-chimney fa-sm"></i>你的房源</a>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- 地圖 ------------------>
+            <div class="wish-map-container col-12 col-sm-12 col-md-5">
+                <div class="wish-map">
+                    <img src="taiwan-map.jpg" alt="" class="taiwan-map">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 前往房源 按扭區 彈跳視窗 -->
+    <div class="modal fade" id="to-lodging">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="to-lodging-header d-flex">
+                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                        <h1 class="fs-4" id="to-lodging-ModalLabel">登入或註冊</h1>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="">
+                            <label for="to-lodging-recipient-name" class="col-form-label fs-1">歡迎你</label>
+                            <input type="text" class="form-control" id="to-lodging-recipient-name" placeholder="電子郵件">
+                        </div>
+                        <div class="mb-3 mt-1">
+                            <p>我們會寄email，以確認你的電子信箱。</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/bc13cdfd27.js" crossorigin="anonymous"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper 卡片照片幻燈片語法 -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+    </script>
+
+    <!-- 前往房源 按扭區 彈跳視窗語法 -->
+    <script>
+        const lodgingModal = document.getElementById('to-lodging-Modal')
+        if (lodgingModal) {
+            lodgingModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget
+                const recipient = button.getAttribute('data-bs-whatever')
+                const modalTitle = lodgingModal.querySelector('.modal-title')
+                const modalBodyInput = lodgingModal.querySelector('.modal-body input')
+
+                modalTitle.textContent = `New message to ${recipient}`
+                modalBodyInput.value = recipient
+            })
+        }
+        //------------- 背景變深色 ----------------
+        lodgingModal.addEventListener('show.bs.modal', function (event) {
+            document.body.classList.add('darken-bg');
+        });
+
+        lodgingModal.addEventListener('hidden.bs.modal', function (event) {
+            document.body.classList.remove('darken-bg');
+        });
+
+    </script>
+
+</body>
+
+</html>
