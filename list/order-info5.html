@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        img {
+            vertical-align: bottom;
+        }
+
+        .order-room-container {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .room-icon {
+            position: sticky;
+            z-index: 3;
+            top: 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            height: 50px;
+        }
+
+        .up-page {
+            padding: 15px 12px;
+            border-radius: 50%;
+            background-color: transparent;
+        }
+
+        .up-page:active {
+            background-color: #eae6e6;
+        }
+
+        .room-pic {
+            margin-bottom: 10px;
+            position: relative;
+            height: 100%;
+            background: #fff;
+            font-family: Helvetica, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .room-img {
+            width: 100%;
+            border-radius: 25px;
+            vertical-align: bottom;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* 入住 退房------------------------------- */
+        .check-datetime {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #929292;
+        }
+
+        .check-datetime p {
+            font-weight: bold;
+            font-size: larger;
+            margin: 0px;
+        }
+
+        .check-in-gp {
+            text-align: start;
+        }
+
+        .check-out-gp {
+            text-align: end;
+        }
+
+        .check-in-gp,
+        .check-out-gp {
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .line {
+            width: 1px;
+            border-left: 2px solid #c6c3c3;
+            align-self: center;
+            height: 90px;
+        }
+
+
+        /* 前往房源 按扭區---------------------- */
+        .go-to-lodging-btn {
+            margin-top: -18px;
+        }
+
+        .btn-grid {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        section>.btn {
+            border-radius: 0px;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        section>.btn,
+        section>a {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        section>.btn:hover,
+        section>a:hover {
+            background-color: #ebeaea;
+            width: 100%;
+            text-align: left;
+        }
+
+        i {
+            margin-left: -10px;
+        }
+
+        .btn+.btn {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .fa-chevron-right {
+            padding-left: 30px;
+            ;
+        }
+
+        /* 每個 section 排版 ------------------------ */
+        .trip-lodging-section {
+            display: grid;
+            justify-items: start;
+        }
+
+        section h2,
+        .total-cost-title {
+            font-weight: bold;
+        }
+
+        section+section {
+            border-top: 7px solid #e0e0e0;
+        }
+
+        /* 預訂詳情-------------------------- */
+        .fellow-traveler-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-bottom: 1px solid #e0e0e0;
+
+        }
+
+        .confirmation-code-div {
+            padding-top: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .cancellation-policy-div {
+            padding: 15px 0px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .read-details {
+            text-decoration: underline;
+        }
+
+        /* 如何前往 section 地圖------- */
+        .address-map-img {
+            width: 100%;
+            vertical-align: bottom;
+        }
+
+        /* 守則和指示------------- */
+
+        .rules-section .details,
+        .landlord-info {
+            font-weight: bold;
+            text-decoration: underline
+        }
+
+        .rules-section .details {
+            border: none;
+            background-color: transparent;
+        }
+
+        section,
+        .address-div {
+            padding: 20px 0;
+        }
+
+        /* 房東-------------------- */
+        .landlord-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 付款資訊----------------- */
+        .total-cost-content {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* -------- 背景變深色 ------- */
+        .modal-backdrop {
+            z-index: 10;
+        }
+
+        /* 使用 JavaScript 來設置背景 */
+        body.darken-bg {
+            overflow: hidden;
+        }
+
+        .darken-bg::before {
+            content: "";
+            background-color: #00000080;
+            /* 半透明黑色背景 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+            /* 確保背景在 Modal 之下 */
+        }
+
+        /* Swiper 照片幻燈片--------------------- */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        :root {
+            --swiper-theme-color: #ededed;
+        }
+
+        /* ---- */
+
+        @media screen and (max-width:767px) {
+
+            .order-info-map-container,
+            .copy-address-btn,
+            .directions-btn {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width:768px) {
+            .order-info-container {
+                max-width: 1200px;
+            }
+
+            .address-map-pic {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="order-info-container container">
+
+        <div class="order-info-row row">
+            <!-- 房源區 -->
+            <div class="order-room-container col-12 col-sm-12 col-md-7">
+
+                <!-- 最上方小圖示 -->
+                <div class="room-icon">
+                    <div class="room-icon-left">
+                        <a href="#" class="up-page-link">
+                            <i class="up-page fa-solid fa-angle-left fa-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <h1 class="main-wish-title fw-bold p-2">你的海邊走走之旅已經準備就緒</h1>
+                <!-- 卡片 -->
+                <div class="my-wish-card-container container">
+                    <div class="have-room-row row">
+                        <!-- 卡片1 -->
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
+                                    <!-- 照片 -->
+                                    <div class="room-pic">
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house4.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house3.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house2.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house1.jpg" class="room-img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="house.jpg" class="room-img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="check-datetime">
+                                    <div class="check-in-gp">
+                                        <p class="check-in-p fs-4">入住</p>
+                                        <div class="check-in-date text-secondary fs-5">5月27日 週一</div>
+                                        <div class="check-in-time text-secondary fs-5">下午2:00</div>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="check-out-gp">
+                                        <p class="check-out-p fs-4">退房</p>
+                                        <div class="check-out-date text-secondary fs-5">5月28日 週二</div>
+                                        <div class="check-out-time text-secondary fs-5">上午11:00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- section 前往房源 按鈕區 -->
+                <section class="trip-lodging-section">
+
+                    <button class="go-to-lodging-btn btn" type="button" data-bs-toggle="modal"
+                        data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-house-chimney fa-sm"></i>
+                            <span class="your-lodging-btn-span">前往房源</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <button class="notice-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="notice-btn-span">注意事項</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <button class="message-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-regular fa-comment fa-sm"></i>
+                            <span class="message-btn-span">傳送訊息給房東</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <a class="your-lodging-btn btn">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-house-chimney fa-sm"></i>
+                            <span class="your-lodging-btn-span">你的房源</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+                </section>
+                <!-- 獨自旅行者的安全建議 按鈕區 -->
+                <section class="safety-advice-section">
+                    <h2>給獨自旅行者的安全建議</h2>
+                    <a class="advice-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="advice-btn-span">試試這些專家建議</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+
+                    <button class="share-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="share-btn-span">分享住宿地點</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <button class="ask-q-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="ask-q-btn-span">該向房東提出的問題</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+                </section>
+
+                <!-- 預訂詳情 baabbb -->
+                <section class="booking-details-section">
+
+                    <h2>預訂詳情</h2>
+                    <div class="fellow-traveler-div">
+                        <span class="fellow-traveler-title fw-bold">同行旅伴
+                            <p class="fellow-traveler">1人</p>
+                        </span>
+                        <i class="headshot fa-solid fa-circle-user fa-2xl"></i>
+                    </div>
+                    <div class="confirmation-code-div">
+                        <span class="confirmation-code-title fw-bold">確認碼</span>
+                        <p class="confirmation-code">HMBYRA5CDE</p>
+                    </div>
+                    <div class="cancellation-policy-div">
+                        <div class="cancellation-policy fw-bold">《退訂政策》</div>
+                        <div class="cancellation-policy-content">5月29日下午3:00前可以免費取消在這之後，該筆預訂則無法退款。</div>
+                        <a class="read-details fw-bold">
+                            閱讀詳情
+                        </a>
+                    </div>
+
+                    <button class="travelers-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="travelers-btn-span">管理旅客</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <a class="change-booking-btn btn">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="change-booking-btn-span">變更預訂</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+
+                    <a class="cancel-booking-btn btn">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="cancel-booking-btn-span">取消預訂</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+
+                    <button class="pdf-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="pdf-btn-span">取得簽證用的PDF檔案</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <button class="print-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="print-btn-pan">列印詳情</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <button class="receipt-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="receipt-btn-pan">取得收據</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+                </section>
+
+                <!-- 如何前往 -->
+                <section class="address-section">
+                    <h2>如何前往</h2>
+
+                    <div class="address-map-pic col-12">
+                        <img src="address-map.jpg" class="address-map-img" alt="">
+                    </div>
+
+                    <div class="address-div">
+                        <div class="address-title fw-bold">地址</div>
+                        <div class="address-content">No 8,Lane149,Section 2,Sanmin Road,Central District, 台中市 400,臺灣
+                        </div>
+                    </div>
+
+                    <button class="copy-address-btn btn" type="button" data-bs-toggle="modal"
+                        data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="copy-address-btn-span">複製地址</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <a class="directions-btn btn">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="directions-btn-span">路線指引</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+                </section>
+
+                <!-- 入住 section -->
+                <section class="check-in-section">
+                    <h2>入住</h2>
+                    <div class="check-in-title fw-bold">
+                        入住方式
+                    </div>
+                    <div class="check-in-content">密碼鑰匙盒</div>
+                </section>
+
+                <!-- 守則和指示 section -->
+                <section class="rules-section">
+                    <h2>守則和指示</h2>
+                    <div class="room-rules fw-bold">《房屋守則》</div>
+                    <div>自助入住方式：密碼鑰匙盒</div>
+                    <div>最多2位房客</div>
+                    <div>禁止攜帶寵物</div>
+                    <button class="details" data-bs-toggle="modal" data-bs-target="#to-lodging">顯示詳情</button>
+
+                    <button class="rules-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="notice-btn-span">顯示房源</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+                </section>
+
+                <!-- 房東 section -->
+                <section class="landlord-section">
+                    <div class="landlord-title">
+                        <h2>房東：Adagio</h2>
+                        <i class="fa-solid fa-user fa-xl"></i>
+                    </div>
+                    <p class="landlord-info">瀏覽更多內容</p>
+                    <button class="landlord-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="copy-address-btn-span">打給房東/體驗達人</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+                </section>
+
+                <!-- 付款資訊 section -->
+                <section class="payment-info-section">
+                    <h2>付款資訊</h2>
+                    <div class="total-cost-title">總費用</div>
+                    <div class="total-cost-content">$874.65 TWD</div>
+
+                    <button class="add-details-btn btn" type="button" data-bs-toggle="modal"
+                        data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="notice-btn-span">新增詳情，以便替旅程報帳</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+
+                    <button class="receipt-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="receipt-btn-pan">取得收據</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </button>
+                </section>
+
+                <!-- 隨時取得用戶支援 section -->
+                <section class="customer-support-section">
+                    <h2>隨時取得用戶支援</h2>
+                    <div>無論你在哪裡，我們的用戶支援能全天候提供協助。</div>
+
+                    <a class="airbnb-support-btn btn">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="receipt-btn-pan">聯絡 Airbnb 用戶支援</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+
+                    <a class="help-center-btn btn">
+                        <div class="btn-left-icon">
+                            <i class="fa-solid fa-book-open fa-sm"></i>
+                            <span class="receipt-btn-pan">前往說明中心</span>
+                        </div>
+                        <div class="btn-right-icon">
+                            <i class="fa-solid fa-chevron-right fa-sm"></i>
+                        </div>
+                    </a>
+                </section>
+
+
+                <!-- 按扭區 彈跳視窗 -->
+                <div class="modal fade" id="to-lodging">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="to-lodging-header d-flex">
+                                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    <h1 class="fs-4" id="to-lodging-ModalLabel">登入或註冊</h1>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="">
+                                        <label for="to-lodging-recipient-name" class="col-form-label fs-1">歡迎你</label>
+                                        <input type="text" class="form-control" id="to-lodging-recipient-name"
+                                            placeholder="電子郵件">
+                                    </div>
+                                    <div class="mb-3 mt-1">
+                                        <p>我們會寄email，以確認你的電子信箱。</p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- 地圖 ------------------>
+            <div class="order-info-map-container col-12 col-sm-12 col-md-5">
+                <div class="wish-map">
+                    <img src="taiwan-map.jpg" alt="" class="taiwan-map">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/bc13cdfd27.js" crossorigin="anonymous"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper 卡片照片幻燈片語法 -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+    </script>
+
+    <!-- 前往房源 按扭區 彈跳視窗語法 -->
+    <script>
+        const lodgingModal = document.getElementById('to-lodging-Modal')
+        if (lodgingModal) {
+            lodgingModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget
+                const recipient = button.getAttribute('data-bs-whatever')
+                const modalTitle = lodgingModal.querySelector('.modal-title')
+                const modalBodyInput = lodgingModal.querySelector('.modal-body input')
+
+                modalTitle.textContent = `New message to ${recipient}`
+                modalBodyInput.value = recipient
+            })
+        }
+        //------------- 背景變深色 ----------------
+        lodgingModal.addEventListener('show.bs.modal', function (event) {
+            document.body.classList.add('darken-bg');
+        });
+
+        lodgingModal.addEventListener('hidden.bs.modal', function (event) {
+            document.body.classList.remove('darken-bg');
+        });
+
+    </script>
+
+</body>
+
+</html>
