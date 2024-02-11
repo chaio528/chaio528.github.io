@@ -10,10 +10,6 @@
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        * {
-            color: #000;
-        }
-
         img {
             vertical-align: bottom;
         }
@@ -108,6 +104,15 @@
             z-index: 2;
         }
 
+        .love-btn {
+            color: #fff;
+        }
+
+        .love-btn:hover {
+            color: red;
+            transition: color 0.5s;
+        }
+
         .room-introduce {
             margin: 10px 0px;
         }
@@ -116,7 +121,6 @@
             margin-top: -4px;
         }
 
-        .room-item-bed,
         .room-item-date,
         .room-item-total {
             color: #656565;
@@ -135,7 +139,8 @@
 
         .room-link {
             position: relative;
-            text-decoration: none;
+            display: flex;
+            flex-direction: column;
         }
 
         .add-remark {
@@ -144,10 +149,12 @@
             font-weight: bold;
         }
 
-        .add-edit-div {
+        .add-edit-div,
+        .add-remark-div {
             background-color: #e1e1e1;
             border-radius: 10px;
             padding: 10px 8px;
+            margin-bottom: 30px;
         }
 
         .add-edit {
@@ -290,6 +297,7 @@
         }
 
         a {
+            color: #000;
             text-decoration: none;
         }
 
@@ -346,6 +354,7 @@
             .my-wish-detail-container {
                 max-width: 1200px;
             }
+
             .no-room-row {
                 border-top: 1px solid #e1e1e1;
                 padding-top: 40px;
@@ -394,15 +403,16 @@
                     <div class="have-room-row row">
                         <!-- 卡片1 -->
                         <div class="col-12 col-sm-12 col-md-6">
-                            <div class="room-item">
-                                <a href="#" class="room-link">
-                                    <!-- 照片 -->
+                            <a href="#" class="room-link">
+                                <div class="room-item">
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
-                                                    <img src="house.jpg" class="room-img">
+                                                    <img src="house2.jpg" class="room-img">
                                                 </div>
                                                 <div class="swiper-slide">
                                                     <img src="house2.jpg" class="room-img">
@@ -432,7 +442,6 @@
                                             <div class="swiper-pagination"></div>
                                         </div>
                                     </div>
-                                    <!-- 卡片文字 -->
                                     <div class="room-introduce">
                                         <div class="room-title">
                                             <h2 class="subtitle">位於Hualien City的獨立房間
@@ -440,19 +449,18 @@
                                             </h2>
                                         </div>
                                         <div class="room-detail">
-                                            <div class="room-item-bed">2張標準雙人床</div>
                                             <div class="room-item-date">5晚．2月18日至23日</div>
-                                            <div class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$16,854 TWD
+                                            <span class="room-item-price">$1,920 TWD晚．
+                                                <label for="my-room-item-total" class="room-item-total">總計$20,854 TWD
                                                     稅前總價
                                                 </label>
-                                            </div>
+                                            </span>
                                         </div>
                                     </div>
-                                </a>
-                                <div class="add-edit-div">
-                                    <label for="my-add-edit" class="add-edit">編輯</label>
                                 </div>
+                            </a>
+                            <div class="add-edit-div">
+                                <label for="my-add-edit" class="add-edit">編輯</label>
                             </div>
                         </div>
                         <!-- 卡片2 -->
@@ -460,7 +468,9 @@
                             <div class="room-item">
                                 <a href="#" class="room-link">
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
@@ -510,15 +520,20 @@
                                         </div>
                                     </div>
                                 </a>
+                            </div>
+                            <div class="add-remark-div">
                                 <label for="my-add-remark" class="add-remark">新增備註</label>
                             </div>
+                            </a>
                         </div>
                         <!-- 卡片3 -->
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="room-item">
                                 <a href="#" class="room-link">
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
@@ -568,7 +583,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                                <div class="add-remark-div">
+                                    <label for="my-add-remark" class="add-remark">新增備註</label>
+                                </div>
                             </div>
                         </div>
                         <!-- 卡片4 -->
@@ -576,7 +593,9 @@
                             <div class="room-item">
                                 <a href="#" class="room-link">
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
@@ -626,7 +645,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                                <div class="add-remark-div">
+                                    <label for="my-add-remark" class="add-remark">新增備註</label>
+                                </div>
                             </div>
                         </div>
                         <!-- 卡片5 -->
@@ -635,7 +656,9 @@
                                 <a href="#" class="room-link">
                                     <!-- 照片 -->
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
@@ -677,7 +700,6 @@
                                             </h2>
                                         </div>
                                         <div class="room-detail">
-                                            <div class="room-item-bed">2張標準雙人床</div>
                                             <div class="room-item-date">5晚．2月18日至23日</div>
                                             <div class="room-item-price">$1,920 TWD晚．
                                                 <label for="my-room-item-total" class="room-item-total">總計$16,854 TWD
@@ -687,8 +709,8 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-edit-div">
-                                    <label for="my-add-edit" class="add-edit">編輯</label>
+                                <div class="add-remark-div">
+                                    <label for="my-add-remark" class="add-remark">新增備註</label>
                                 </div>
                             </div>
                         </div>
@@ -698,7 +720,9 @@
                                 <a href="#" class="room-link">
                                     <!-- 照片 -->
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
@@ -740,7 +764,6 @@
                                             </h2>
                                         </div>
                                         <div class="room-detail">
-                                            <div class="room-item-bed">2張標準雙人床</div>
                                             <div class="room-item-date">5晚．2月18日至23日</div>
                                             <div class="room-item-price">$1,920 TWD晚．
                                                 <label for="my-room-item-total" class="room-item-total">總計$16,854 TWD
@@ -750,7 +773,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                                <div class="add-remark-div">
+                                    <label for="my-add-remark" class="add-remark">新增備註</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -765,7 +790,9 @@
                                 <a href="#" class="room-link">
                                     <div class="no-room-tag">無法預訂</div>
                                     <div class="room-pic">
-                                        <i class="room-pic-love fa-solid fa-heart fa-xl"></i>
+                                        <div class="love-btn">
+                                            <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
+                                        </div>
                                         <div class="swiper mySwiper">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
@@ -814,7 +841,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <label for="my-add-remark" class="add-remark">新增備註</label>
+                                <div class="add-remark-div">
+                                    <label for="my-add-remark" class="add-remark">新增備註</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -879,11 +908,11 @@
                                 <i class="cross fa-solid fa-xmark fa-sm"></i>
                                 <hr>
                                 <div class="detail-content detail-content-share">
-                                    <div href="#" class="detail-content-mysub1">
+                                    <div class="detail-content-mysub1">
                                         <i class="fa-solid fa-link fa-xl"></i>
-                                        <a class="send-link">
+                                        <a class="send-link" href="#">
                                             <b>傳送連結</b>
-                                            <p>有此連結的任何人都可查看</p>
+                                            <p>有此連結的人都可查看</p>
                                         </a>
                                     </div>
                                     <div class="detail-content-mysub2">
