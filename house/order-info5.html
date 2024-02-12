@@ -99,9 +99,10 @@
 
 
         /* 前往房源 按扭區---------------------- */
-        .go-to-lodging-btn{
-            margin-top: -18px;
+        .go-to-lodging-btn {
+            margin-top: -21px;
         }
+
         .btn-grid {
             display: flex;
             flex-direction: row;
@@ -129,15 +130,17 @@
             text-align: left;
         }
 
-        i{
+        i {
             margin-left: -10px;
         }
-        .btn+.btn{
+
+        .btn+.btn,.btn+.btn:active {
             border-top: 1px solid #e0e0e0;
         }
 
-        .fa-chevron-right{
-            padding-left:30px;;
+        .fa-chevron-right {
+            padding-left: 30px;
+            ;
         }
 
         /* 每個 section 排版 ------------------------ */
@@ -294,7 +297,7 @@
 
         <div class="order-info-row row">
             <!-- 房源區 -->
-            <div class="order-room-container col-12 col-sm-12 col-md-7">
+            <div class="order-room-container col-12 col-sm-12 col-md-5">
 
                 <!-- 最上方小圖示 -->
                 <div class="room-icon">
@@ -305,7 +308,7 @@
                     </div>
                 </div>
 
-                <h1 class="main-wish-title fw-bold p-2">你的海邊走走之旅已經準備就緒</h1>
+                <h1 class="main-wish-title fw-bold p-2">你的海邊走走之旅已經準備就緒 ♥</h1>
                 <!-- 卡片 -->
                 <div class="my-wish-card-container container">
                     <div class="have-room-row row">
@@ -368,7 +371,7 @@
                 </div>
 
                 <!-- section 前往房源 按鈕區 -->
-                <section class="trip-lodging-section d-grid">
+                <section class="trip-lodging-section">
 
                     <button class="go-to-lodging-btn btn" type="button" data-bs-toggle="modal"
                         data-bs-target="#to-lodging">
@@ -412,7 +415,7 @@
                     </a>
                 </section>
                 <!-- 獨自旅行者的安全建議 按鈕區 -->
-                <section class="safety-advice-section d-grid">
+                <section class="safety-advice-section">
                     <h2>給獨自旅行者的安全建議</h2>
                     <a class="advice-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
                         <div class="btn-left-icon">
@@ -446,7 +449,7 @@
                 </section>
 
                 <!-- 預訂詳情 baabbb -->
-                <section class="booking-details-section d-grid">
+                <section class="booking-details-section">
 
                     <h2>預訂詳情</h2>
                     <div class="fellow-traveler-div">
@@ -663,46 +666,47 @@
                             <i class="fa-solid fa-chevron-right fa-sm"></i>
                         </div>
                     </a>
-
                 </section>
+
+
+                <!-- 按扭區 彈跳視窗 -->
+                <div class="modal fade" id="to-lodging">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="to-lodging-header d-flex">
+                                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    <h1 class="fs-4" id="to-lodging-ModalLabel">登入或註冊</h1>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="">
+                                        <label for="to-lodging-recipient-name" class="col-form-label fs-1">歡迎你</label>
+                                        <input type="text" class="form-control" id="to-lodging-recipient-name"
+                                            placeholder="電子郵件">
+                                    </div>
+                                    <div class="mb-3 mt-1">
+                                        <p>我們會寄email，以確認你的電子信箱。</p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
 
             <!-- 地圖 ------------------>
-            <div class="order-info-map-container col-12 col-sm-12 col-md-5">
+            <div class="order-info-map-container col-12 col-sm-12 col-md-7">
                 <div class="wish-map">
                     <img src="taiwan-map.jpg" alt="" class="taiwan-map">
                 </div>
             </div>
         </div>
 
-    </div>
-
-    <!-- 按扭區 彈跳視窗 -->
-    <div class="modal fade" id="to-lodging">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="to-lodging-header d-flex">
-                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                        <h1 class="fs-4" id="to-lodging-ModalLabel">登入或註冊</h1>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="">
-                            <label for="to-lodging-recipient-name" class="col-form-label fs-1">歡迎你</label>
-                            <input type="text" class="form-control" id="to-lodging-recipient-name" placeholder="電子郵件">
-                        </div>
-                        <div class="mb-3 mt-1">
-                            <p>我們會寄email，以確認你的電子信箱。</p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- bootstrap -->
