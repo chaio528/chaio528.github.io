@@ -12,11 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     .reservation-change-container {
-      margin: auto;
       padding-top: 10px;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
     }
 
     .main-title,
@@ -33,7 +29,6 @@
       z-index: 3;
       bottom: 0;
       left: 0;
-      width: 63%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -72,9 +67,6 @@
     }
 
     @media screen and (max-width:767px) {
-      .reservation-change-container {
-      padding-top: 10px;
-    }
       .send-request-desktop {
         display: none;
       }
@@ -167,103 +159,103 @@
 
 <body>
   <div class="reservation-change-container container">
-
-    <div class="cancel-div">
-      <section class="cancel-room-options-section">
-        <!-- 第一選項 -->
-        <div class="option-one">
-          <h1 class="main-title">你是因為什麼原因需要取消預訂?</h1>
-          <select class="cancel-menu form-select" aria-label="select">
-            <option selected>我已不需要預定住宿</option>
-            <option value="1">我不小心預定了住宿</option>
-            <option value="2">我的房東需要取消預訂</option>
-            <option value="3">我對房東不滿意</option>
-            <option value="3">我的旅行日期變更了</option>
-            <option value="3">其他</option>
-          </select>
-        </div>
-
-        <!-- 第二選項 -->
-        <!-- <div class="option-two">
-          <h1 class="main-title">告訴Adagio您必須取消的原因</h1>
-
-          <div class="cancel-form form-floating">
-            <textarea class="cancel-form-control form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-              style="height: 100px"></textarea>
-            <label for="floatingTextarea2">請說明你的情況</label>
+    <div class="row">
+      <div class="cancel-div col-12 col-sm-12 col-md-6">
+        <section class="cancel-room-options-section">
+          <!-- 第一選項 -->
+          <div class="option-one">
+            <h1 class="main-title">你是因為什麼原因需要取消預訂?</h1>
+            <select class="cancel-menu form-select" aria-label="select">
+              <option selected>我已不需要預定住宿</option>
+              <option value="1">我不小心預定了住宿</option>
+              <option value="2">我的房東需要取消預訂</option>
+              <option value="3">我對房東不滿意</option>
+              <option value="3">我的旅行日期變更了</option>
+              <option value="3">其他</option>
+            </select>
           </div>
-        </div> -->
-
-        <!---------- 下方 sticky 繼續-------- -->
-        <div class="send-request-div">
-          <!-- 手機 -->
-          <div class="send-request-phone">
-            <div class="refund-title fw-bold">退款總額</div>
-            <div class="refund-content fw-bold">$874.65 TWD</div>
-            <a href="#" class="cancellation-policy-details">顯示詳情</a>
-          </div>
-
-          <!-- 桌機 -->
-          <div class="send-request-desktop">
-            <i class="fa-solid fa-angle-left fa-sm"></i>
-            <span class="up-page">返回</span>
-          </div>
-          <!-- 新增的絕對定位元素 -->
-          <div class="centered-text">1/3</div>
-
-          <!-- 繼續按鈕 -->
-          <a href="#" class="send-request-a">繼續</a>
-        </div>
-      </section>
-    </div>
-
-
-    <div class="desktop-div">
-      <section class="cancel-room-section">
-        <div class="room-item">
-          <div class="my-room-item">
-            <div class="room-item-pic">
-              <img src="cancelled8.jpg" class="room-img">
+  
+          <!-- 第二選項 -->
+          <!-- <div class="option-two">
+            <h1 class="main-title">告訴Adagio您必須取消的原因</h1>
+  
+            <div class="cancel-form form-floating">
+              <textarea class="cancel-form-control form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                style="height: 100px"></textarea>
+              <label for="floatingTextarea2">請說明你的情況</label>
             </div>
-            <div class="room-introduce">
-              <div class="room-item-tag">房間</div>
-              <div class="room-item-title title">
-                「全新」你所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房
+          </div> -->
+  
+          <!---------- 下方 sticky 繼續-------- -->
+          <div class="send-request-div cancel-div col-12 col-sm-12 col-md-6">
+            <!-- 手機 -->
+            <div class="send-request-phone">
+              <div class="refund-title fw-bold">退款總額</div>
+              <div class="refund-content fw-bold">$874.65 TWD</div>
+              <a href="#" class="cancellation-policy-details">顯示詳情</a>
+            </div>
+  
+            <!-- 桌機 -->
+            <div class="send-request-desktop">
+              <i class="fa-solid fa-angle-left fa-sm"></i>
+              <span class="up-page">返回</span>
+            </div>
+            <!-- 新增的絕對定位元素 -->
+            <div class="centered-text">1/3</div>
+  
+            <!-- 繼續按鈕 -->
+            <a href="#" class="send-request-a">繼續</a>
+          </div>
+        </section>
+      </div>
+
+      <div class="desktop-div col-12 col-sm-12 col-md-6">
+        <section class="cancel-room-section">
+          <div class="room-item">
+            <div class="my-room-item">
+              <div class="room-item-pic">
+                <img src="cancelled8.jpg" class="room-img">
               </div>
-              <div class="landlord-title">房東：
-                <span class="landlord-name">Adagio</span>
+              <div class="room-introduce">
+                <div class="room-item-tag">房間</div>
+                <div class="room-item-title title">
+                  「全新」你所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房
+                </div>
+                <div class="landlord-title">房東：
+                  <span class="landlord-name">Adagio</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!------ 桌機 ------->
-        <div class="desktop-gp">
-          <div class="desktop-date-gp sub-gp">
-            <span class="desktop-date-title">日期</span>
-            <span class="desktop-date-content">5月30日週四至31日週五</span>
+          <!------ 桌機 ------->
+          <div class="desktop-gp">
+            <div class="desktop-date-gp sub-gp">
+              <span class="desktop-date-title">日期</span>
+              <span class="desktop-date-content">5月30日週四至31日週五</span>
+            </div>
+            <div class="desktop-traveler-gp sub-gp">
+              <span class="desktop-traveler-title">人數</span>
+              <span class="desktop-traveler-content">1名成人</span>
+            </div>
+            <div class="desktop-paid-gp sub-gp">
+              <span class="desktop-paid-title">目前已支付的金額</span>
+              <span class="desktop-paid-content">$874.65 TWD</span>
+            </div>
+            <div class="refund-total sub-gp">
+              <span class="refund-total-title title">退款總額</span>
+              <span class="refund-total-content fw-bold">$874.65 TWD</span>
+            </div>
           </div>
-          <div class="desktop-traveler-gp sub-gp">
-            <span class="desktop-traveler-title">人數</span>
-            <span class="desktop-traveler-content">1名成人</span>
-          </div>
-          <div class="desktop-paid-gp sub-gp">
-            <span class="desktop-paid-title">目前已支付的金額</span>
-            <span class="desktop-paid-content">$874.65 TWD</span>
-          </div>
-          <div class="refund-total sub-gp">
-            <span class="refund-total-title title">退款總額</span>
-            <span class="refund-total-content fw-bold">$874.65 TWD</span>
-          </div>
-        </div>
-      </section>
-      <!------- 退訂政策 ------>
-      <section class="cancellation-policy-section">
-        <p class="cancellation-policy-title title">《退訂政策》</p>
-        <p class="cancellation-policy-content">全部退款：你將拿回已支付的全部款項。</p>
-        <a href="#" class="cancellation-policy-details">顯示詳情</a>
-      </section>
+        </section>
+        <!------- 退訂政策 ------>
+        <section class="cancellation-policy-section">
+          <p class="cancellation-policy-title title">《退訂政策》</p>
+          <p class="cancellation-policy-content">全部退款：你將拿回已支付的全部款項。</p>
+          <a href="#" class="cancellation-policy-details">顯示詳情</a>
+        </section>
+      </div>
     </div>
-  </div>
+    </div>
 
   <!-- bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
