@@ -8,7 +8,7 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Swiper --->
+    <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         .reservation-change-container {
@@ -70,7 +70,7 @@
         }
 
         @media screen and (max-width:767px) {
-            .desktop-gp{
+            .desktop-gp {
                 display: none;
             }
 
@@ -117,7 +117,8 @@
             }
 
             /* 日期--- */
-            .reservation-date-btn-gp {
+            .reservation-date-btn-gp,
+            .reservation-traveler-btn-gp {
                 width: 100%;
                 border: 1px solid #bfbfbf;
             }
@@ -147,11 +148,10 @@
                 border-radius: 8px;
             }
 
-            .reservation-traveler-btn-gp,
+            /* .reservation-traveler-btn-gp,
             .reservation-traveler-dropdown {
                 text-align: start;
-                width: 100%;
-            }
+            } */
         }
     </style>
 </head>
@@ -163,71 +163,65 @@
             <h1 class="main-title">你想要變更那些內容?</h1>
             <p class="main-title-describe">變更後，你可以向房東 Adagio 傳送申請，請對方確認預訂的變更內容。</p>
 
-            <div class="col-12 col-sm-12 col-md-12">
-                <div class="room-item">
-                    <div class="room-item-pic">
-                        <img src="change-img.jpg" class="room-img">
+            <div class="room-item">
+                <div class="room-item-pic">
+                    <img src="change-img.jpg" class="room-img">
+                </div>
+                <div class="room-introduce">
+                    <div class="room-item-title">
+                        「全新」你所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房
                     </div>
-                    <div class="room-introduce">
-                        <div class="room-item-title">
-                            「全新」你所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房
-                        </div>
-                        <div class="room-item-title-content">
-                            房間．1張床．1間衛浴
-                        </div>
+                    <div class="room-item-title-content">
+                        房間．1張床．1間衛浴
                     </div>
                 </div>
+            </div>
 
-                <h2 class="subtitle">預訂詳情</h2>
-                <!------ 手機 ------->
-                <div class="phone-gp">
-                    <div class="reservation-date-gp ">
-                        <div class="reservation-date-sub-gp">
-                            <div class="reservation-date-title">日期</div>
-                            <div class="reservation-date">5月30日至31日</div>
-                        </div>
-                        <div class="change-btn">變更</div>
+            <h2 class="subtitle">預訂詳情</h2>
+            <!------ 手機 ------->
+            <div class="phone-gp">
+                <div class="reservation-date-gp ">
+                    <div class="reservation-date-sub-gp">
+                        <div class="reservation-date-title">日期</div>
+                        <div class="reservation-date">5月30日至31日</div>
                     </div>
-                    <div class="reservation-traveler-gp">
-                        <div class="reservation-traveler-sub-gp">
-                            <div class="reservation-traveler-title">旅客</div>
-                            <div class="reservation-guests">1人</div>
-                        </div>
-                        <div class="change-btn">變更</div>
-                    </div>
+                    <div class="change-btn">變更</div>
                 </div>
-                <!------- 桌機------- -->
-                <div class="desktop-gp">
-                    <!-- 日期 和 按鈕 -->
-                    <div class="reservation-date-title">日期</div>
-                    <div class="reservation-date-btn-gp btn-group" role="group">
-                        <button type="button" class="reservation-date-btn btn btn-block">
-                            <span>入住：2024年5月30日</span>
-                        </button>
-                        <button type="button" class="reservation-traveler-btn btn btn-block">
-                            <span>退房：2024年5月30日</span>
-                        </button>
+                <div class="reservation-traveler-gp">
+                    <div class="reservation-traveler-sub-gp">
+                        <div class="reservation-traveler-title">旅客</div>
+                        <div class="reservation-guests">1人</div>
                     </div>
-                    <!-- 人數 和 按鈕 -->
-                    <div class="reservation-traveler-title">旅客</div>
-                    <div class="reservation-traveler-btn-gp dropdown">
-                        <button class="reservation-traveler-dropdown btn dropdown-toggle" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            1人
-                        </button>
-                        <ul class="reservation-traveler-menu dropdown-menu">
-                            <li><a class="dropdown-item" href="#">1人</a></li>
-                            <li><a class="dropdown-item" href="#">2人</a></li>
-                            <li><a class="dropdown-item" href="#">3人</a></li>
-                            <li><a class="dropdown-item" href="#">4人</a></li>
-                            <li><a class="dropdown-item" href="#">5人</a></li>
-                            <li><a class="dropdown-item" href="#">6人</a></li>
-                        </ul>
-                    </div>
+                    <div class="change-btn">變更</div>
+                </div>
+            </div>
+            <!------- 桌機------- -->
+            <div class="desktop-gp">
+                <!-- 日期 和 按鈕 -->
+                <div class="reservation-date-title">日期</div>
+                <div class="reservation-date-btn-gp btn-group" role="group">
+                    <button type="button" class="reservation-date-btn btn btn-block">
+                        <span>入住：2024年5月30日</span>
+                    </button>
+                    <button type="button" class="reservation-traveler-btn btn btn-block">
+                        <span>退房：2024年5月30日</span>
+                    </button>
+                </div>
+                <!-- 人數 和 按鈕 -->
+                <div class="reservation-traveler-title">旅客</div>
 
-                </div>
+                <select class="reservation-traveler-btn-gp form-select" aria-label="select">
+                    <option selected>1人</option>
+                    <option value="1">2人</option>
+                    <option value="2">3人</option>
+                    <option value="3">4人</option>
+                    <option value="3">5人</option>
+                    <option value="3">6人</option>
+                  </select>
 
             </div>
+
+
         </section>
         <!------- 退訂政策 ------>
         <section class="cancellation-policy-section">
@@ -240,9 +234,6 @@
         </div>
 
     </div>
-
-
-
 
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
