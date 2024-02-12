@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>變更預訂/取消預訂</title>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    .reservation-change-container {
+      padding-top: 10px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    .main-title,
+    .title,
+    .change-btn {
+      font-weight: bold;
+    }
+
+    /* 傳送申請 繼續按鈕---------- */
+    .send-request-div {
+      position: relative;
+      padding: 0px 10px;
+      position: fixed;
+      z-index: 3;
+      bottom: 0;
+      left: 0;
+      width: 63%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      height: 70px;
+      border-top: 1px solid #d1d1d1;
+      border-bottom: 1px solid #d1d1d1;
+    }
+
+    .up-page {
+      text-decoration: underline;
+    }
+
+    /* 新增的絕對定位元素 */
+    .centered-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .send-request-a {
+      margin-left: auto;
+      text-decoration: none;
+      font-weight: bold;
+      color: #fff;
+      background-color: #969595;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    /* 顯示詳情-------- */
+    /* 顯示詳情------- */
+    .cancellation-policy-details {
+      text-decoration: underline;
+      color: #000;
+    }
+
+    @media screen and (max-width:767px) {
+      .send-request-desktop {
+        display: none;
+      }
+
+      .send-request-div {
+        padding: 3rem 1rem;
+      }
+
+      .desktop-div,
+      .centered-text {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width:768px) {
+      .title {
+        font-weight: bold;
+      }
+
+      .sub-gp {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        padding: 10px 0;
+        font-size: 13px;
+      }
+
+      .send-request-phone {
+        display: none;
+      }
+
+      .cancellation-policy-section {
+        font-size: 13px;
+      }
+
+      .my-room-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        align-items: start;
+        margin-bottom: 15px;
+      }
+
+      .room-item-pic img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        vertical-align: top;
+      }
+
+      .room-item-tag {
+        font-size: 12px;
+        margin-top: -4px;
+      }
+
+      .room-item-title,
+      .landlord-title {
+        font-size: 12px;
+      }
+
+      .landlord-name {
+        text-decoration: underline;
+      }
+
+      .cancellation-policy-section {
+        padding: 10px 0;
+      }
+
+      .desktop-div {
+        border: 1px solid #dcdcdc;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .desktop-gp,
+      .desktop-paid-gp,
+      .cancellation-policy-section {
+        border-top: 1px solid #cfcfcf;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reservation-change-container container">
+
+    <div class="cancel-div">
+      <section class="cancel-room-options-section">
+        <!-- 第一選項 -->
+        <div class="option-one">
+          <h1 class="main-title">你是因為什麼原因需要取消預訂?</h1>
+          <select class="cancel-menu form-select" aria-label="select">
+            <option selected>我已不需要預定住宿</option>
+            <option value="1">我不小心預定了住宿</option>
+            <option value="2">我的房東需要取消預訂</option>
+            <option value="3">我對房東不滿意</option>
+            <option value="3">我的旅行日期變更了</option>
+            <option value="3">其他</option>
+          </select>
+        </div>
+
+        <!-- 第二選項 -->
+        <!-- <div class="option-two">
+          <h1 class="main-title">告訴Adagio您必須取消的原因</h1>
+
+          <div class="cancel-form form-floating">
+            <textarea class="cancel-form-control form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+              style="height: 100px"></textarea>
+            <label for="floatingTextarea2">請說明你的情況</label>
+          </div>
+        </div> -->
+
+        <!---------- 下方 sticky 繼續-------- -->
+        <div class="send-request-div">
+          <!-- 手機 -->
+          <div class="send-request-phone">
+            <div class="refund-title fw-bold">退款總額</div>
+            <div class="refund-content fw-bold">$874.65 TWD</div>
+            <a href="#" class="cancellation-policy-details">顯示詳情</a>
+          </div>
+
+          <!-- 桌機 -->
+          <div class="send-request-desktop">
+            <i class="fa-solid fa-angle-left fa-sm"></i>
+            <span class="up-page">返回</span>
+          </div>
+          <!-- 新增的絕對定位元素 -->
+          <div class="centered-text">1/3</div>
+
+          <!-- 繼續按鈕 -->
+          <a href="#" class="send-request-a">繼續</a>
+        </div>
+      </section>
+    </div>
+
+
+    <div class="desktop-div">
+      <section class="cancel-room-section">
+        <div class="room-item">
+          <div class="my-room-item">
+            <div class="room-item-pic">
+              <img src="cancelled8.jpg" class="room-img">
+            </div>
+            <div class="room-introduce">
+              <div class="room-item-tag">房間</div>
+              <div class="room-item-title title">
+                「全新」你所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房
+              </div>
+              <div class="landlord-title">房東：
+                <span class="landlord-name">Adagio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!------ 桌機 ------->
+        <div class="desktop-gp">
+          <div class="desktop-date-gp sub-gp">
+            <span class="desktop-date-title">日期</span>
+            <span class="desktop-date-content">5月30日週四至31日週五</span>
+          </div>
+          <div class="desktop-traveler-gp sub-gp">
+            <span class="desktop-traveler-title">人數</span>
+            <span class="desktop-traveler-content">1名成人</span>
+          </div>
+          <div class="desktop-paid-gp sub-gp">
+            <span class="desktop-paid-title">目前已支付的金額</span>
+            <span class="desktop-paid-content">$874.65 TWD</span>
+          </div>
+          <div class="refund-total sub-gp">
+            <span class="refund-total-title title">退款總額</span>
+            <span class="refund-total-content fw-bold">$874.65 TWD</span>
+          </div>
+        </div>
+      </section>
+      <!------- 退訂政策 ------>
+      <section class="cancellation-policy-section">
+        <p class="cancellation-policy-title title">《退訂政策》</p>
+        <p class="cancellation-policy-content">全部退款：你將拿回已支付的全部款項。</p>
+        <a href="#" class="cancellation-policy-details">顯示詳情</a>
+      </section>
+    </div>
+  </div>
+
+  <!-- bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/bc13cdfd27.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
