@@ -60,13 +60,33 @@
             font-weight: bold;
         }
 
-        /* 桌機-------------- */
-        section {
-            padding-bottom: 30px;
+        /* 傳送申請---------- */
+        .send-request-div {
+            position: fixed;
+            z-index: 3;
+            bottom: 0px;
+            right :0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            height: 70px;
+            border-top: 1px solid #d1d1d1;
+            border-bottom: 1px solid #d1d1d1;
         }
 
-        section+section {
-            border-top: 7px solid #e0e0e0;
+        .send-request-a {
+            margin-left: auto;
+            text-decoration: none;
+            font-weight: bold;
+            color: #fff;
+            background-color: #dcdcdc;
+            padding: 10px 8px;
+            border-radius: 10px;
+        }
+
+        section {
+            padding-bottom: 30px;
         }
 
         @media screen and (max-width:767px) {
@@ -83,35 +103,9 @@
             .change-btn {
                 text-decoration: underline;
             }
-
-            /* 傳送申請---------- */
-            .send-request-div {
-                position: sticky;
-                z-index: 3;
-                bottom: 0px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: #fff;
-                height: 70px;
-                border-top: 1px solid #d1d1d1;
-                border-bottom: 1px solid #d1d1d1;
-            }
-
-            .send-request-a {
-                margin-left: auto;
-                text-decoration: none;
-                font-weight: bold;
-                color: #fff;
-                background-color: #dcdcdc;
-                padding: 10px 8px;
-                border-radius: 10px;
-            }
         }
 
         @media screen and (min-width:768px) {
-
-            .send-request-div,
             .phone-gp {
                 display: none;
             }
@@ -147,11 +141,6 @@
             .reservation-traveler-btn-gp {
                 border-radius: 8px;
             }
-
-            /* .reservation-traveler-btn-gp,
-            .reservation-traveler-dropdown {
-                text-align: start;
-            } */
         }
     </style>
 </head>
@@ -217,7 +206,7 @@
                     <option value="3">4人</option>
                     <option value="3">5人</option>
                     <option value="3">6人</option>
-                  </select>
+                </select>
 
             </div>
 
@@ -229,8 +218,10 @@
             <p class="cancellation-policy-p">5月29日下午3:00前可免費取消在這之後，該筆預訂則無法退款。</p>
         </section>
 
-        <div class="send-request-div">
-            <a href="#" class="send-request-a">傳送申請</a>
+        <div class="send-request-row row">
+            <div class="send-request-div col-12">
+                <a href="#" class="send-request-a">傳送申請</a>
+            </div>
         </div>
 
     </div>
