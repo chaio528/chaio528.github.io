@@ -32,24 +32,31 @@
 
         .room-icon-right {
             display: flex;
+            align-items: center;
             gap: 20px;
         }
 
-        .up-load,
-        .point {
-            padding: 15px 10px;
+        .up-page,
+        .share-detail,
+        .rename-settings {
             border-radius: 50%;
             background-color: transparent;
         }
 
         .up-page {
             padding: 15px 12px;
-            border-radius: 50%;
-            background-color: transparent;
         }
 
-        .up-load:active,
-        .point:active,
+        .share-detail {
+            padding: 5px 11px;
+        }
+
+        .rename-settings {
+            padding: 4px 10px;
+        }
+
+        .share-detail:active,
+        .rename-settings:active,
         .up-page:active {
             background-color: #eae6e6;
         }
@@ -132,6 +139,7 @@
         }
 
         .room-item-total {
+            border: none;
             display: inline;
             text-decoration: underline;
             font-weight: 400;
@@ -212,107 +220,44 @@
             font-weight: bold;
         }
 
-        /* 
-        彈跳視窗-----------------------------
 
-        價格明細
-        設定重新命名
-        */
-        .price-detail-row {
-            /* display: none; */
-        }
+        /* 價格明細 彈跳視窗 ---------------- */
 
-        .point-rename-row {
-            /* display: none; */
-        }
 
-        .detail-item {
-            position: relative;
-            border-top: 1px solid #7e7878;
-            border-radius: 20px;
-            padding-top: 10px;
-            padding-bottom: 50px;
-        }
-
-        .detail-content {
-            padding: 0 20px;
-        }
-
-        .cross {
-            position: absolute;
-            top: 23px;
-            left: 20px;
-        }
-
-        .detail-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bolder;
-        }
 
         .sub1-set,
         .sub2-set {
             display: grid;
             grid-template-columns: repeat(2, auto);
             justify-content: space-between;
+            padding: 10px 0;
         }
 
-        /* 
-        彈跳視窗-----------------------------
-
-        右上的分享
-        */
-        .share-detail-row {
-            /* display: none; */
+        .bline {
+            border: 1px solid #eeeeee;
         }
 
-        .detail-content-mysub1,
-        .detail-content-mysub2 {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
+        /* 上方分享 彈跳視窗 */
+        .send-link-btn,
+        .cooperation-btn {
+            display: flex;
             align-items: center;
-            border: 1px solid #bcbaba;
-            border-radius: 20px;
-            padding: 15px 20px;
+            gap: 20px;
+            padding: 10px;
+            border: 1px solid #c3c2c2;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
-        .detail-content-mysub1:hover,
-        .detail-content-mysub2:hover {
-            border: 1px solid #000;
-        }
-
-        .detail-content-mysub1:active,
-        .detail-content-mysub2:active {
-            transform: scale(0.8);
-            transition: transform 0.2s;
-        }
-
-        .detail-content-share {
-            display: grid;
-            gap: 15px;
-        }
-
-        .detail-content-mysub1 b {
-            font-size: 18px;
+        .send-link-btn:active,
+        .cooperation-btn:active {
+            transform: scale(0.9);
+            transition: transform 1s;
         }
 
         a {
             color: #000;
             text-decoration: none;
-        }
-
-        /* 控制彈跳視窗的 input----------------- */
-        #my-up-load,
-        #my-point,
-        #my-room-item-total,
-        #my-add-remark,
-        #my-add-edit {
-            display: none;
-        }
-
-        /* 控制彈跳視窗------------------------- */
-        #my-up-load:checked .wish-listings-container .share-detail-row {
-            display: block;
         }
 
         /* Swiper 照片幻燈片--------------------- */
@@ -365,12 +310,6 @@
 
 <body>
     <div class="my-wish-detail-container container">
-        <input type="checkbox" id="my-up-load">
-        <input type="checkbox" id="my-point">
-        <input type="checkbox" id="my-room-item-total">
-        <input type="checkbox" id="my-add-remark">
-        <input type="checkbox" id="my-add-edit">
-
         <div class="my-wish-detail-row row">
             <!-- 房源區 -->
             <div class="wish-listings-container col-12 col-sm-12 col-md-7">
@@ -383,12 +322,14 @@
                         </a>
                     </div>
                     <div class="room-icon-right">
-                        <label for="my-up-load">
-                            <i class="up-load fa-solid fa-arrow-up-from-bracket fa-sm"></i>
-                        </label>
-                        <label for="my-point">
-                            <i class="point fa-solid fa-ellipsis fa-sm"></i>
-                        </label>
+                        <span class="share-detail" type="button" data-bs-toggle="modal"
+                            data-bs-target="#to-share-detail">
+                            <i class="fa-solid fa-arrow-up-from-bracket fa-sm"></i>
+                        </span>
+                        <span class="rename-settings" type="button" data-bs-toggle="modal"
+                            data-bs-target="#to-rename-settings">
+                            <i class="fa-solid fa-ellipsis fa-sm"></i>
+                        </span>
                     </div>
                 </div>
 
@@ -403,8 +344,8 @@
                     <div class="have-room-row row">
                         <!-- 卡片1 -->
                         <div class="col-12 col-sm-12 col-md-6">
-                            <a href="#" class="room-link">
-                                <div class="room-item">
+                            <div class="room-item">
+                                <a href="#" class="room-link">
                                     <div class="room-pic">
                                         <div class="love-btn">
                                             <i class="room-pic-love fa-solid fa-heart fa-2xl"></i>
@@ -450,17 +391,17 @@
                                         </div>
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
-                                            <span class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$20,854 TWD
-                                                    稅前總價
-                                                </label>
-                                            </span>
+                                            <div class="room-item-price">$1,920 TWD晚．
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$20,854 TWD 稅前總價
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                </a>
+                                <div class="add-edit-div">
+                                    <label for="my-add-edit" class="add-edit">編輯</label>
                                 </div>
-                            </a>
-                            <div class="add-edit-div">
-                                <label for="my-add-edit" class="add-edit">編輯</label>
                             </div>
                         </div>
                         <!-- 卡片2 -->
@@ -512,19 +453,18 @@
                                         </div>
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
-                                            <span class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$20,854 TWD
-                                                    稅前總價
-                                                </label>
-                                            </span>
+                                            <div class="room-item-price">$1,920 TWD晚．
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$20,854 TWD 稅前總價
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
+                                <div class="add-remark-div">
+                                    <label for="my-add-remark" class="add-remark">新增備註</label>
+                                </div>
                             </div>
-                            <div class="add-remark-div">
-                                <label for="my-add-remark" class="add-remark">新增備註</label>
-                            </div>
-                            </a>
                         </div>
                         <!-- 卡片3 -->
                         <div class="col-12 col-sm-12 col-md-6">
@@ -575,11 +515,11 @@
                                         </div>
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
-                                            <span class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$9,854 TWD
-                                                    稅前總價
-                                                </label>
-                                            </span>
+                                            <div class="room-item-price">$1,920 TWD晚．
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$9,854 TWD 稅前總價
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -637,11 +577,11 @@
                                         </div>
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
-                                            <span class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$9,854 TWD
-                                                    稅前總價
-                                                </label>
-                                            </span>
+                                            <div class="room-item-price">$1,920 TWD晚．
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$9,854 TWD 稅前總價
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -702,9 +642,9 @@
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
                                             <div class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$16,854 TWD
-                                                    稅前總價
-                                                </label>
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$16,854 TWD 稅前總價
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -766,9 +706,9 @@
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
                                             <div class="room-item-price">$1,920 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$16,854 TWD
-                                                    稅前總價
-                                                </label>
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$20,854 TWD 稅前總價
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -834,10 +774,11 @@
                                         </div>
                                         <div class="room-detail">
                                             <div class="room-item-date">5晚．2月18日至23日</div>
-                                            <span class="room-item-price">$854 TWD晚．
-                                                <label for="my-room-item-total" class="room-item-total">總計$854 TWD 稅前總價
-                                                </label>
-                                            </span>
+                                            <div class="room-item-price">$854 TWD晚．
+                                                <span class="room-item-total" data-bs-toggle="modal"
+                                                    data-bs-target="#to-room-item-total">總計$20,854 TWD 稅前總價
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -847,81 +788,92 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- 價格明細 彈跳視窗 ------------------->
-                    <div class="price-detail-row row">
-                        <div class="col-12 col-sm-12 col-md-12">
-                            <div class="detail-item">
-                                <header class="detail-title">價格明細</header>
-                                <i class="cross fa-solid fa-xmark fa-sm"></i>
-                                <hr>
-                                <div class="detail-content">
-                                    <div class="detail-content-sub1">
+                    <!-- -------------------------------------------------------------- -->
+                    <!-- 價格明細 彈跳視窗 -->
+                    <div class="modal fade" id="to-room-item-total">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="to-lodging-header d-flex">
+                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        <h1 class="fs-4" id="detail-title">價格明細</h1>
+                                    </div>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <form>
                                         <div class="sub1-set">
                                             <span>$1,667 TWD x 5晚</span>
                                             <span>$8,334 TWD</span>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="detail-content-sub2">
+                                        <div class="bline"></div>
                                         <div class="sub2-set">
                                             <span>稅前總價</span>
                                             <span>$1,667 TWD</span>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 右上設定 彈跳視窗 -->
-                    <div class="point-rename-row row">
-                        <div class="col-12 col-sm-12 col-md-12">
-                            <div class="detail-item">
-                                <header class="detail-title">設定</header>
-                                <i class="cross fa-solid fa-xmark fa-sm"></i>
-                                <hr>
-                                <div class="detail-content">
-                                    <div class="detail-content-sub1">
-                                        <div class="sub1-set">
+                    <!-- -------------------------------------------------------------- -->
+                    <!-- 設定 彈跳視窗 -->
+                    <div class="modal fade" id="to-rename-settings">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="to-lodging-header d-flex">
+                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        <h1 class="fs-4" id="detail-title">設定</h1>
+                                    </div>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <form>
+                                        <div class="sub1-set pb-4">
                                             <i class="sub-set-icon fa-solid fa-pen fa-sm"> 重新命名</i>
                                             <i class="fa-solid fa-angle-right fa-sm"></i>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="detail-content-sub2">
-                                        <div class="sub2-set">
+                                        <div class="bline"></div>
+                                        <div class="sub2-set pt-4">
                                             <i class="sub-set-icon fa-solid fa-trash-can fa-sm"> 刪除</i>
                                             <i class="fa-solid fa-angle-right fa-sm"></i>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 分享 彈跳視窗 -->
-                    <div class="share-detail-row row">
-                        <div class="col-12 col-sm-12 col-md-12">
-                            <div class="detail-item">
-                                <header class="detail-title">你想要怎麼分享呢?</header>
-                                <i class="cross fa-solid fa-xmark fa-sm"></i>
-                                <hr>
-                                <div class="detail-content detail-content-share">
-                                    <div class="detail-content-mysub1">
-                                        <i class="fa-solid fa-link fa-xl"></i>
-                                        <a class="send-link" href="#">
-                                            <b>傳送連結</b>
-                                            <p>有此連結的人都可查看</p>
-                                        </a>
+                    <!-- -------------------------------------------------------------- -->
+                    <div class="modal fade" id="to-share-detail">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="to-lodging-header d-flex">
+                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        <h1 class="fs-4" id="detail-title">你想要怎麼分享呢?</h1>
                                     </div>
-                                    <div class="detail-content-mysub2">
-                                        <i class="fa-solid fa-user-plus fa-xl"></i>
-                                        <a class="cooperation">
-                                            <b>合作</b>
-                                            <p>邀請其他人使用此心願單</p>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <form>
+                                        <a href="#" class="send-link-btn">
+                                            <i class="fa-solid fa-link fa-xl"></i>
+                                            <div class="send-link-gp">
+                                                <div class="send-link-title fw-bold">傳送連結</div>
+                                                <div class="send-link-content">有此連結的人都可查看</div>
+                                            </div>
                                         </a>
-                                    </div>
+                                        <a href="#" class="cooperation-btn">
+                                            <i class="fa-solid fa-user-plus fa-xl"></i>
+                                            <div class="cooperation-gp">
+                                                <div class="cooperation-title fw-bold">合作</div>
+                                                <div class="cooperation-content">
+                                                    邀請其他人使用此心願單
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -956,6 +908,13 @@
                 el: ".swiper-pagination",
             },
         });
+    </script>
+    <script>
+        // ------------------------------ 視窗不要停 -------------------------
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     var toNoticeModal = new bootstrap.Modal(document.getElementById('to-share-detail'));
+        //     toNoticeModal.show();
+        // });
     </script>
 
 </body>
