@@ -10,35 +10,62 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Semantic UI  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <style>
-    .modify-container{
+    .modify-container {
       padding-top: 10px;
     }
+
+    .main-title {
+      display: flex;
+      align-items: end;
+      text-shadow:2px 2px 3px#9da1a0;
+    }
+
+    .main-title-img {
+      width: 100%;
+      vertical-align: bottom;
+    }
+
+    .modify-row {
+      display: grid;
+      gap: 30px;
+    }
+
     .modify-div,
     .cancel-div {
-      border: 1px solid #bfbfbf;
+      position: relative;
+      border: 1px solid #4f9292;
       border-radius: 15px;
-      padding: 20px 20px;
-      box-shadow: 7px 10px 10px 3px #cbcbcb;
+      padding: 15px 14px;
+      box-shadow: 7px 10px 10px 3px #6f9595;
+    }
+
+    .modify-div:hover,
+    .cancel-div:hover {
+      border: 2px solid #4f9292;
+      transform: scale(0.98);
+      transition: transform 0.3s;
+    }
+
+    .ribbon {
+      position: absolute;
+      top: -10px;
+      left: 50px;
     }
 
     .modify-subtitle,
     .cancel-subtitle {
-      padding-top: 10px;
+      margin-top: 12px;
       font-weight: bold;
     }
 
     .modify-subtitle-describe,
     .cancel-subtitle-describe {
       margin-bottom: 30px;
-    }
-
-    .modify-start-a,
-    .cancel-start-a {
-      font-weight: bold;
-      border: 1px solid #c5c4c4;
-      border-radius: 15px;
-      padding: 10px 10px;
     }
 
     .modify-start-div,
@@ -52,23 +79,24 @@
       transition: transform 0.5s;
     }
 
+    .modify-subtitle,
+    .cancel-subtitle {
+      /* text-shadow:10px 8px 2px #979797; */
+      font-weight: bold;
+      font-size: 28px;
+    }
+
     a {
       text-decoration: none;
       color: #000;
     }
 
     @media screen and (max-width:767px) {
-      .modify-row {
-        display: grid;
-        gap: 30px;
-      }
     }
 
     @media screen and (min-width:768px) {
       .modify-row {
-        display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
       }
     }
   </style>
@@ -77,19 +105,26 @@
 
 <body>
   <div class="modify-container container">
-    <h1 class="main-title">在Central District的1晚住宿</h1>
-    <p class="main-title-describe">5月30日至5月31日入住「全新」您所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房</p>
+
+    <h1 class="main-title ui header">
+      <img src="plugin.png" class="main-title-img">
+      <div class="content">
+        在Central District的1晚住宿
+        <div class="main-title-describe sub header fw-bold">5月30日至5月31日入住「全新」您所看到的一切都是新的！台中一中街乾淨明亮陽台雙人房</div>
+      </div>
+    </h1>
 
     <div class="modify-row">
 
       <div class="modify-div">
+        <div class="ui orange ribbon label">Modify Reservation</div>
         <div class="modify-icon">
           <i class="fa-solid fa-pencil fa-xl"></i>
         </div>
         <h2 class="modify-subtitle">變更預訂</h2>
-        <div class="modify-subtitle-describe">申請更改日期或房客人數</div>
+        <div class="modify-subtitle-describe fw-bold">申請更改日期或房客人數</div>
         <div class="modify-start-div">
-          <a href="#" class="modify-start-a">
+          <a href="#" class="modify-start-a ui teal button">
             開始吧
             <i class="fa-solid fa-angle-right fa-sm"></i>
           </a>
@@ -97,13 +132,14 @@
       </div>
 
       <div class="cancel-div">
+        <div class="ui orange ribbon label">Cancel Reservation</div>
         <div class="cancel-icon">
           <i class="fa-solid fa-house fa-xl"></i>
         </div>
         <h2 class="cancel-subtitle">取消預訂</h2>
-        <div class="cancel-subtitle-describe">在預訂取消之前，您會先看到所有詳情</div>
+        <div class="cancel-subtitle-describe fw-bold">在預訂取消之前，您會先看到所有詳情</div>
         <div class="cancel-start-div">
-          <a href="#" class="cancel-start-a">
+          <a href="#" class="cancel-start-a ui teal button">
             開始吧
             <i class="fa-solid fa-angle-right fa-sm"></i>
           </a>
