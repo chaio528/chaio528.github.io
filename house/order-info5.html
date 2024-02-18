@@ -15,16 +15,22 @@
         }
 
         .order-room-container {
+            position: relative;
+            z-index: 1;
             height: 100vh;
-            overflow-y: auto;
         }
 
+        /* 地圖---------------------- */
+
+        .taiwan-map {
+            width: 100%;
+        }
+
+        /* 卡片---------------------- */
         .room-icon {
             position: sticky;
             z-index: 3;
             top: 0px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
             background-color: #fff;
             height: 50px;
@@ -97,7 +103,6 @@
             height: 90px;
         }
 
-
         /* 前往房源 按扭區---------------------- */
         .go-to-lodging-btn {
             margin-top: -21px;
@@ -156,7 +161,7 @@
         }
 
         section+section {
-            border-top: 7px solid #e0e0e0;
+            border-top: 5px solid #e0e0e0;
         }
 
         /* 預訂詳情-------------------------- */
@@ -181,6 +186,7 @@
 
         .read-details {
             text-decoration: underline;
+            cursor: pointer;
         }
 
         /* 如何前往 section 地圖------- */
@@ -193,11 +199,7 @@
 
         .rules-section .details,
         .landlord-info {
-<<<<<<< HEAD
             color: #000;
-=======
-            color:#000;
->>>>>>> 772c4cc02a53728a0ae578f8aca12c4e6d193ee6
             font-weight: bold;
             text-decoration: underline
         }
@@ -225,50 +227,52 @@
             border-bottom: 1px solid #e0e0e0;
         }
 
-        /* -------- 背景變深色 ------- */
-        .modal-backdrop {
-            z-index: 10;
-        }
-
-        /* 使用 JavaScript 來設置背景 */
-        body.darken-bg {
-            overflow: hidden;
-        }
-
-        .darken-bg::before {
-            content: "";
-            background-color: #00000080;
-            /* 半透明黑色背景 */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 11;
-            /* 確保背景在 Modal 之下 */
-        }
 
         /* 共同    彈跳視窗-------------------------- */
         .bline {
             border-bottom: 1px solid #d5d5d5;
         }
+
+        .modal h1 {
+            margin-top: -5px;
+        }
+
         /* 注意事項 彈跳視窗--------------------------*/
-        .check-div,.occupancy-div  {
+        .check-div,
+        .occupancy-div {
             padding: 10px 0;
         }
-        .to-notice-div{
+
+        .to-notice-div {
             margin-left: -5px;
         }
-        .to-notice-title{
+
+        .to-notice-title {
             margin-left: -15px;
         }
-        .check-title ,.stay-title{
+
+        .check-title,
+        .stay-title {
             margin-left: -8px;
         }
+
         /* 分享     彈跳視窗-------------------------- */
         .share-address-content,
         .share-address-content-div {
             text-decoration: underline;
+        }
+
+        /* 退訂政策 閱讀詳情 彈跳視窗------------- */
+        .full-refund-div,
+        .non-refundable-div {
+            display: flex;
+            gap: 30px;
+        }
+
+        .full-refund-time,
+        .non-refundable-time,
+        .non-refundable-check-out {
+            font-size: 13px;
         }
 
         /* Swiper 照片幻燈片--------------------- */
@@ -496,9 +500,9 @@
                     <div class="cancellation-policy-div">
                         <div class="cancellation-policy fw-bold">《退訂政策》</div>
                         <div class="cancellation-policy-content">5月29日下午3:00前可以免費取消在這之後，該筆預訂則無法退款。</div>
-                        <a class="read-details fw-bold">
+                        <div class="read-details fw-bold" data-bs-toggle="modal" data-bs-target="#to-cancellation">
                             閱讀詳情
-                        </a>
+                        </div>
                     </div>
 
                     <button class="travelers-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
@@ -554,7 +558,8 @@
                     <button class="receipt-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
                         <div class="btn-left-icon">
                             <i class="fa-solid fa-file-invoice-dollar fa-sm"></i>
-                            <span class="receipt-btn-pan">取得收據</span>
+                            <a href="https://chaio528.github.io/house/RoomReceipt.html" target="_blank"
+                                class="receipt-btn-pan">取得收據</a>
                         </div>
                         <div class="btn-right-icon">
                             <i class="fa-solid fa-chevron-right fa-sm"></i>
@@ -610,7 +615,7 @@
                 <!-- 守則和指示 section -->
                 <section class="rules-section">
                     <h2>守則和指示</h2>
-                    <div class="room-rules fw-bold">《房屋守則》</div>
+                    <div class="room-rules fw-bold fs-3">《房屋守則》</div>
                     <div>自助入住方式：密碼鑰匙盒</div>
                     <div>最多2位房客</div>
                     <div>禁止攜帶寵物</div>
@@ -665,7 +670,8 @@
                     <button class="receipt-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
                         <div class="btn-left-icon">
                             <i class="fa-solid fa-file-invoice-dollar fa-sm"></i>
-                            <span class="receipt-btn-pan">取得收據</span>
+                            <a href="https://chaio528.github.io/house/RoomReceipt.html" target="_blank"
+                                class="receipt-btn-pan">取得收據</a>
                         </div>
                         <div class="btn-right-icon">
                             <i class="fa-solid fa-chevron-right fa-sm"></i>
@@ -698,161 +704,6 @@
                         </div>
                     </a>
                 </section>
-
-                <!-- 前往房源 彈跳視窗---------------------------------->
-                <div class="modal fade" id="to-view-listing">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="to-lodging-header d-flex">
-                                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                    <h1 class="fs-4" id="notice-ModalLabel">前往房源</h1>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="to-view-listing-title">
-                                        <label for="to-lodging-recipient-name" class="col-form-label fs-4 fw-bold">No.8.
-                                            Lane 149.Section 2.Sanmin Road
-                                            Central District.台中市 400</label>
-                                    </div>
-
-                                    <div class="view-listing-map-container col-12">
-                                        <div class="view-listing-row row">
-                                            <div class="view-listing-map">
-                                                <img src="address-map.jpg" alt="" class="taiwan-map w-100 mb-3">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button"
-                                        class="view-listing-directions-btn btn btn-dark w-100 mb-4 fs-5">交通指南</button>
-                                    <button type="button"
-                                        class="view-listing-copy-address-btn btn btn-light border-dark w-100 mb-4 fs-5">複製地址</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 注意事項 彈跳視窗 -->
-                <div class="modal fade" id="to-notice">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="to-lodging-header d-flex">
-                                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                    <h1 class="fs-4" id="notice-ModalLabel">注意事項</h1>
-                                </div>
-                            </div>
-                            <div class="modal-body p-4">
-                                <form>
-                                    <div class="to-notice-div">
-                                        <label for="to-notice-recipient-name"
-                                            class="to-notice-title col-form-label fs-1 fw-bold">《房屋守則》</label>
-                                        <p class="to-notice-p">你會入住別人的家，因此請愛護房東的房源。</p>
-                                    </div>
-
-                                    <div class="check-div fs-4 mb-3 mt-1">
-                                        <div class="check-title fw-bold mb-3">入住與退房</div>
-
-                                        <div class="check-in-div check-div bline">
-                                            <i class="fa-regular fa-clock fa-sm p-1"></i>
-                                            <span class="check-in-content p-2">入住時間：下午3:00 - 上午12:00</span>
-                                        </div>
-                                        <div class="check-out-div check-div bline">
-                                            <i class="fa-regular fa-clock fa-sm p-1"></i>
-                                            <span class="check-out-content p-2">退房時間：下午12:00前</span>
-                                        </div>
-                                        <div class="self-help-div check-div">
-                                            <i class="fa-solid fa-door-closed fa-sm p-1"></i>
-                                            <span class="self-help-content p-2">自助入住方式：密碼鑰匙盒</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="stay-div fs-4 mb-3 mt-1">
-                                        <div class="stay-title fw-bold mb-3">住宿期間</div>
-
-                                        <div class="max-occupancy-div occupancy-div bline">
-                                            <i class="fa-solid fa-people-group p-1"></i>
-                                            <span class="max-occupancy-content p-2">最多2位房客</span>
-                                        </div>
-                                        <div class="no-pets-div occupancy-div bline">
-                                            <i class="fa-solid fs-4 fa-cat fa-sm p-1"></i>
-                                            <span class="no-pets-content p-2">禁止攜帶寵物</span>
-                                        </div>
-                                        <div class="no-parties occupancy-div bline">
-                                            <i class="fa-solid fa-champagne-glasses fa-sm p-1"></i>
-                                            <span class="no-parties-content p-2">禁止舉辦派對和活動</span>
-                                        </div>
-                                        <div class="no-smoking occupancy-div">
-                                            <i class="fa-solid fa-smoking fa-sm p-1"></i>
-                                            <span class="no-smokingt p-2">禁止抽菸</span>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 分享住宿地點 彈跳視窗 -->
-                <div class="modal fade" id="to-share-housing">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="to-lodging-header d-flex">
-                                    <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="to-share-housing-title">
-                                        <label for="to-lodging-recipient-name"
-                                            class="col-form-label fs-1 fw-bold">分享住宿地點</label>
-                                        <p class="to-share-housing-p">為防緊急情況發生，請與可信任的好友分享住宿地點。</p>
-                                    </div>
-
-                                    <div class="share-check-div fs-4">
-                                        <div class="share-check-in-div mb-3">
-                                            <div class="share-check-in-title">入住</div>
-                                            <span class="check-in-content fw-bold">5月30日 週四下午3:00</span>
-                                        </div>
-                                        <div class="share-check-out-div mb-3">
-                                            <div class="share-check-out-title">退房</div>
-                                            <span class="check-out-content fw-bold">5月31日 週五下午12:00</span>
-                                        </div>
-                                        <div class="share-pin-div mb-3">
-                                            <div class="share-pin-title">確認碼</div>
-                                            <span class="share-pin-content fw-bold">HMBYRA5CDE</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="share-address-div mb-3">
-                                        <div class="share-address-title">地址</div>
-                                        <span class="share-address-content fw-bold">No.8. Lane 149.Section 2.Sanmin Road
-                                            Central District.台中市 400</span>
-                                        <div class="share-address-content-div fw-bold">臺灣</div>
-
-                                        <div class="share-map-container col-12">
-                                            <div class="share-row row">
-                                                <div class="share-map">
-                                                    <img src="address-map.jpg" alt="" class="taiwan-map w-100 mb-3">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button"
-                                            class="continue-btn btn btn-dark w-100 mb-4 fs-5">分享</button>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- 地圖 ------------------>
@@ -862,8 +713,194 @@
                 </div>
             </div>
 
+            <!-- 前往房源 彈跳視窗---------------------------------->
+            <div class="modal fade" id="to-view-listing">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="to-lodging-header d-flex">
+                                <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <h1 class="fs-4" id="notice-ModalLabel">前往房源</h1>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="to-view-listing-title">
+                                    <label for="to-lodging-recipient-name" class="col-form-label fs-4 fw-bold">No.8.
+                                        Lane 149.Section 2.Sanmin Road
+                                        Central District.台中市 400</label>
+                                </div>
 
-            
+                                <div class="view-listing-map-container col-12">
+                                    <div class="view-listing-row row">
+                                        <div class="view-listing-map">
+                                            <img src="address-map.jpg" alt="" class="taiwan-map w-100 mb-3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                    class="view-listing-directions-btn btn btn-dark w-100 mb-4 fs-5">交通指南</button>
+                                <button type="button"
+                                    class="view-listing-copy-address-btn btn btn-light border-dark w-100 mb-4 fs-5">複製地址</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 注意事項 彈跳視窗 -->
+            <div class="modal fade" id="to-notice">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="to-notice-header d-flex">
+                                <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <h1 class="fs-4" id="notice-ModalLabel">注意事項</h1>
+                            </div>
+                        </div>
+                        <div class="modal-body p-4">
+                            <form>
+                                <div class="to-notice-div">
+                                    <label for="to-notice-recipient-name"
+                                        class="to-notice-title col-form-label fs-1 fw-bold">《房屋守則》</label>
+                                    <p class="to-notice-p">你會入住別人的家，因此請愛護房東的房源。</p>
+                                </div>
+
+                                <div class="check-div fs-4 mb-3 mt-1">
+                                    <div class="check-title fw-bold mb-3">入住與退房</div>
+
+                                    <div class="check-in-div check-div bline">
+                                        <i class="fa-regular fa-clock fa-sm p-1"></i>
+                                        <span class="check-in-content p-2">入住時間：下午3:00 - 上午12:00</span>
+                                    </div>
+                                    <div class="check-out-div check-div bline">
+                                        <i class="fa-regular fa-clock fa-sm p-1"></i>
+                                        <span class="check-out-content p-2">退房時間：下午12:00前</span>
+                                    </div>
+                                    <div class="self-help-div check-div">
+                                        <i class="fa-solid fa-door-closed fa-sm p-1"></i>
+                                        <span class="self-help-content p-2">自助入住方式：密碼鑰匙盒</span>
+                                    </div>
+                                </div>
+
+                                <div class="stay-div fs-4 mb-3 mt-1">
+                                    <div class="stay-title fw-bold mb-3">住宿期間</div>
+
+                                    <div class="max-occupancy-div occupancy-div bline">
+                                        <i class="fa-solid fa-people-group p-1"></i>
+                                        <span class="max-occupancy-content p-2">最多2位房客</span>
+                                    </div>
+                                    <div class="no-pets-div occupancy-div bline">
+                                        <i class="fa-solid fs-4 fa-cat fa-sm p-1"></i>
+                                        <span class="no-pets-content p-2">禁止攜帶寵物</span>
+                                    </div>
+                                    <div class="no-parties occupancy-div bline">
+                                        <i class="fa-solid fa-champagne-glasses fa-sm p-1"></i>
+                                        <span class="no-parties-content p-2">禁止舉辦派對和活動</span>
+                                    </div>
+                                    <div class="no-smoking occupancy-div">
+                                        <i class="fa-solid fa-smoking fa-sm p-1"></i>
+                                        <span class="no-smokingt p-2">禁止抽菸</span>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分享住宿地點 彈跳視窗 -->
+            <div class="modal fade" id="to-share-housing">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="to-share-housing-header d-flex">
+                                <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="to-share-housing-title">
+                                    <label for="to-share-housing-recipient-name"
+                                        class="col-form-label fs-3 fw-bold">分享住宿地點</label>
+                                    <p class="to-share-housing-p">為防緊急情況發生，請與可信任的好友分享住宿地點。</p>
+                                </div>
+
+                                <div class="share-check-div fs-4">
+                                    <div class="share-check-in-div mb-3">
+                                        <div class="share-check-in-title">入住</div>
+                                        <span class="check-in-content fw-bold">5月30日 週四下午3:00</span>
+                                    </div>
+                                    <div class="share-check-out-div mb-3">
+                                        <div class="share-check-out-title">退房</div>
+                                        <span class="check-out-content fw-bold">5月31日 週五下午12:00</span>
+                                    </div>
+                                    <div class="share-pin-div mb-3">
+                                        <div class="share-pin-title">確認碼</div>
+                                        <span class="share-pin-content fw-bold">HMBYRA5CDE</span>
+                                    </div>
+                                </div>
+
+                                <div class="share-address-div mb-3">
+                                    <div class="share-address-title">地址</div>
+                                    <span class="share-address-content fw-bold">No.8. Lane 149.Section 2.Sanmin Road
+                                        Central District.台中市 400</span>
+                                    <div class="share-address-content-div fw-bold">臺灣</div>
+
+                                    <div class="share-map-container col-12">
+                                        <div class="share-row row">
+                                            <div class="share-map">
+                                                <img src="address-map.jpg" alt="" class="taiwan-map w-100 mb-3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="continue-btn btn btn-dark w-100 mb-4 fs-5">分享</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 退訂政策 閱讀詳情 -->
+            <div class="modal fade" id="to-cancellation">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="to-cancellation-header d-flex">
+                                <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <h1 class="fs-4 fw-bold" id="to-cancellation-ModalLabel">《退訂政策》</h1>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="cancel-deadline fs-5 mb-3 fw-bold">取消截止時間</div>
+
+                            <div class="full-refund-div">
+                                <div class="full-refund-date-title fw-bold">10月27日
+                                </div>
+                                <div class="full-refund-date-content">全額退款：你將拿回已支付的全部款項。</div>
+                            </div>
+                            <div class="full-refund-time">下午3:00</div>
+                            <hr>
+                            <div class="non-refundable-div">
+                                <div class="non-refundable-date-title fw-bold">10月29日</div>
+                                <div class="non-refundable-date-content">無法退款。</div>
+                            </div>
+                            <div class="non-refundable-time">上午11:00</div>
+                            <div class="non-refundable-check-out">( 退房 )</div>
+                            <hr>
+                            <p class="non-refundable-p fw-bold"><u>了解更多有關《退訂政策》的事宜</u></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -888,59 +925,12 @@
 
 
     <script>
-        // 前往房源 --------------------------------------
-        const viewListingModal = document.getElementById('to-view-listing')
-        if (viewListingModal) {
-            viewListingModal.addEventListener('show.bs.modal', event => {
-                const button = event.relatedTarget
-                const recipient = button.getAttribute('data-bs-whatever')
-                const modalTitle = noticeModal.querySelector('.modal-title')
-                const modalBodyInput = noticeModal.querySelector('.modal-body input')
-
-                modalTitle.textContent = `New message to ${recipient}`
-                modalBodyInput.value = recipient
-            })
-        }
-
-        // 注意事項 按扭區 彈跳視窗語法--------------------
-        const noticeModal = document.getElementById('to-notice')
-        if (noticeModal) {
-            noticeModal.addEventListener('show.bs.modal', event => {
-                const button = event.relatedTarget
-                const recipient = button.getAttribute('data-bs-whatever')
-                const modalTitle = noticeModal.querySelector('.modal-title')
-                const modalBodyInput = noticeModal.querySelector('.modal-body input')
-
-                modalTitle.textContent = `New message to ${recipient}`
-                modalBodyInput.value = recipient
-            })
-        }
-        // 分享住宿地點 按扭區 彈跳視窗語法--------------------
-        const shareHousingModal = document.getElementById('to-share-housing')
-        if (shareHousingModal) {
-            shareHousingModal.addEventListener('show.bs.modal', event => {
-                const button = event.relatedTarget
-                const recipient = button.getAttribute('data-bs-whatever')
-                const modalTitle = noticeModal.querySelector('.modal-title')
-                const modalBodyInput = noticeModal.querySelector('.modal-body input')
-
-                modalTitle.textContent = `New message to ${recipient}`
-                modalBodyInput.value = recipient
-            })
-        }
-        //------------- 背景變深色 ----------------
-        noticeModal.addEventListener('show.bs.modal', function (event) {
-            document.body.classList.add('darken-bg');
-        });
-
-        noticeModal.addEventListener('hidden.bs.modal', function (event) {
-            document.body.classList.remove('darken-bg');
-        });
-
         // ------------------------------ 視窗不要停 -------------------------
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     var toNoticeModal = new bootstrap.Modal(document.getElementById('to-notice'));
-        //     toNoticeModal.show();
-        // });
+        /*
+       document.addEventListener("DOMContentLoaded", function () {
+           var toNoticeModal = new bootstrap.Modal(document.getElementById('to-cancellation'));
+           toNoticeModal.show();
+       }); 
+       */
 
     </script>
