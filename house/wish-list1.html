@@ -62,25 +62,25 @@
             z-index: 1;
         }
 
-        .add-edit-div {
+        .add-edit-div,.add-complete-div {
             width: 60px;
             margin-left: auto;
             margin-right: 10px;
         }
 
-        .add-edit {
+        .add-edit,.add-complete {
             font-size: 20px;
             border: transparent;
             background-color: transparent;
             text-decoration: underline;
             font-weight: bold;
             border-radius: 10px;
-            padding: 3px 0px;
+            padding: 5px 8px;
             text-align: center;
             margin-top: 10px;
         }
 
-        .add-edit:active {
+        .add-edit:hover,.add-complete:hover {
             background-color: #e1e1e1;
         }
 
@@ -138,6 +138,9 @@
         }
 
         @media screen and (min-width:768px) {
+            .add-edit-div,.add-complete-div{
+                display: none;
+            }
             .wish-list-container{
                 max-width: 1200px;
             }
@@ -150,9 +153,12 @@
 
 <body>
     <div class="wish-list-container container">
-        <div class="add-edit-div row">
-            <button class="add-edit">編輯</button>
+        <div class="add-edit-div">
+            <button class="add-edit fs-5">編輯</button>
         </div>
+        <!-- <div class="add-complete-div">
+            <button class="add-complete fs-5">完成</button>
+        </div> -->
         <h1 class="main-wish-title">心願單</h1>
 
         <div class="room-row row">
