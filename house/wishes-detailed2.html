@@ -62,6 +62,7 @@
         .up-page:active {
             background-color: #eae6e6;
         }
+
         /* 新增日期 人數 */
         .date-peoples {
             display: grid;
@@ -81,10 +82,26 @@
             width: 100px;
             font-weight: bold;
         }
-        .date-peoples button:hover{
+
+        .date-peoples button:hover {
             transform: scale(0.96);
             transition: transform 0.1s;
             border: 1px solid #bebdbd;
+        }
+
+        .with-pets {
+            cursor: pointer;
+        }
+
+        .close-btn,
+        .close-btn:hover {
+            border: 1px solid #c3c2c2;
+            box-shadow: 0px 3px 5px #91918f;
+        }
+
+        .close-btn:hover {
+            transform: scale(0.96);
+            transition: transform 0.3s;
         }
 
         .room-item {
@@ -229,9 +246,10 @@
         }
 
         /* 價格明細 彈跳視窗 ---------------- */
-        .modal h1{
+        .modal h1 {
             margin-top: -6px;
         }
+
         .sub1-set,
         .sub2-set {
             display: grid;
@@ -261,12 +279,16 @@
         .cooperation-btn:hover {
             transform: scale(0.97);
             transition: transform 0.3s;
-            color:#000;
+            color: #000;
         }
 
         a {
             color: #000;
             text-decoration: none;
+        }
+        /* 重新命名彈跳視窗--------------------- */
+        #to-rename-settings .sub1-set,#to-rename-settings .sub2-set{
+            cursor: pointer;
         }
 
         /* 地圖--------------------------------- */
@@ -355,7 +377,7 @@
                 <!-- 新增日期 人數 -->
                 <div class="date-peoples">
                     <button class="create-date">新增日期</button>
-                    <button class="peoples">1人</button>
+                    <button class="peoples" data-bs-toggle="modal" data-bs-target="#to-peoples">1人</button>
                 </div>
                 <!-- 卡片 -->
                 <div class="my-wish-card-container container">
@@ -811,15 +833,14 @@
 
             </div>
 
-            <!-- 地圖 ------------------>
+            <!-- 地圖 ------------------------------>
             <div class="wish-map-container col-12 col-sm-12 col-md-5">
                 <div class="wish-map">
                     <img src="taiwan-map.jpg" alt="" class="taiwan-map">
                 </div>
             </div>
         </div>
-        <!-- -------------------------------------------------------------- -->
-        <!-- 價格明細 彈跳視窗 -->
+        <!-- 價格明細 彈跳視窗 ----------------------------------------->
         <div class="modal fade" id="to-room-item-total">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -846,8 +867,7 @@
                 </div>
             </div>
         </div>
-        <!-- -------------------------------------------------------------- -->
-        <!-- 設定 彈跳視窗 -->
+        <!-- 設定 彈跳視窗 ----------------------------------------->
         <div class="modal fade" id="to-rename-settings">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -860,12 +880,12 @@
                     </div>
                     <div class="modal-body p-4">
                         <form>
-                            <div class="sub1-set pb-4">
+                            <div class="sub1-set pb-4" data-bs-toggle="modal" data-bs-target="#to-rename-sub">
                                 <i class="sub-set-icon fa-solid fa-pen fa-sm"> 重新命名</i>
                                 <i class="fa-solid fa-angle-right fa-sm"></i>
                             </div>
                             <div class="bline"></div>
-                            <div class="sub2-set pt-4">
+                            <div class="sub2-set pt-4" data-bs-toggle="modal" data-bs-target="#to-delete-sub">
                                 <i class="sub-set-icon fa-solid fa-trash-can fa-sm"> 刪除</i>
                                 <i class="fa-solid fa-angle-right fa-sm"></i>
                             </div>
@@ -874,8 +894,56 @@
                 </div>
             </div>
         </div>
-        <!-- -------------------------------------------------------------- -->
-        <!-- 分享彈跳視窗 -->
+        <!-- 心願單 刪除 彈跳視窗 ---------------------- -->
+        <div class="modal fade" id="to-delete-sub">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="to-delete-sub-header d-flex">
+                            <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form>
+                            <div class="to-delete-sub-title fw-bold">要刪除此心願單？</div>
+                            <div class="to-delete-sub-content border-bottom pb-4">系統也會從所有共享者的帳號中永久刪除「來一趟說走就走的旅行 ♥」。</div>
+                            <div class="to-delete-sub-btn-gp d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-primary">取消</button>
+                                <button type="button" class="btn btn-dark">刪除</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 心願單 重新命名 彈跳視窗 ------------------------>
+        <div class="modal fade" id="to-rename-sub">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="to-rename-sub-header d-flex">
+                            <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <h1 class="fs-4" id="detail-title">重新命名心願單</h1>
+                        </div>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form>
+                            <textarea class="to-rename-sub-input form-control" id="exampleFormControlTextarea1"
+                                rows="3">
+                            </textarea>
+                            <p class="to-rename-sub-input-p mt-2 pb-2 border-bottom">已輸入50個字( 最多輸入50個字 )</p>
+                            <div class="to-rename-sub-btn-gp d-flex justify-content-between">
+                                <button type="button" class="btn btn-primary">取消</button>
+                                <button type="button" class="btn btn-dark">儲存</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 分享彈跳視窗 -------------------------------->
         <div class="modal fade" id="to-share-detail">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -909,6 +977,80 @@
                 </div>
             </div>
         </div>
+        <!-- 幾人彈跳視窗---------------------------- -->
+        <div class="modal fade" id="to-peoples">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <!--內容區------->
+                        <div class="row row-cols-2 gy-3 gx-0 py-3 px-2 justify-content-between">
+                            <div>
+                                <div class="fw-bold">成人</div>
+                                <div style="font-size: 0.75rem;">年滿 13 歲</div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn rounded-circle me-1 px-2 py-1 btn-count">
+                                    <img src="reduce.svg" class="w-75 h-75 align-baseline" alt="reduce-icon">
+                                </button>
+                                <span class="align-middle">0</span>
+                                <button type="button" class="btn rounded-circle ms-1 px-2 py-1 btn-count">
+                                    <img src="add.svg" class="w-75 h-75 align-baseline" alt="add-icon">
+                                </button>
+                            </div>
+                            <div>
+                                <div class="fw-bold">兒童</div>
+                                <div style="font-size: 0.75rem;">2 - 12 歲</div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn rounded-circle me-1 px-2 py-1 btn-count">
+                                    <img src="reduce.svg" class="w-75 h-75 align-baseline" alt="reduce-icon">
+                                </button>
+                                <span class="align-middle">0</span>
+                                <button type="button" class="btn rounded-circle ms-1 px-2 py-1 btn-count">
+                                    <img src="add.svg" class="w-75 h-75 align-baseline" alt="add-icon">
+                                </button>
+                            </div>
+                            <div>
+                                <div class="fw-bold">嬰幼兒</div>
+                                <div style="font-size: 0.75rem;">2 歲以下</div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn rounded-circle me-1 px-2 py-1 btn-count">
+                                    <img src="reduce.svg" class="w-75 h-75 align-baseline" alt="reduce-icon">
+                                </button>
+                                <span class="align-middle">0</span>
+                                <button type="button" class="btn rounded-circle ms-1 px-2 py-1 btn-count">
+                                    <img src="add.svg" class="w-75 h-75 align-baseline" alt="add-icon">
+                                </button>
+                            </div>
+                            <div>
+                                <div class="fw-bold">寵物</div>
+                                <div class="with-pets text-decoration-underline" style="font-size: 0.75rem;">會攜帶服務性動物嗎？
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn rounded-circle me-1 px-2 py-1 btn-count">
+                                    <img src="reduce.svg" class="w-75 h-75 align-baseline" alt="reduce-icon">
+                                </button>
+                                <span class="align-middle">0</span>
+                                <button type="button" class="btn rounded-circle ms-1 px-2 py-1 btn-count">
+                                    <img src="add.svg" class="w-75 h-75 align-baseline" alt="add-icon">
+                                </button>
+                            </div>
+                            <div class="col-12" style="font-size: 0.75rem;">
+                                此房源最多可供 2 人入住（不包括嬰幼兒）。不接受寵物入住。
+                            </div>
+                        </div>
+                        <button type="button"
+                            class="close-btn btn btn-outline-light text-dark text-decoration-underline d-block ms-auto"
+                            data-bs-dismiss="modal" aria-label="Close">
+                            關閉
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- bootstrap -->
@@ -931,10 +1073,12 @@
     </script>
     <script>
         // ------------------------------ 視窗不要停 -------------------------
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     var toNoticeModal = new bootstrap.Modal(document.getElementById('to-share-detail'));
-        //     toNoticeModal.show();
-        // });
+        /*
+        document.addEventListener("DOMContentLoaded", function () {
+            var toNoticeModal = new bootstrap.Modal(document.getElementById('to-delete-sub'));
+            toNoticeModal.show();
+        });
+        */
     </script>
 
 </body>
