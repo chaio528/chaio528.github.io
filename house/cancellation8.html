@@ -57,7 +57,8 @@
       transform: translateX(-50%);
     }
 
-    .send-request-a {
+    .send-request-a,
+    .complete-a {
       margin-left: auto;
       text-decoration: none;
       font-weight: bold;
@@ -67,16 +68,11 @@
       border-radius: 10px;
     }
 
-    .send-request-a:hover {
+    .send-request-a:hover,
+    .complete-a:hover {
       color: #fff;
       transform: scale(0.96);
       transition: transform 0.3s;
-    }
-
-    /* 顯示詳情 ----------------- */
-    .cancellation-policy-details {
-      text-decoration: underline;
-      color: #000;
     }
 
     /* 第三選項 ----------------- */
@@ -107,36 +103,17 @@
     }
 
     .booking-fund-btn,
-    .credit-card-btn {
+    .credit-card-btn,.cancellation-policy-details {
+      color: #000;
       font-weight: bold;
       text-decoration: underline;
+      cursor: pointer;
     }
 
-    /* Swiper 照片幻燈片--------------------- */
-    .swiper {
-      width: 100%;
-      height: 100%;
-      border-radius: 25px;
-    }
-
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    :root {
-      --swiper-theme-color: #ededed;
+    /* 顯示詳情 ----------------- */
+    .cancellation-policy-details:hover {
+      color: #000;
+      text-decoration: underline;
     }
 
     /* 你的預訂已取消 彈跳視窗---------- */
@@ -180,13 +157,64 @@
       margin-left: -6px;
     }
 
-    .get-receipt:hover,.read-details:hover {
+    .get-receipt:hover,
+    .read-details:hover {
       color: #000;
       text-decoration: underline;
       cursor: pointer;
     }
-    .customer-support-section i{
+
+    .customer-support-section i {
       margin-right: 5px;
+    }
+
+    /* 退訂政策 閱讀詳情 彈跳視窗------------- */
+    .to-cancellation-header {
+      align-items: start;
+      margin-top: -30px;
+    }
+
+    .full-refund-div,
+    .non-refundable-div {
+      display: flex;
+      gap: 30px;
+    }
+
+    .full-refund-time,
+    .non-refundable-time,
+    .non-refundable-check-out {
+      font-size: 13px;
+    }
+
+    .non-refundable-p {
+      cursor: pointer;
+    }
+
+    /* Swiper 照片幻燈片--------------------- */
+    .swiper {
+      width: 100%;
+      height: 100%;
+      border-radius: 25px;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    :root {
+      --swiper-theme-color: #ededed;
     }
 
     @media screen and (max-width:767px) {
@@ -395,7 +423,8 @@
               <div class="send-request-phone">
                 <div class="refund-title fw-bold">退款總額</div>
                 <div class="refund-content fw-bold">$874.65 TWD</div>
-                <a href="#" class="cancellation-policy-details">顯示詳情</a>
+                <a href="#" class="cancellation-policy-details" data-bs-toggle="modal"
+                  data-bs-target="#to-cancellation">顯示詳情</a>
               </div>
 
               <!-- 桌機 -->
@@ -408,6 +437,7 @@
 
               <!-- 繼續按鈕 ------------------->
               <a href="#" class="send-request-a" data-bs-toggle="modal" data-bs-target="#to-send-request">繼續</a>
+              <!-- <a href="#" class="complete-a" data-bs-toggle="modal" data-bs-target="#to-send-request">完成</a> -->
             </div>
         </section>
       </div>
@@ -454,7 +484,8 @@
         <section class="cancellation-policy-section">
           <p class="cancellation-policy-title title fw-bold">《退訂政策》</p>
           <p class="cancellation-policy-content fw-bold">全部退款：你將拿回已支付的全部款項。</p>
-          <a href="#" class="cancellation-policy-details fw-bold">顯示詳情</a>
+          <a href="#" class="cancellation-policy-details fw-bold" data-bs-toggle="modal"
+          data-bs-target="#to-cancellation">顯示詳情</a>
         </section>
       </div>
     </div>
@@ -507,7 +538,7 @@
                   </div>
                 </div>
 
-                <!-- 傳送訊息給房東 -->
+                <!-- 傳送訊息給房東 按鈕-->
                 <button class="message-btn btn" type="button" data-bs-toggle="modal" data-bs-target="">
                   <div class="btn-left-icon">
                     <i class="fa-regular fa-comment fa-sm"></i>
@@ -528,14 +559,15 @@
                 <div class="cancellation-policy-div">
                   <div class="cancellation-policy-title fw-bold fs-5">《退訂政策》</div>
                   <div class="cancellation-policy-content">5月29日下午3:00前可以免費取消在這之後，該筆預訂則無法退款。</div>
-                  <a class="read-details fw-bold">
+                  <a class="read-details fw-bold" data-bs-toggle="modal" data-bs-target="#to-cancellation">
                     閱讀詳情
                   </a>
                 </div>
                 <div class="total-div">
                   <div class="total-title fw-bold fs-5">總費用</div>
                   <div class="total-content">$0.00 TWD</div>
-                  <a href="https://chaio528.github.io/house/RoomReceipt.html"  target="_blank" class="get-receipt fw-bold">取得收據</a>
+                  <a href="https://chaio528.github.io/house/RoomReceipt.html" target="_blank"
+                    class="get-receipt fw-bold">取得收據</a>
                 </div>
                 <button class="rules-btn btn" type="button" data-bs-toggle="modal" data-bs-target="#to-lodging">
                   <div class="btn-left-icon">
@@ -578,6 +610,41 @@
         </div>
       </div>
     </div>
+
+    <!-- 退訂政策 閱讀詳情 彈跳視窗 -->
+    <div class="modal fade" id="to-cancellation">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="to-cancellation-header d-flex">
+              <button type="button" class="btn-close me-1 mt-4" data-bs-dismiss="modal" aria-label="Close"></button>
+
+              <h1 class="to-cancellation-title fs-4 fw-bold" id="to-cancellation-ModalLabel">《退訂政策》</h1>
+            </div>
+          </div>
+          <div class="modal-body">
+
+            <div class="cancel-deadline fs-5 mb-3 fw-bold">取消截止時間</div>
+
+            <div class="full-refund-div">
+              <div class="full-refund-date-title fw-bold">10月27日
+              </div>
+              <div class="full-refund-date-content">全額退款：你將拿回已支付的全部款項。</div>
+            </div>
+            <div class="full-refund-time">下午3:00</div>
+            <hr>
+            <div class="non-refundable-div">
+              <div class="non-refundable-date-title fw-bold">10月29日</div>
+              <div class="non-refundable-date-content">無法退款。</div>
+            </div>
+            <div class="non-refundable-time">上午11:00</div>
+            <div class="non-refundable-check-out">( 退房 )</div>
+            <hr>
+            <p class="non-refundable-p fw-bold"><u>了解更多有關《退訂政策》的事宜</u></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- bootstrap -->
@@ -603,8 +670,8 @@
   <script>
     // ------------------------------ 視窗不要停 -------------------------
     /*
-    document.addEventListener("DOMContentLoaded", functˊˊˊˊˊˊˊˊˊˊˊˊˊˊˊˊ持ㄘion () {
-      var toNoticeModal = new bootstrap.Modal(document.getElementById('to-send-request'));
+    document.addEventListener("DOMContentLoaded", function () {
+      var toNoticeModal = new bootstrap.Modal(document.getElementById('to-cancellation'));
       toNoticeModal.show();
     });
     */
