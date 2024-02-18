@@ -15,6 +15,8 @@
         }
 
         .wish-listings-container {
+            position: relative;
+            z-index: 1;
             height: 100vh;
             overflow-y: auto;
         }
@@ -60,7 +62,7 @@
         .up-page:active {
             background-color: #eae6e6;
         }
-
+        /* 新增日期 人數 */
         .date-peoples {
             display: grid;
             grid-template-columns: auto auto;
@@ -75,10 +77,14 @@
             border-radius: 20px;
             padding: 6px 12px;
             width: fit-content;
+            box-shadow: 0px 3px 3px 1px #dddddd;
+            width: 100px;
+            font-weight: bold;
         }
-
-        .date-peoples button:active {
-            border: 1px solid #000;
+        .date-peoples button:hover{
+            transform: scale(0.96);
+            transition: transform 0.1s;
+            border: 1px solid #bebdbd;
         }
 
         .room-item {
@@ -143,6 +149,7 @@
             display: inline;
             text-decoration: underline;
             font-weight: 400;
+            margin-left: -5px;
         }
 
         .room-link {
@@ -151,7 +158,8 @@
             flex-direction: column;
         }
 
-        .add-remark {
+        /* 可不做----------編輯 新增備註  */
+        /* .add-remark {
             text-decoration: underline;
             color: #656565;
             font-weight: bold;
@@ -171,7 +179,7 @@
             font-weight: bold;
             border: none;
             background-color: transparent;
-        }
+        } */
 
         .main-wish-title,
         .subtitle {
@@ -220,11 +228,10 @@
             font-weight: bold;
         }
 
-
         /* 價格明細 彈跳視窗 ---------------- */
-
-
-
+        .modal h1{
+            margin-top: -6px;
+        }
         .sub1-set,
         .sub2-set {
             display: grid;
@@ -247,17 +254,28 @@
             border: 1px solid #c3c2c2;
             border-radius: 10px;
             margin-bottom: 10px;
+            box-shadow: 3px 3px 5px 2px #c3c2c2;
         }
 
-        .send-link-btn:active,
-        .cooperation-btn:active {
-            transform: scale(0.9);
-            transition: transform 1s;
+        .send-link-btn:hover,
+        .cooperation-btn:hover {
+            transform: scale(0.97);
+            transition: transform 0.3s;
+            color:#000;
         }
 
         a {
             color: #000;
             text-decoration: none;
+        }
+
+        /* 地圖--------------------------------- */
+        .wish-map {
+            height: 100vh;
+        }
+
+        .taiwan-map {
+            width: 100%;
         }
 
         /* Swiper 照片幻燈片--------------------- */
@@ -399,9 +417,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-edit-div">
+                                <!-- <div class="add-edit-div">
                                     <label for="my-add-edit" class="add-edit">編輯</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 卡片2 -->
@@ -461,9 +479,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-remark-div">
+                                <!-- <div class="add-remark-div">
                                     <label for="my-add-remark" class="add-remark">新增備註</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 卡片3 -->
@@ -523,9 +541,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-remark-div">
+                                <!-- <div class="add-remark-div">
                                     <label for="my-add-remark" class="add-remark">新增備註</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 卡片4 -->
@@ -585,9 +603,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-remark-div">
+                                <!-- <div class="add-remark-div">
                                     <label for="my-add-remark" class="add-remark">新增備註</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 卡片5 -->
@@ -649,9 +667,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-remark-div">
+                                <!-- <div class="add-remark-div">
                                     <label for="my-add-remark" class="add-remark">新增備註</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- 卡片6 -->
@@ -713,9 +731,9 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-remark-div">
+                                <!-- <div class="add-remark-div">
                                     <label for="my-add-remark" class="add-remark">新增備註</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -782,103 +800,15 @@
                                         </div>
                                     </div>
                                 </a>
-                                <div class="add-remark-div">
+                                <!-- <div class="add-remark-div">
                                     <label for="my-add-remark" class="add-remark">新增備註</label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <!-- -------------------------------------------------------------- -->
-                    <!-- 價格明細 彈跳視窗 -->
-                    <div class="modal fade" id="to-room-item-total">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="to-lodging-header d-flex">
-                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                        <h1 class="fs-4" id="detail-title">價格明細</h1>
-                                    </div>
-                                </div>
-                                <div class="modal-body p-4">
-                                    <form>
-                                        <div class="sub1-set">
-                                            <span>$1,667 TWD x 5晚</span>
-                                            <span>$8,334 TWD</span>
-                                        </div>
-                                        <div class="bline"></div>
-                                        <div class="sub2-set">
-                                            <span>稅前總價</span>
-                                            <span>$1,667 TWD</span>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- -------------------------------------------------------------- -->
-                    <!-- 設定 彈跳視窗 -->
-                    <div class="modal fade" id="to-rename-settings">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="to-lodging-header d-flex">
-                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                        <h1 class="fs-4" id="detail-title">設定</h1>
-                                    </div>
-                                </div>
-                                <div class="modal-body p-4">
-                                    <form>
-                                        <div class="sub1-set pb-4">
-                                            <i class="sub-set-icon fa-solid fa-pen fa-sm"> 重新命名</i>
-                                            <i class="fa-solid fa-angle-right fa-sm"></i>
-                                        </div>
-                                        <div class="bline"></div>
-                                        <div class="sub2-set pt-4">
-                                            <i class="sub-set-icon fa-solid fa-trash-can fa-sm"> 刪除</i>
-                                            <i class="fa-solid fa-angle-right fa-sm"></i>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- -------------------------------------------------------------- -->
-                    <div class="modal fade" id="to-share-detail">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="to-lodging-header d-flex">
-                                        <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                        <h1 class="fs-4" id="detail-title">你想要怎麼分享呢?</h1>
-                                    </div>
-                                </div>
-                                <div class="modal-body p-4">
-                                    <form>
-                                        <a href="#" class="send-link-btn">
-                                            <i class="fa-solid fa-link fa-xl"></i>
-                                            <div class="send-link-gp">
-                                                <div class="send-link-title fw-bold">傳送連結</div>
-                                                <div class="send-link-content">有此連結的人都可查看</div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="cooperation-btn">
-                                            <i class="fa-solid fa-user-plus fa-xl"></i>
-                                            <div class="cooperation-gp">
-                                                <div class="cooperation-title fw-bold">合作</div>
-                                                <div class="cooperation-content">
-                                                    邀請其他人使用此心願單
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+
             </div>
 
             <!-- 地圖 ------------------>
@@ -888,7 +818,97 @@
                 </div>
             </div>
         </div>
-
+        <!-- -------------------------------------------------------------- -->
+        <!-- 價格明細 彈跳視窗 -->
+        <div class="modal fade" id="to-room-item-total">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="to-lodging-header d-flex">
+                            <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <h1 class="fs-4" id="detail-title">價格明細</h1>
+                        </div>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form>
+                            <div class="sub1-set">
+                                <span>$1,667 TWD x 5晚</span>
+                                <span>$8,334 TWD</span>
+                            </div>
+                            <div class="bline"></div>
+                            <div class="sub2-set">
+                                <span>稅前總價</span>
+                                <span>$1,667 TWD</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------------------------------------------- -->
+        <!-- 設定 彈跳視窗 -->
+        <div class="modal fade" id="to-rename-settings">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="to-lodging-header d-flex">
+                            <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <h1 class="fs-4" id="detail-title">設定</h1>
+                        </div>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form>
+                            <div class="sub1-set pb-4">
+                                <i class="sub-set-icon fa-solid fa-pen fa-sm"> 重新命名</i>
+                                <i class="fa-solid fa-angle-right fa-sm"></i>
+                            </div>
+                            <div class="bline"></div>
+                            <div class="sub2-set pt-4">
+                                <i class="sub-set-icon fa-solid fa-trash-can fa-sm"> 刪除</i>
+                                <i class="fa-solid fa-angle-right fa-sm"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -------------------------------------------------------------- -->
+        <!-- 分享彈跳視窗 -->
+        <div class="modal fade" id="to-share-detail">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="to-lodging-header d-flex">
+                            <button type="button" class="btn-close me-1" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <h1 class="fs-4" id="detail-title">你想要怎麼分享呢?</h1>
+                        </div>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form>
+                            <a href="#" class="send-link-btn">
+                                <i class="fa-solid fa-link fa-xl"></i>
+                                <div class="send-link-gp">
+                                    <div class="send-link-title fw-bold">傳送連結</div>
+                                    <div class="send-link-content">有此連結的人都可查看</div>
+                                </div>
+                            </a>
+                            <a href="#" class="cooperation-btn">
+                                <i class="fa-solid fa-user-plus fa-xl"></i>
+                                <div class="cooperation-gp">
+                                    <div class="cooperation-title fw-bold">合作</div>
+                                    <div class="cooperation-content">
+                                        邀請其他人使用此心願單
+                                    </div>
+                                </div>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- bootstrap -->
