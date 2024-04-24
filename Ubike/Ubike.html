@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>myYouBike2.0</title>
+    <!-- Semantic UI  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Leaflet JavaScript 地圖庫的 CSS 文件 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- 這是 Leaflet.markercluster 的 CSS 文件。Leaflet.markercluster 是一個用於在 Leaflet 地圖上聚合大量標記（markers）的插件。該 CSS 文件定義了預設的樣式和外觀，用於聚合標記時的集群顯示。 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <style>
+        .map-container {
+            width: 100%;
+            height: 500px;
+        }
+
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="ui teal header">
+            <img src="./h1.png">
+            <div class="content">
+                YouBike2.0站點地圖
+                <div class="sub ui teal header">請點選下拉式選單</div>
+            </div>
+        </h1>
+        <!-- 地圖 -->
+        <div class="row">
+            <div class="col-3">
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+            </div>
+            <!-- 資訊 -->
+            <div class="col-9">
+                <div class="h2 ui teal header">站點資訊</div>
+                <div class="input-group">
+                    <select id="city_select" class="form-select" aria-label="">
+                        <option selected value="">選擇縣市</option>
+                    </select>
+                    <select id="area_select" class="form-select" aria-label="">
+                        <option selected value="">請先選擇縣市</option>
+                    </select>
+                </div>
+
+                <!-- 資料呈現表格 -->
+                <table id="my_table" class="table table-striped mt-3 text-center">
+                    <thead>
+                        <!-- <tr>
+                  <th scope="col">區域</th>
+                  <th scope="col">站點名稱</th>
+                  <th scope="col">數量(剩餘/空位/總共)</th>
+                  <th scope="col">地圖</th>
+                  <th scope="col">經緯度</th>
+                </tr> -->
+                    </thead>
+                    <tbody class="data_rows">
+                <!-- <tr>
+                  <td class="bg-info-subtle"></td>
+                  <td class="bg-info-subtle"></td>
+                  <td class="bg-info-subtle"></td>
+                  <td class="bg-info-subtle"></td>
+                  <td class="bg-info-subtle"><i class="fa-solid fa-map-location-dot"></i></td>
+                  <td class="bg-info-subtle"><i class="fa-solid fa-circle-info"></i></td>
+                </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- bootStrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <!--  Leaflet 地圖庫的 JavaScript 文件，地圖瓦片的顯示、圖層的添加、標記的放置、地圖視圖的控制等。 -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Leaflet 地圖上聚合大量標記（markers）的插件。
+        Leaflet.markercluster 可以將這些標記聚合成群，提高地圖的清晰度和性能。該插件可以將相鄰的標記分組為一個群，當用戶縮放地圖時，自動調整群的顯示方式。 -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <!-- Semantic UI   -->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+
+    <script>
+        //-----------------------------------------------------------
+        // 腳踏車 站點資訊 ( 網路url )
+        const youBikeDataUrlSet = {
+            臺北市:
+                "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
+            新北市:
+                "https://data.ntpc.gov.tw/api/datasets/010E5B15-3823-4B20-B401-B1CF000550C5/json?page=0&size=1000",
+        };
+        const citySelect = document.querySelector("#city_select");
+        const areaSelect = document.querySelector("#area_select");
+        const myTable = document.querySelector("#my_table");
+        let taiwanAreaData = [];              // 全台縣市經緯度(資料夾)
+        let cityArr = [];                     // 全台縣市郵遞區號(網路)
+        let currentCityYouBikeDataArr = [];   // 臺北市 的腳踏車JSON檔內文
+        let markers = L.markerClusterGroup(); //地圖上的marker groups
+        // ♥ 1.取得全台縣市經緯度(資料夾)  2.取得全台縣市郵遞區號(網路)
+        window.addEventListener("load", () => {
+            fetchTaiwanAreaData()
+                .then((data) => {
+                    taiwanAreaData = data;
+                    return fetchCityData();
+                })
+                .then((data) => {
+                    cityArr = data;
+                    cityArr.forEach((item) => {
+                        // 給城市 下拉式選單 塞縣市(網路) >>>>>
+                        citySelect.innerHTML += `<option value="${item.City}">${item.City}</option>`;
+                    });
+                });
+            //----------------------------------------------------------渲染結束-----
+            // ♥1.渲染完成 全台縣市經緯度(資料夾)
+            function fetchTaiwanAreaData() {
+                return fetch("./TaiwanArea.json").then((response) => response.json());
+            }
+            //-------------------------------------------------------取得資料結束----
+            // ♥2.全台縣市郵遞區號(網路)
+            function fetchCityData(url) {
+                return fetch(
+                    "https://raw.githubusercontent.com/apprunner/FileStorage/master/TaiwanAddress_Simple.json"
+                ).then((response) => response.json());
+            }
+            //------------------------------------------------選單值改變 要做的事-----
+            /* 給城市 下拉式選單 塞縣市(網路) >>>>>
+               ♥ 城市 下拉式選單 註冊事件,改變值時 
+               1.給地區選單塞值 2.做表格的抬頭
+            */
+            citySelect.addEventListener("change", (e) => {
+                initAreaSelect(e.target.value);
+                const dataSourceUrl = youBikeDataUrlSet[e.target.value];
+                // 當使用者從下拉選單中選擇了 "臺北市"，e.target.value 的值就是 "臺北市"
+                // dataSourceUrl = 臺北市腳踏車 的JSON檔
+                //-----------------------------------------------------------------------
+                fetchYouBikeData(dataSourceUrl)
+                    .then((data) => {
+                        currentCityYouBikeDataArr = data; // 把臺北市 的腳踏車JSON檔內文
+                        renderingTableData(currentCityYouBikeDataArr); // 做表格身體
+                    })
+                    .catch((err) => {
+                        alert("無法取得youBike資料");
+                        currentCityYouBikeDataArr = [];
+                        renderingTableData(currentCityYouBikeDataArr);//沒有資料就做空的表格身體
+                    });
+            });
+
+
+            //-----------------------------------------------------------------------
+            // ♥ ♥ ♥ 城市選單 值改變時 1.地區選單顯示:請先選擇縣市 2.地區選單塞值
+            function initAreaSelect(city) {
+                areaSelect.innerHTML = `<option selected value="">請先選擇縣市</option>`;
+                if (city === "") return;
+
+                // 全台縣市郵遞區號(網路) item
+                // find() 方法是用來找出陣列中符合 用戶選擇的縣市 e = city
+                cityArr.find((item) => item.City === city)
+                    .Districts.forEach((element) => {
+                        areaSelect.innerHTML += `<option value="${element.District}">${element.District}</option>`;
+                    });
+            }
+
+
+            //--------------------------------------------------------------------
+            // ♥ 地區 下拉式選單 註冊事件,改變值時
+            areaSelect.addEventListener("change", (e) => {
+                const areaData = currentCityYouBikeDataArr.filter(
+                    (item) => item.sarea === e.target.value
+                );
+                renderingTableData(areaData); // 把每區 腳踏車資料代進去
+                setMapView(e.target.value);
+            });
+        });
+        //--------------------------------------------- 地圖飛來飛去 ----4❤語法--
+        function setMapView(district) {
+            const theArea = taiwanAreaData.find(
+                (item) => item.District === district
+            );
+            map.flyTo([theArea.Lat, theArea.Lng], 14);
+        }
+        //-----------------------------------------------------------------------
+        function renderingTableData(youBikeData) {
+            const tHead = myTable.querySelector("thead");
+            tHead.innerHTML = `<tr>
+                <th scope="col">區域</th>
+                <th scope="col">站點名稱</th>
+                <th scope="col">數量(剩餘/空位/總共)</th>
+                <th scope="col">地圖</th>
+                <th scope="col">經緯度</th>
+                <th scope="col">最後更新時間</th>
+              </tr>`;
+            // [
+            //   {
+            //     sno: "500101001",
+            //     sna: "YouBike2.0_捷運科技大樓站",
+            //     tot: 28,
+            //     sbi: 13,
+            //     sarea: "大安區",
+            //     mday: "2024-01-15 18:22:10",
+            //     lat: 25.02605,
+            //     lng: 121.5436,
+            //     ar: "復興南路二段235號前",
+            //     sareaen: "Daan Dist.",
+            //     snaen: "YouBike2.0_MRT Technology Bldg. Sta.",
+            //     aren: "No.235， Sec. 2， Fuxing S. Rd.",
+            //     bemp: 15,
+            //     act: "1",
+            //     srcUpdateTime: "2024-01-15 18:22:25",
+            //     updateTime: "2024-01-15 18:22:36",
+            //     infoTime: "2024-01-15 18:22:10",
+            //     infoDate: "2024-01-15",
+            //   },
+            // ];
+            const tBody = myTable.querySelector(".data_rows");
+            tBody.innerHTML = "";
+
+            youBikeData.forEach((obj) => {
+                // 每一橫排 ----------------------------
+                const tempRow = document.createElement("tr");
+                // 1.中山區 ----------------------------
+                const sareaData = document.createElement("td");
+                sareaData.setAttribute("class", "bg-warning-subtle fw-bold");
+                sareaData.textContent = obj.sarea;
+                tempRow.append(sareaData);
+                // 2.腳踏車站點名稱 ---------------------
+                const snaData = document.createElement("td");
+                snaData.setAttribute("class", "bg-info-subtle fw-bold");
+                snaData.innerHTML = obj.sna +"<br>地址："+ obj.ar;
+                tempRow.append(snaData);
+                // 3.(數量) 剩餘/空位/總共 ---------------
+                const remainInfo = document.createElement("td");
+                remainInfo.setAttribute("class", "bg-primary-subtle fw-bold");
+                remainInfo.textContent = `${obj.sbi} / ${obj.bemp} / ${obj.tot}`;
+                tempRow.append(remainInfo);
+                // 4.地圖 --------------------------------
+                const mapIcon = document.createElement("td");
+                mapIcon.setAttribute("role", "button");
+                mapIcon.setAttribute("class", "bg-success-subtle");
+                mapIcon.innerHTML = '<i class="fa-solid fa-map-location-dot"></i>';
+
+                mapIcon.addEventListener("click", () => {
+                    map.panTo([obj.lat, obj.lng], 15);
+                });
+
+                tempRow.append(mapIcon);
+                // 5.經緯度 ------------------------------
+                const infoIcon = document.createElement("td");
+                // (role) 屬性為 "button"。在 Web 開發中，角色屬性通常用於提供更多的語義信息，以幫助屏幕助讀器和其他輔助技術理解網頁的內容和交互元素。
+                infoIcon.setAttribute("role", "button");
+                infoIcon.setAttribute("class", "bg-light-subtle");
+                // bootStrap 套件的工具提示(在圖示旁有小信息 經緯度)
+                infoIcon.setAttribute("data-bs-toggle", "tooltip");
+                // 是用於設定 Bootstrap 工具提示的標題內容。
+                infoIcon.setAttribute("data-bs-title", `${obj.lat} / ${obj.lng}`);
+                infoIcon.innerHTML = '<i class="fa-solid fa-circle-info"></i>';
+                tempRow.append(infoIcon);
+
+                // 6.時間 ------------------------------------
+                const mday = document.createElement("td");
+                mday.setAttribute("class", "bg-danger-subtle fw-bold");
+                mday.textContent = obj.mday;
+                tempRow.append(mday);
+
+                // 每一橫排 加入到 表格身體
+                tBody.appendChild(tempRow);
+            });
+
+            console.log(youBikeData);
+            enableAllTooltips();
+
+            setMarker();
+        }
+
+        //-----------------------------------------------------------------------
+        function fetchYouBikeData(url) {
+            return fetch(url).then((response) => response.json());
+        }
+        //---------------------------------------  啟用所有工具提示  -------------
+        function enableAllTooltips() {
+            const tooltipTriggerList = document.querySelectorAll(
+                '[data-bs-toggle="tooltip"]'
+            );
+            const tooltipList = [...tooltipTriggerList].map(
+                (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+            );
+        }
+        //----------------------------------------------------------1❤語法-----
+        /*
+          ♥ 初始化地圖
+          
+          L 表示 Leaflet 命名空間。
+          map 是 Leaflet 提供的一個方法，用於創建地圖對象。
+          設定了地圖的初始中心座標為 [25.0415001, 121.5372731]，並設定了初始縮放級別為 15。
+        */
+        const map = L.map("map", {
+            center: [25.0415001, 121.5372731],
+            zoom: 15,
+        });
+
+        var osmUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+        var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 });
+        map.addLayer(osm);
+        //-------------------------------------------------------- -3❤語法----
+        function setMarker() {
+            if (markers) markers.clearLayers();
+
+            currentCityYouBikeDataArr.forEach((item) => {
+                const marker = L.marker([item.lat, item.lng], {
+                    title: item.sna,
+                });
+
+                marker.bindPopup(
+                    `<b>${item.sna}</b><br>剩餘/空位/總共: ${item.sbi}/${item.bemp}/${item.tot}`
+                );
+                markers.addLayer(marker);
+            });
+            map.addLayer(markers);
+        }
+    </script>
+</body>

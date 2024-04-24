@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        * {
+            font-weight: bold;
+        }
+
+        /* 我是大區塊 */
+        .container {
+            width: 100%;
+            /* height: 800px; */
+            text-align: center;
+        }
+
+        /* 我是3顆按鈕 */
+        .btn-outline-primary {
+            padding: 12px 130px;
+        }
+
+        /* 我是輸入框 */
+        .input-group {
+            width: 940px;
+        }
+
+        /* 我是內文區 */
+        .list {
+            width: 950px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container p-3 mb-2 bg-info-subtle text-emphasis-info mx-auto">
+        <h1 class="h1 text-primary">1A2B猜數字遊戲</h1>
+        <!-- 我是3顆按鈕 -->
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <!-- 開始 -->
+            <button type="button" class="startButton btn btn-outline-primary">開始</button>
+            <button type="button" class="giveUpButton btn btn-outline-primary">放棄重來</button>
+            <button type="button" class="answerButton btn btn-outline-primary" id="liveToastBtn">看答案</button>
+        </div>
+        <!-- 我是跳出答案區 -->
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="mx-auto fs-6">答案是</strong>
+                </div>
+                <div class="toast-body">
+                </div>
+            </div>
+        </div>
+        <!-- 我是輸入區 -->
+        <div class="input-group mt-4 mb-4 mx-auto">
+            <!-- 答案區 -->
+            <label class="input-group-text border-info-subtle" for="inputGroupSelect01">答案區</label>
+            <!-- 輸入 input -->
+            <input type="text" class="guessInput form-control" placeholder="GuessNumber"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+            <!-- 猜 -->
+            <button class="checkButton btn btn-primary" type="button" id="button-addon2">
+                猜 !
+            </button>
+        </div>
+        <!-- 內文區 -->
+        <ul class="list list-group mx-auto text-start">
+        </ul>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
+        </script>
+    <script>
+        const startButton = document.querySelector('.startButton');     /*開始按鈕*/
+        const giveUpButton = document.querySelector('.giveUpButton');   /*放棄按鈕*/
+        const toastTrigger = document.getElementById('liveToastBtn')    /*答案按鈕*/
+        const toastLiveExample = document.getElementById('liveToast')   /*跳出答案框框*/
+        const answerText = document.querySelector('.toast-body');       /*答案文字*/
+        const guessInput = document.querySelector('.guessInput');       /*輸入*/
+        const checkButton = document.querySelector('.checkButton');     /*猜*/
+        const list = document.querySelector('.list');                   /*大內文*/
+
+        let answer = generateRandom();
+        // 產生亂數
+        function generateRandom() {
+            const numbers = [];
+            while (numbers.length < 4) {
+                // 產生亂數
+                var newNum = (Math.floor(Math.random() * 10)).toString();
+
+                // 確認 放進的亂數 是否存在( 重複 )
+                if (numbers.includes(newNum)) {
+                    continue;
+                } else {
+                    numbers.push(newNum);
+                }
+            }
+            return numbers;
+        }
+
+        guessInput.disabled = true;
+        checkButton.disabled = true;
+        giveUpButton.disabled = true;
+        toastTrigger.disabled = true;
+        // 開始按鈕掛上事件
+        startButton.addEventListener('click', () => {
+            resetGame();
+            guessInput.disabled = false;
+            checkButton.disabled = false;
+            giveUpButton.disabled = false;
+            toastTrigger.disabled = false;
+        });
+
+        // Functions
+        function resetGame() {
+            answer = generateRandom();
+        }
+
+        // 看答案按鈕掛上事件
+        if (toastTrigger) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+                answerText.innerText = `${answer.join('')}`;
+            })
+        }
+
+        let aCount = 0;
+        let bCount = 0;
+
+        // 輸入數字 按'猜'後 跳出item
+        checkButton.addEventListener('click', () => {
+            aCount = 0;
+            bCount = 0;
+
+            if (guessInput.value.length == 4) {
+                for (let i = 0; i < answer.length; i++) {
+                    if (answer[i] === guessInput.value[i]) { aCount++; }
+                    else if (answer[i] !== guessInput.value[i] && answer.includes(guessInput.value[i])) { bCount++; }
+                }
+            }
+            newItem();
+        });
+
+        let item;
+        // 出現新item
+        function newItem() {
+            const hint = document.createElement('span');
+            hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-danger text-white position-absolute start-0 top-50 translate-middle-y');
+            hint.textContent = `${aCount}A${bCount}B`;
+
+            item = document.createElement('li');
+            item.setAttribute('class', 'item list-group-item list-group-item-warning text-center position-relative');
+
+            const guessValue = guessInput.value;
+            const guessArray = guessValue.split('');
+            const guessSet = new Set(guessArray);
+
+            if (isNaN(parseInt(guessValue)) || guessValue.length !== 4 || guessSet.size !== 4) {
+                item.innerText = `您輸入的內容不正確`;
+                hint.textContent = ` Error `;
+                alert(`請輸入4個不重複的數字`);
+            } else {
+                item.innerText = `您輸入了: ${guessValue}`;
+            }
+
+            item.appendChild(hint);
+            list.prepend(item);
+            guessInput.value = '';
+
+            if (aCount === 4) {
+                hint.setAttribute('class', 'hint rounded-pill me-2 px-2 py-1 bg-warning text-white position-absolute start-0 top-50 translate-middle-y');
+                hint.textContent = `${aCount}A${bCount}B`;
+                item.innerText = `恭喜過關~ 答案是: ${answer.join('')}！`;
+                item.appendChild(hint);
+                list.prepend(item);
+                item.style.backgroundColor = '#FFFF66';
+                item.style.border = '#FFFF66';
+                guessInput.disabled = true;
+                checkButton.disabled = true;
+            }
+        }
+
+        // 放棄按鈕
+        giveUpButton.addEventListener('click', () => {
+            alert(`答案是: ${answer.join('')}`);
+            resetGame();
+            list.innerHTML = '';
+            guessInput.disabled = false;
+            checkButton.disabled = false;
+        })
+    </script>
+</body>
+
+</html>

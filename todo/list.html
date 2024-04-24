@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;600&family=Noto+Serif+TC:wght@900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* 好唷 */
+        * {
+            font-family: 'Noto Serif TC', serif;
+            letter-spacing: 2px;
+        }
+
+        .container,
+        .wrap,
+        .divItem {
+            width: 960px;
+        }
+
+        .input {
+            box-shadow: 1px 5px 5px #bddce2;
+        }
+
+        .divItem {
+            box-shadow: 1px 5px 5px #e2e1bd;
+            font-size: large;
+        }
+
+        .inputTodo {
+            width: 720px;
+            height: 30px;
+            text-overflow: ellipsis;
+        }
+
+        .completed .inputTodo {
+            text-decoration: line-through;
+        }
+
+        .btn {
+            box-shadow: 1px 5px 5px #a4835a;
+        }
+
+        .btn:active {
+            box-shadow: 5px 2px 2px #a4835a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mx-auto">
+        <h1 class="text-center">待辦清單</h1>
+        <!-- 上面輸入區 -->
+        <div class="input-group mb-3">
+            <!-- 新增輸入欄 -->
+            <input type="text" class="input form-control" placeholder="Enter your to-do item"
+                aria-label="Recipient's username">
+            <button class="addBtn btn btn-primary" type="button">新增</button>
+        </div>
+        <script>
+            const $input = document.querySelector('.input');
+            const $addBtn = document.querySelector('.addBtn');
+            let $wrap, $divItem, $divTodo, $check, $inputTodo, $divBtn, $editBtn, $delBtn;
+
+            $addBtn.addEventListener('click', () => {
+                createListElement($input)
+                saveItemToStorage();
+                $input.value = "";
+            });
+            window.addEventListener('load', loadItemsFromLocalStorage);
+            // 從 localStorage 中載入現有的待辦事項 ///////////////
+
+            function loadItemsFromLocalStorage() {
+                // 解析 localStorage 中的待辦事項，若無則為空陣列
+                const items = JSON.parse(localStorage.getItem('items')) || [];
+                items.forEach(item => {
+                    createListElement(item);
+                });
+            }
+
+            function createListElement(item) {
+                // wrap
+                $wrap = document.createElement('div');
+                $wrap.setAttribute('class', 'wrap m-auto');
+                // divItem
+                $divItem = document.createElement('div');
+                $divItem.setAttribute('class', 'divItem d-flex p-lg-3 mb-2 mt-2 border border-secondary-subtle align-items-center');
+                if (item.completed) {
+                    $divItem.classList.add('completed');
+                }
+                // divTodo
+                $divTodo = document.createElement('div');
+                $divTodo.setAttribute('class', 'divTodo bg-primary-subtle d-flex align-items-center p-2');
+                // check input
+                $check = document.createElement('input');
+                $check.setAttribute('class', 'check form-check-input me-1 border border-secondary-subtle m-3');
+                $check.type = "checkbox";
+                $check.checked = item.completed;
+                $check.addEventListener('click', (event) => {
+                    const toCheckedDivItem = event.target.closest('.divItem');
+                    toCheckedDivItem.classList.toggle('completed');  // 切換 completed 類別
+                    saveItemToStorage();
+                });
+
+                // inputTodo
+                $inputTodo = document.createElement('input');
+                $inputTodo.setAttribute('class', 'inputTodo myInput form-control bg-primary-subtle ms-2 flex-wrap');
+                $inputTodo.type = "text";
+                $inputTodo.value = item.value.trim();
+                $inputTodo.disabled = true;
+
+                // divBtn
+                $divBtn = document.createElement('div');
+                $divBtn.setAttribute('class', 'divBtn mx-auto');
+                // editBtn
+                $editBtn = document.createElement('button');
+                $editBtn.setAttribute('class', 'editBtn btn btn-warning mx-1');
+                $editBtn.type = "button";
+                $editBtn.innerText = '編輯';
+                $editBtn.addEventListener('click', onBtnEditClick);
+                // delBtn
+                $delBtn = document.createElement('button');
+                $delBtn.setAttribute('class', 'delBtn btn btn-danger');
+                $delBtn.type = 'button';
+                $delBtn.innerText = '刪除';
+                $delBtn.addEventListener('click', delList);
+
+                // 附加
+                $divTodo.appendChild($check);
+                $divTodo.appendChild($inputTodo);
+
+                $divItem.prepend($divTodo);
+
+                $divBtn.appendChild($editBtn);
+                $divBtn.appendChild($delBtn);
+                $divItem.appendChild($divBtn);
+
+                $wrap.appendChild($divItem);
+                document.body.appendChild($wrap);
+
+            }
+
+            // 刪除按鈕 事件
+            function delList(event) {
+                if (event.target.classList.contains('delBtn')) {
+                    const delDivItem = event.target.closest('.divItem');
+                    if (delDivItem) {
+                        delDivItem.remove();
+                        // 從 localStorage 中移除該待辦事項
+                        saveItemToStorage();
+                    }
+                }
+            }
+            // 編輯按鈕事件
+            function onBtnEditClick(event) {
+                const editBtn = event.target;
+                const inputTodo = editBtn.closest('.divItem').querySelector('.inputTodo');
+                if (editBtn.innerText === '編輯') {
+                    // 切換為保存
+                    editBtn.innerText = '保存';
+                    editBtn.setAttribute('class', 'editBtn btn bg-info text-white mx-1');
+                    inputTodo.disabled = false;
+                } else {
+                    // 切換為編輯
+                    editBtn.innerText = '編輯';
+                    editBtn.setAttribute('class', 'editBtn btn btn-warning mx-1');
+                    inputTodo.disabled = true;
+                }
+                // 編輯完成後將待辦事項存入 localStorage
+                saveItemToStorage();
+            }
+
+            // 將待辦事項存入 localStorage
+            function saveItemToStorage() {
+                const items = Array.from(document.querySelectorAll('.divItem')).map(divItem => {
+                    $inputTodo = divItem.querySelector('.inputTodo');
+                    $check = divItem.querySelector('.check');
+                    return {
+                        value: $inputTodo.value,
+                        completed: $check.checked,
+                    };
+                });
+
+                localStorage.setItem('items', JSON.stringify(items));
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
