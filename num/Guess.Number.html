@@ -12,24 +12,19 @@
             font-weight: bold;
         }
 
-        /* 我是大區塊 */
         .container {
             width: 100%;
-            /* height: 800px; */
             text-align: center;
         }
 
-        /* 我是3顆按鈕 */
         .btn-outline-primary {
             padding: 12px 130px;
         }
 
-        /* 我是輸入框 */
         .input-group {
             width: 940px;
         }
 
-        /* 我是內文區 */
         .list {
             width: 950px;
         }
@@ -39,14 +34,11 @@
 <body>
     <div class="container p-3 mb-2 bg-info-subtle text-emphasis-info mx-auto">
         <h1 class="h1 text-primary">1A2B猜數字遊戲</h1>
-        <!-- 我是3顆按鈕 -->
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <!-- 開始 -->
             <button type="button" class="startButton btn btn-outline-primary">開始</button>
             <button type="button" class="giveUpButton btn btn-outline-primary">放棄重來</button>
             <button type="button" class="answerButton btn btn-outline-primary" id="liveToastBtn">看答案</button>
         </div>
-        <!-- 我是跳出答案區 -->
         <div class="toast-container position-fixed top-0 end-0 p-3">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
@@ -56,19 +48,14 @@
                 </div>
             </div>
         </div>
-        <!-- 我是輸入區 -->
         <div class="input-group mt-4 mb-4 mx-auto">
-            <!-- 答案區 -->
             <label class="input-group-text border-info-subtle" for="inputGroupSelect01">答案區</label>
-            <!-- 輸入 input -->
             <input type="text" class="guessInput form-control" placeholder="GuessNumber"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
-            <!-- 猜 -->
             <button class="checkButton btn btn-primary" type="button" id="button-addon2">
                 猜 !
             </button>
         </div>
-        <!-- 內文區 -->
         <ul class="list list-group mx-auto text-start">
         </ul>
 
@@ -79,24 +66,20 @@
 
         </script>
     <script>
-        const startButton = document.querySelector('.startButton');     /*開始按鈕*/
-        const giveUpButton = document.querySelector('.giveUpButton');   /*放棄按鈕*/
-        const toastTrigger = document.getElementById('liveToastBtn')    /*答案按鈕*/
-        const toastLiveExample = document.getElementById('liveToast')   /*跳出答案框框*/
-        const answerText = document.querySelector('.toast-body');       /*答案文字*/
-        const guessInput = document.querySelector('.guessInput');       /*輸入*/
-        const checkButton = document.querySelector('.checkButton');     /*猜*/
-        const list = document.querySelector('.list');                   /*大內文*/
+        const startButton = document.querySelector('.startButton');     
+        const giveUpButton = document.querySelector('.giveUpButton');  
+        const toastTrigger = document.getElementById('liveToastBtn')    
+        const toastLiveExample = document.getElementById('liveToast')   
+        const answerText = document.querySelector('.toast-body');       
+        const guessInput = document.querySelector('.guessInput');       
+        const checkButton = document.querySelector('.checkButton');     
+        const list = document.querySelector('.list');                   
 
         let answer = generateRandom();
-        // 產生亂數
         function generateRandom() {
             const numbers = [];
             while (numbers.length < 4) {
-                // 產生亂數
                 var newNum = (Math.floor(Math.random() * 10)).toString();
-
-                // 確認 放進的亂數 是否存在( 重複 )
                 if (numbers.includes(newNum)) {
                     continue;
                 } else {
@@ -110,7 +93,6 @@
         checkButton.disabled = true;
         giveUpButton.disabled = true;
         toastTrigger.disabled = true;
-        // 開始按鈕掛上事件
         startButton.addEventListener('click', () => {
             resetGame();
             guessInput.disabled = false;
@@ -119,12 +101,10 @@
             toastTrigger.disabled = false;
         });
 
-        // Functions
         function resetGame() {
             answer = generateRandom();
         }
 
-        // 看答案按鈕掛上事件
         if (toastTrigger) {
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
             toastTrigger.addEventListener('click', () => {
@@ -136,7 +116,6 @@
         let aCount = 0;
         let bCount = 0;
 
-        // 輸入數字 按'猜'後 跳出item
         checkButton.addEventListener('click', () => {
             aCount = 0;
             bCount = 0;
@@ -189,7 +168,6 @@
             }
         }
 
-        // 放棄按鈕
         giveUpButton.addEventListener('click', () => {
             alert(`答案是: ${answer.join('')}`);
             resetGame();
