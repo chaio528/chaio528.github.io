@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-weight: bold;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: linear-gradient(#56eefc, #293cb8ea);
+            background-size: cover;
+        }
+
+        .game-container {
+            width: 960px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .item-ear {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ear {
+            clip-path: ellipse(40% 200% at 50% 200%);
+            margin: 0px 20px;
+            width: 200px;
+            height: 40px;
+            background-color: #00bffe;
+        }
+
+        .inner-ear {
+            clip-path: ellipse(40% 200% at 50% 200%);
+            margin: 0px 20px;
+            width: 150px;
+            height: 30px;
+            background-color: antiquewhite;
+            margin-inline: auto;
+            margin-top: 10px;
+            opacity: .8;
+        }
+
+        .item-head {
+            width: 500px;
+            height: 350px;
+            background-color: #02befd;
+            border-radius: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 15px 25px #252323;
+        }
+
+        .face {
+            padding: 0px 20px;
+            border: 5px solid #4c55d9;
+            border-radius: 10%;
+            opacity: .7;
+            width: 400px;
+            height: 300px;
+            background-color: #04ecd9;
+        }
+
+        #result {
+            font-size: 40px;
+        }
+
+        .highlight {
+            font-size: 36px;
+        }
+
+        .item-body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 450px;
+            height: 250px;
+            background-color: #02abe4;
+            box-shadow: 30px 30px 30px #252323;
+            margin-bottom: auto;
+        }
+
+        .item-body::before {
+            display: block;
+            content: '';
+            width: 100%;
+            border-top: 10px solid #252323;
+            opacity: .3;
+        }
+
+        .item-body input {
+            display: inline-block;
+        }
+
+        #guess-input {
+            width: 350px;
+            height: 20px;
+        }
+
+        .btn {
+            background-color: #fa0;
+            width: 130px;
+            height: 40px;
+            margin: -2px 5px;
+            box-shadow: 0px 5px 0px #a60;
+            transition: .2s;
+        }
+
+        .btn:active {
+            box-shadow: 0px 2px 0px #a60;
+        }
+
+        .start-btn {
+            background-image: linear-gradient(to right, #f7879a, yellow 50%, #df84df);
+            box-shadow: 5px 5px 5px #7d1a7ae8;
+            position: relative;
+            bottom: 180px;
+            left: 370px;
+        }
+
+        .start-btn:active {
+            box-shadow: 2px 2px 3px #7d1a7ae8;
+        }
+
+        .answer-btn {
+            background-image: linear-gradient(to right, #48c76c, #f9f942 50%, #48c76c);
+            box-shadow: 5px 5px 5px #0e6029e8;
+            position: relative;
+            bottom: 160px;
+            left: 370px;
+        }
+
+        .answer-btn:active {
+            box-shadow: 2px 2px 3px #0e6029e8;
+        }
+
+        .gameStart {
+            color: #04ecd9;
+            opacity: .7;
+            text-shadow: 6px 6px 0 #252323;
+            font-family: Helvetica;
+            margin: 0;
+            padding: 0;
+            font-size: 100px;
+            position: relative;
+        }
+
+        .gameStart::after {
+            content: attr(data-spotlight);
+            color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+            clip-path: ellipse(100px 100px at 0% 50%);
+            animation: spotlight 3s infinite;
+            background-image: url(https://images.unsplash.com/photo-1519580930435-fbfc9e7ecf26?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: 150%;
+            background-position: center center;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .wait {
+            position: relative;
+            font-size: 6em;
+            Letter-spacing: 15px;
+            width: 100%;
+            text-align: center;
+            -webkit-box-reflect: below 1px linear-gradient(to top right, transparent, #edba04);
+            line-height: 0.7em;
+            animation: animate 6s linear;
+        }
+
+        .fireworks-container {
+            display: none;
+            animation: fadeIn .8s ease-in-out;
+        }
+
+        .fireworks {
+            position: absolute;
+        }
+
+        .fireworks:nth-child(odd) {
+            width: 20%;
+        }
+
+        .fireworks:nth-child(even) {
+            width: 35%;
+        }
+
+        .firework1 {
+            top: 10px;
+            left: 2px;
+        }
+
+        .firework2 {
+            bottom: 2px;
+            left: 880px;
+        }
+
+        .firework3 {
+            top: 2px;
+            left: 650px;
+        }
+
+        .firework4 {
+            top: 5px;
+            right: 1px;
+        }
+
+        .firework5 {
+            bottom: 1px;
+            left: 1px;
+        }
+
+        .firework6 {
+            top: 6px;
+            left: 260px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes spotlight {
+            0% {
+                -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+                clip-path: ellipse(100px 100px at 0% 50%);
+            }
+
+            50% {
+                -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+                clip-path: ellipse(100px 100px at 100% 50%);
+            }
+
+            100% {
+                -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+                clip-path: ellipse(100px 100px at 0% 50%);
+            }
+        }
+
+        @keyframes animate {
+
+            0%,
+            18%,
+            20%,
+            50.1%,
+            60%,
+            65.1%,
+            80%,
+            90.1%,
+            92%,
+            93.5%,
+            95%,
+            98% {
+                color: #f1c31ff4;
+                text-shadow: none;
+            }
+
+            18.1%,
+            20.1%,
+            30%,
+            50%,
+            60.1%,
+            65%,
+            80.1%,
+            90%,
+            92.1%,
+            100% {
+                coLor: #ebe4d3;
+                text-shadow: 0 0 10px #03bcf4,
+                    0 0 20px #03bcf4,
+                    0 0 40pX #03bcf4,
+                    0 0 80px #03bcf4,
+                    0 0 160px #03bcf4;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="initial-screen">
+        <h1 class="gameStart" data-spotlight="♥ 終極密碼遊戲即將開始! ♥">♥ 終極密碼遊戲即將開始! ♥</h1>
+        <h2 class="wait">請靜待6秒</h2>
+    </div>
+    <div class="game-screen" style="display: none">
+        <div class="game-container">
+            <div class="fireworks-container">
+                <img src="fireworks.gif" class="fireworks firework1">
+                <img src="fireworks.gif" class="fireworks firework2">
+                <img src="fireworks.gif" class="fireworks firework3">
+                <img src="fireworks.gif" class="fireworks firework4">
+                <img src="fireworks.gif" class="fireworks firework5">
+                <img src="fireworks.gif" class="fireworks firework6">
+            </div>
+            <div class="item-ear">
+                <div class="ear1 ear">
+                    <div class="inner-ear"></div>
+                </div>
+                <div class="ear2 ear">
+                    <div class="inner-ear"></div>
+                </div>
+            </div>
+            <div class="item-head">
+                <div class="face">
+                    <p id="result">Fighting</p>
+                    <p class="highlight">請輸入1~100之間的數字</p>
+                </div>
+            </div>
+            <div class="item-body">
+                <input type="text" id="guess-input" readonly>
+                <input type="button" class="btnGroup btn" value="1">
+                <input type="button" class="btnGroup btn" value="2">
+                <input type="button" class="btnGroup btn" value="3">
+                <input type="button" class="btnGroup btn" value="4">
+                <input type="button" class="btnGroup btn" value="5">
+                <input type="button" class="btnGroup btn" value="6">
+                <input type="button" class="btnGroup btn" value="7">
+                <input type="button" class="btnGroup btn" value="8">
+                <input type="button" class="btnGroup btn" value="9">
+                <input type="button" class="btnGroup btn" value="0">
+                <input type="button" id="confirmBtn" class="btn" value="確認">
+                <input type="button" id="clearBtn" class="btn" value="清除">
+            </div>
+            <input type="button" class="start-btn btn" value="開始遊戲">
+            <input type="button" class="answer-btn btn" value="看答案">
+        </div>
+    </div>
+    <script>
+        const startButton = document.querySelector('.start-btn');
+        const answerButton = document.querySelector('.answer-btn');
+        const btnGroup = document.querySelectorAll('.btnGroup');
+        const guessInput = document.getElementById('guess-input');
+        const confirmButton = document.getElementById('confirmBtn');
+        const clearButton = document.getElementById('clearBtn');
+        const resultMessage = document.getElementById('result');
+        const highLight = document.querySelector('.highlight');
+        const fireworks = document.querySelector('.fireworks-container');
+
+        let min = 1;
+        let max = 100;
+        let answer = Math.floor(Math.random() * (max - min + 1) + min);
+        let guessNum;
+
+        btnGroup.forEach(function (item) {
+            guessInput.value = '';
+            item.addEventListener('click', function () {
+                guessInput.value += item.value;
+            });
+        });
+
+
+        clearButton.addEventListener('click', function () {
+            guessInput.value = '';
+            resultMessage.innerText = 'Fighting';
+        });
+
+        confirmButton.addEventListener('click', function () {
+            guessNum = parseInt(guessInput.value, 10);
+
+            if (guessNum > answer && guessNum < max) {
+                max = guessNum;
+            }
+            else if (guessNum < answer && guessNum > min) {
+                min = guessNum;
+            }
+
+            if (!isNaN(guessNum) && guessNum >= 1 && guessNum <= 100) {
+                resultMessage.innerText = `您猜的數字是：${guessNum}`;
+            }
+            else {
+                resultMessage.innerText = '輸入無效內容\n請重新輸入 !!';
+            }
+
+            if (guessNum !== answer) {
+                highLight.innerText = `請輸入${min} - ${max}之間的整數`;
+            }
+            else {
+                highLight.innerText = `猜中了！！！\n答案是 【${answer}】 ♥ ♥ ♥`;
+
+                setTimeout(function () {
+                    fireworks.style.display = 'block';
+                }, 1);
+            }
+            guessInput.value = ""; 
+        });
+
+        confirmButton.disabled = true;
+        clearButton.disabled = true;
+        answerButton.disabled = true;
+
+        startButton.addEventListener('click', function () {
+            answer = Math.floor(Math.random() * (max - min + 1) + min);
+            confirmButton.disabled = false;
+            clearButton.disabled = false;
+            answerButton.disabled = false;
+            fireworks.style.display = 'none';
+            resultMessage.innerText = 'Fighting';
+            highLight.innerText = '請輸入1~100之間的數字';
+            guessInput.value = '';
+            min = 1;
+            max = 100;
+        });
+
+        answerButton.addEventListener('click', () => {
+            alert(`答案是${answer}`);
+        });
+
+        const initialScreen = document.querySelector('.initial-screen');
+        const gameScreen = document.querySelector('.game-screen');
+
+        setTimeout(function () {
+            initialScreen.style.display = 'none';
+            gameScreen.style.display = 'block';
+            alert(`加油~~ 猜中有煙火唷♥`);
+        }, 6000);
+
+    </script>
+</body>
+
+</html>
