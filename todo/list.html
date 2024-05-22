@@ -19,7 +19,7 @@
             letter-spacing: 2px;
         }
 
-        .container,
+        .input-group,
         .wrap,
         .divItem {
             width: 960px;
@@ -57,140 +57,140 @@
 <body>
     <div class="container mx-auto">
         <h1 class="text-center">待辦清單</h1>
-        <div class="input-group mb-3">
-            <input type="text" class="input form-control" placeholder="Enter your to-do item"
-                aria-label="Recipient's username">
+        <!-- 上面輸入區 -->
+        <div class="input-group mb-3 mx-auto">
+            <!-- 新增輸入欄 -->
+            <input type="text" class="input form-control" placeholder="Enter your to-do item">
             <button class="addBtn btn btn-primary" type="button">新增</button>
         </div>
-        <script>
-            const $input = document.querySelector('.input');
-            const $addBtn = document.querySelector('.addBtn');
-            let $wrap, $divItem, $divTodo, $check, $inputTodo, $divBtn, $editBtn, $delBtn;
-
-            $addBtn.addEventListener('click', () => {
-                createListElement($input)
-                saveItemToStorage();
-                $input.value = "";
-            });
-            window.addEventListener('load', loadItemsFromLocalStorage);
-
-            function loadItemsFromLocalStorage() {
-
-                const items = JSON.parse(localStorage.getItem('items')) || [];
-                items.forEach(item => {
-                    createListElement(item);
-                });
-            }
-
-            function createListElement(item) {
-                // wrap
-                $wrap = document.createElement('div');
-                $wrap.setAttribute('class', 'wrap m-auto');
-                // divItem
-                $divItem = document.createElement('div');
-                $divItem.setAttribute('class', 'divItem d-flex p-lg-3 mb-2 mt-2 border border-secondary-subtle align-items-center');
-                if (item.completed) {
-                    $divItem.classList.add('completed');
-                }
-                // divTodo
-                $divTodo = document.createElement('div');
-                $divTodo.setAttribute('class', 'divTodo bg-primary-subtle d-flex align-items-center p-2');
-                // check input
-                $check = document.createElement('input');
-                $check.setAttribute('class', 'check form-check-input me-1 border border-secondary-subtle m-3');
-                $check.type = "checkbox";
-                $check.checked = item.completed;
-                $check.addEventListener('click', (event) => {
-                    const toCheckedDivItem = event.target.closest('.divItem');
-                    toCheckedDivItem.classList.toggle('completed');  // 切換 completed 類別
-                    saveItemToStorage();
-                });
-
-                // inputTodo
-                $inputTodo = document.createElement('input');
-                $inputTodo.setAttribute('class', 'inputTodo myInput form-control bg-primary-subtle ms-2 flex-wrap');
-                $inputTodo.type = "text";
-                $inputTodo.value = item.value.trim();
-                $inputTodo.disabled = true;
-
-                // divBtn
-                $divBtn = document.createElement('div');
-                $divBtn.setAttribute('class', 'divBtn mx-auto');
-                // editBtn
-                $editBtn = document.createElement('button');
-                $editBtn.setAttribute('class', 'editBtn btn btn-warning mx-1');
-                $editBtn.type = "button";
-                $editBtn.innerText = '編輯';
-                $editBtn.addEventListener('click', onBtnEditClick);
-                // delBtn
-                $delBtn = document.createElement('button');
-                $delBtn.setAttribute('class', 'delBtn btn btn-danger');
-                $delBtn.type = 'button';
-                $delBtn.innerText = '刪除';
-                $delBtn.addEventListener('click', delList);
-
-                // 附加
-                $divTodo.appendChild($check);
-                $divTodo.appendChild($inputTodo);
-
-                $divItem.prepend($divTodo);
-
-                $divBtn.appendChild($editBtn);
-                $divBtn.appendChild($delBtn);
-                $divItem.appendChild($divBtn);
-
-                $wrap.appendChild($divItem);
-                document.body.appendChild($wrap);
-
-            }
-
-            // 刪除按鈕 事件
-            function delList(event) {
-                if (event.target.classList.contains('delBtn')) {
-                    const delDivItem = event.target.closest('.divItem');
-                    if (delDivItem) {
-                        delDivItem.remove();
-                        // 從 localStorage 中移除該待辦事項
-                        saveItemToStorage();
-                    }
-                }
-            }
-            // 編輯按鈕事件
-            function onBtnEditClick(event) {
-                const editBtn = event.target;
-                const inputTodo = editBtn.closest('.divItem').querySelector('.inputTodo');
-                if (editBtn.innerText === '編輯') {
-                    // 切換為保存
-                    editBtn.innerText = '保存';
-                    editBtn.setAttribute('class', 'editBtn btn bg-info text-white mx-1');
-                    inputTodo.disabled = false;
-                } else {
-                    // 切換為編輯
-                    editBtn.innerText = '編輯';
-                    editBtn.setAttribute('class', 'editBtn btn btn-warning mx-1');
-                    inputTodo.disabled = true;
-                }
-                // 編輯完成後將待辦事項存入 localStorage
-                saveItemToStorage();
-            }
-
-            // 將待辦事項存入 localStorage
-            function saveItemToStorage() {
-                const items = Array.from(document.querySelectorAll('.divItem')).map(divItem => {
-                    $inputTodo = divItem.querySelector('.inputTodo');
-                    $check = divItem.querySelector('.check');
-                    return {
-                        value: $inputTodo.value,
-                        completed: $check.checked,
-                    };
-                });
-
-                localStorage.setItem('items', JSON.stringify(items));
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    </div>
+    <!-- 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+    <!-- 我的 -->
+        <script>
+            const container = document.querySelector('.container');
+            const input = document.querySelector('.input');
+            const addBtn = document.querySelector('.addBtn');
+
+            window.addEventListener('load' ,loadItemFromStorage);
+            function loadItemFromStorage(){
+                let items = JSON.parse(localStorage.getItem('items')) || [];
+                items.forEach(function(item){
+                    createLiElement(item);
+                });
+            }
+
+            function saveItemToStorage(){
+                let items = Array.from(document.querySelectorAll('.divItem')).map(
+                    function(item){
+                        let inputTodo = item.querySelector('.inputTodo');
+                        let check = item.querySelector('.check');
+                        return{
+                            value: inputTodo.value,
+                            completed: check.checked
+                        }
+                    }
+                );
+                localStorage.setItem('items' ,JSON.stringify(items));
+            }
+
+            function createLiElement(item){
+                let wrap = document.createElement('div');
+                wrap.setAttribute('class','wrap m-auto');
+
+                let divItem = document.createElement('div');
+                divItem.setAttribute('class','divItem d-flex p-lg-3 mb-2 mt-2 border border-secondary-subtle align-items-center');
+                if(item.completed){
+                    divItem.classList.add('completed');
+                }
+
+                let divTodo = document.createElement('div');
+                divTodo.setAttribute('class','divTodo bg-primary-subtle d-flex align-items-center p-2');
+
+                let check = document.createElement('input');
+                check.setAttribute('class','check form-check-input me-1 border border-secondary-subtle m-3');
+                check.type = 'checkbox';
+                check.checked = item.completed;
+                check.addEventListener('click',function(e){
+                    let divItem = e.target.closest('.divItem');
+                    if(divItem){
+                        divItem.classList.toggle('completed');
+                        saveItemToStorage();
+                    }else{
+                        console.log('找不到元素');
+                    }
+                });
+
+                let inputTodo = document.createElement('input');
+                inputTodo.setAttribute('class','inputTodo myInput form-control bg-primary-subtle ms-2 flex-wrap');
+                inputTodo.type = 'text';
+                inputTodo.value = item.value.trim();
+                inputTodo.disabled = true;
+
+                let divBtn = document.createElement('div');
+                divBtn.setAttribute('class','divBtn mx-auto');
+
+                let editBtn = document.createElement('button');
+                editBtn.setAttribute('class','editBtn btn btn-warning mx-2');
+                editBtn.innerText = '編輯';
+                editBtn.addEventListener('click' ,onEditBtnClick);
+
+                let delBtn = document.createElement('button');
+                delBtn.setAttribute('class','delBtn btn btn-danger');
+                delBtn.innerText = '刪除';
+                delBtn.addEventListener('click' ,onDelBtnClick);
+
+                // 附加
+                divTodo.append(check);
+                divTodo.append(inputTodo);
+                
+                divItem.append(divTodo);
+                divBtn.append(editBtn);
+                divBtn.append(delBtn);
+
+                divItem.append(divBtn);
+                
+                wrap.append(divItem);
+                container.append(wrap);
+            }
+            addBtn.addEventListener('click',function(){
+                if(input.value.trim() == ""){
+                    alert('請輸入內容');
+                    input.value = "";
+                    return;
+                }
+                createLiElement(input);
+                saveItemToStorage();
+                input.value = "";
+            });
+            // 編輯
+            function onEditBtnClick(e){
+                let editBtn = e.target;
+                let inputTodo = editBtn.closest('.divItem').querySelector('.inputTodo');
+                if(editBtn.innerText === '編輯'){
+                    editBtn.innerText = '保存';
+                    editBtn.setAttribute('class','editBtn btn bg-info text-white mx-1');
+                    inputTodo.disabled = false;
+                }else{
+                    editBtn.innerText = '編輯'
+                    editBtn.setAttribute('class','editBtn btn btn-warning mx-2');
+                    inputTodo.disabled = true;
+                }
+                saveItemToStorage();
+            }
+
+            function onDelBtnClick(e){
+                let divItem = e.target.closest('.divItem');
+                if(divItem){
+                    divItem.remove();
+                    saveItemToStorage();
+                }else{
+                    console.log('找不到元素');
+                }
+            }
+        </script>
 </body>
 
 </html>
